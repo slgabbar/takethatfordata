@@ -1,0 +1,17 @@
+***REMOVED***
+  "name": "takethatfordata",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": ***REMOVED***
+    "test": "echo \"Error: no test specified\" && exit 1"
+  ***REMOVED***,
+  "author": "",
+  "license": "ISC",
+  "dependencies": ***REMOVED***
+    "express": "^4.16.2",
+    "firebase": "^4.9.0",
+    "firebase-admin": "^5.8.1",
+    "nodemon": "^1.14.11"
+  ***REMOVED***
+***REMOVED***
