@@ -13,5 +13,8 @@
     "firebase": "^4.9.0",
     "firebase-admin": "^5.8.1",
     "nodemon": "^1.14.11"
+  },
+  "devDependencies": {
+    "webpack": "^3.10.0"
   }
 }
