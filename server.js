@@ -28,7 +28,7 @@ ref.once("value", function(snapshot) ***REMOVED***
 var express = require('express');
 var app = express();
 var port = 8080;
-
+app.use('/static', express.static('public'))
 
 // start the server
 var server = app.listen(port, function() ***REMOVED***
@@ -38,7 +38,7 @@ var server = app.listen(port, function() ***REMOVED***
    
   console.log("Example app listening at http://%s:%s", host, port)
 ***REMOVED***);
-app.use(express.static('public'));
+
 
 // route our app
 /*
@@ -47,5 +47,17 @@ app.get('/', function(req, res) ***REMOVED***
 ***REMOVED***);
 */
 app.get('/', function(req, res) ***REMOVED***
-    res.sendFile(path.join(__dirname + '/index.html'));
+    res.sendFile(path.join(__dirname + '/public/index.html'));
+***REMOVED***);
+
+app.get('/create_account', function(req, res) ***REMOVED***
+    res.sendFile(path.join(__dirname + '/public/signup.html'));
+***REMOVED***);
+
+app.get('/signin', function(req, res) ***REMOVED***
+    res.sendFile(path.join(__dirname + '/public/signin.html'));
+***REMOVED***);
+
+app.get('/input', function(req, res) ***REMOVED***
+    res.sendFile(path.join(__dirname + '/public/inputdata.html'));
 ***REMOVED***);
