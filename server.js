@@ -1,5 +1,5 @@
 const admin = require('firebase-admin');
-
+const path = require('path');
 const cert = require('./db-credentials.json');
 
 admin.initializeApp({
@@ -38,8 +38,14 @@ var server = app.listen(port, function() {
    
   console.log("Example app listening at http://%s:%s", host, port)
 });
+app.use(express.static('public'));
 
 // route our app
+/*
 app.get('/', function(req, res) {
   res.send('hello world! testing?');
+});
+*/
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/index.html'));
 });
