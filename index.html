@@ -6,18 +6,20 @@
 	<script src='https://unpkg.com/vue'></script>
 	<script src="js/main.js"></script>
 	<style>
-		div {
+		#court {
+			background: url("pic/court.png");
     		width: 500px;
     		height: 470px;
     		border: 1px solid black;
     		text-align: center;
-
 		}
 	</style>
 </head>
 <body>
 	<h1>Coordinates Page</h1>
-	<div onclick="showCoords(event)"><p id="demo"></p></div>
+	<div onclick="showCoords(event)">
+		<p id="court"></p>
+	</div>
 	<button onclick="printArray(event)">Print</button>
 </body>
 </html>

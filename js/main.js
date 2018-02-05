@@ -6,15 +6,26 @@ function main() {
 
 function showCoords(event) {
     var cX = event.clientX;
-    var sX = event.screenX;
+    //var sX = event.screenX;
     var cY = event.clientY;
-    var sY = event.screenY;
+    //var sY = event.screenY;
     var coords1 = "client - X: " + cX + ", Y coords: " + cY;
     //var coords2 = "screen - X: " + sX + ", Y coords: " + sY;
     storeCoordinates(cX, cY);
     //coords.push({x:cX, y:cY});
     console.log(coords1);
 	//console.log(coords2);
+	var size = '8px';
+	var dot = document.getElementById("dot");
+	$('div').append(
+            $('<div></div>')
+                .css('position', 'absolute')
+                .css('top', cY + 'px')
+                .css('left', cX + 'px')
+                .css('width', size)
+                .css('height', size)
+                .css('background-color', 'red')
+        );
 
 }
 
