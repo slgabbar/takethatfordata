@@ -28,7 +28,7 @@ ref.once("value", function(snapshot) {
 var express = require('express');
 var app = express();
 var port = 8080;
-app.use('/static', express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // start the server
 var server = app.listen(port, function() {
@@ -46,6 +46,10 @@ app.get('/', function(req, res) {
   res.send('hello world! testing?');
 });
 */
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public'));
+});
+
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/index.html'));
 });
