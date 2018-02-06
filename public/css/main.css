@@ -1,0 +1,49 @@
+body ***REMOVED***
+    background-color: #fff;
+    margin: 0;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 1.5em;
+    line-height: 1em;
+***REMOVED***
+h1 ***REMOVED***
+    padding:.5em;
+***REMOVED***
+
+.navbar ***REMOVED***
+    height: 60px !important;
+    margin-bottom: 0;
+    background-color: #fff;
+    z-index: 9999;
+    border: 0;
+    font-size: 12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 2px;
+    border-radius: 0;
+    border-bottom: .5px solid #DFDFDF;
+***REMOVED***
+
+.navbar li a, .navbar .navbar-brand ***REMOVED***
+    color: #83C7F2 !important;
+***REMOVED***
+
+.navbar-nav li a:hover, .navbar-nav li.active a ***REMOVED***
+    color: #fff !important;
+    background-color: #83C7F2 !important;
+***REMOVED***
+
+.navbar-default .navbar-toggle ***REMOVED***
+    border-color: transparent;
+    color: #83C7F2 !important;
+***REMOVED***
+
+.jumbotron ***REMOVED***
+ background-color:#fff;
+***REMOVED***
+.space***REMOVED***
+   padding-top: 10em;
+   margin-bottom: 10em;
+***REMOVED***
+
+.btn***REMOVED***
+    background-color: #83C7F2 !important;
+***REMOVED***

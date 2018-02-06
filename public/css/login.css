@@ -1,0 +1,67 @@
+
+input[type=text], input[type=password], input[type=email] ***REMOVED***
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #72d6f5;
+    border-radius: 0;
+    width: 100%;
+    margin: 0 0 30px 0;
+    padding: 0;
+    box-shadow: none;
+***REMOVED***
+
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus ***REMOVED***
+    box-shadow: none;
+    border-bottom: 1px solid #6eafc4;
+***REMOVED***
+.btn***REMOVED***
+    background-color: #83C7F2 !important;
+***REMOVED***
+form***REMOVED***
+    padding:80px;
+***REMOVED***
+
+.inner-form***REMOVED***
+    background:#FFF;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.4);
+***REMOVED***
+
+label***REMOVED***
+    font-weight:400;
+    font-size:15px;
+***REMOVED***
+
+.form-control ***REMOVED***
+    background-color: #f5f5f5;
+    box-shadow: none;
+    color: #565656;
+    font-size:14px;
+    padding:30px 10px;
+    margin-bottom:30px;
+    border: 1px solid #f1f1f1;
+***REMOVED***
+
+.btn***REMOVED*** 
+    background: #72d6f5;
+    color: #FFF;
+    border-radius: 6px;
+    margin: 0 auto;
+    height: 48px;
+    line-height: 38px;
+    display: table;
+    font-size: 15px;
+    width: 100%;
+    border:none;
+***REMOVED***
+
+.btn:hover***REMOVED***
+
+    border:none;
+***REMOVED***
+
+.forgot***REMOVED***
+    text-align:center;
+    margin-top:30px;
+    font-size:16px;
+***REMOVED***

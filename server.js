@@ -28,7 +28,7 @@ ref.once("value", function(snapshot) ***REMOVED***
 var express = require('express');
 var app = express();
 var port = 8080;
-app.use('/static', express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // start the server
 var server = app.listen(port, function() ***REMOVED***
@@ -46,6 +46,10 @@ app.get('/', function(req, res) ***REMOVED***
   res.send('hello world! testing?');
 ***REMOVED***);
 */
+app.get('/', function(req, res) ***REMOVED***
+    res.sendFile(path.join(__dirname + '/public'));
+***REMOVED***);
+
 app.get('/', function(req, res) ***REMOVED***
     res.sendFile(path.join(__dirname + '/public/index.html'));
 ***REMOVED***);
