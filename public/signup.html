@@ -13,30 +13,30 @@
 <!-- <script src="test.js"></script> -->
 <script>
   // Initialize Firebase
-  var config = ***REMOVED***
+  var config = {
     apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
     authDomain: "takethatfordata-8f719.firebaseapp.com",
     databaseURL: "https://takethatfordata-8f719.firebaseio.com",
     projectId: "takethatfordata-8f719",
     storageBucket: "takethatfordata-8f719.appspot.com",
     messagingSenderId: "211430446462"
-  ***REMOVED***;
+  };
   firebase.initializeApp(config);
   const db = firebase.database(),
       auth = firebase.auth();
 
-function test() ***REMOVED***
+function test() {
 var x = document.getElementById("fname").value;
 var y = document.getElementById("lname").value;
 document.getElementById("result").innerHTML = x + " " + y;
-firebase.auth().createUserWithEmailAndPassword(x, y).catch(function(error) ***REMOVED***
+firebase.auth().createUserWithEmailAndPassword(x, y).catch(function(error) {
   // Handle Errors here.
   var errorCode = error.code;
   var errorMessage = error.message;
   // ...
 
-***REMOVED***);
-***REMOVED***
+});
+}
 </script>
 </body>
 </html>
