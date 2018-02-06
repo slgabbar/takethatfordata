@@ -1,1 +1,1 @@
-module.exports = ***REMOVED******REMOVED***;
+module.exports = {};

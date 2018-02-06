@@ -24,52 +24,52 @@
 <!-- <script src="test.js"></script> -->
 <script>
   // Initialize Firebase
-  var config = ***REMOVED***
+  var config = {
     apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
     authDomain: "takethatfordata-8f719.firebaseapp.com",
     databaseURL: "https://takethatfordata-8f719.firebaseio.com",
     projectId: "takethatfordata-8f719",
     storageBucket: "takethatfordata-8f719.appspot.com",
     messagingSenderId: "211430446462"
-  ***REMOVED***;
+  };
   firebase.initializeApp(config);
 
-function test1() ***REMOVED***
+function test1() {
 	var x = document.getElementById("tname").value;
 	var y = document.getElementById("season1").value;
 	var z = document.getElementById("player").value;
 	document.getElementById("res").innerHTML = x + " " + y + " " + z;
 	var user = firebase.auth().currentUser;
-	if (user) ***REMOVED***
+	if (user) {
 	  var db = firebase.database();
 	  var ref = db.ref("/users/" + user.uid + "/" + x + "/season/" + y + "/players");
-	  ref.push(***REMOVED***
+	  ref.push({
 		name : [z]
-	  ***REMOVED***);
-	***REMOVED*** else ***REMOVED***
+	  });
+	} else {
 	  // No user is signed in.
 	  console.log("Error not logged in");
-	***REMOVED***
-***REMOVED***
+	}
+}
 
-function test() ***REMOVED***
+function test() {
 	var x = document.getElementById("fname").value;
 	var y = document.getElementById("lname").value;
 	var z = document.getElementById("season").value;
 	document.getElementById("result").innerHTML = x + " " + y + " " + z;
 	var user = firebase.auth().currentUser;
-	if (user) ***REMOVED***
+	if (user) {
 	  var db = firebase.database();
 	  var ref = db.ref("/users/" + user.uid + "/" + x);
-	  ref.set(***REMOVED***
+	  ref.set({
 		location: [y],
 		season: [z]
-	  ***REMOVED***);
-	***REMOVED*** else ***REMOVED***
+	  });
+	} else {
 	  // No user is signed in.
 	  console.log("Error not logged in");
-	***REMOVED***
-***REMOVED***
+	}
+}
 
 
 

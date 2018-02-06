@@ -1,5 +1,5 @@
 
-input[type=text], input[type=password], input[type=email] ***REMOVED***
+input[type=text], input[type=password], input[type=email] {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #72d6f5;
@@ -8,31 +8,31 @@ input[type=text], input[type=password], input[type=email] ***REMOVED***
     margin: 0 0 30px 0;
     padding: 0;
     box-shadow: none;
-***REMOVED***
+}
 
 
-input[type=text]:focus, input[type=password]:focus, input[type=email]:focus ***REMOVED***
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
     box-shadow: none;
     border-bottom: 1px solid #6eafc4;
-***REMOVED***
-.btn***REMOVED***
+}
+.btn{
     background-color: #83C7F2 !important;
-***REMOVED***
-form***REMOVED***
+}
+form{
     padding:80px;
-***REMOVED***
+}
 
-.inner-form***REMOVED***
+.inner-form{
     background:#FFF;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.4);
-***REMOVED***
+}
 
-label***REMOVED***
+label{
     font-weight:400;
     font-size:15px;
-***REMOVED***
+}
 
-.form-control ***REMOVED***
+.form-control {
     background-color: #f5f5f5;
     box-shadow: none;
     color: #565656;
@@ -40,9 +40,9 @@ label***REMOVED***
     padding:30px 10px;
     margin-bottom:30px;
     border: 1px solid #f1f1f1;
-***REMOVED***
+}
 
-.btn***REMOVED*** 
+.btn{ 
     background: #72d6f5;
     color: #FFF;
     border-radius: 6px;
@@ -53,15 +53,15 @@ label***REMOVED***
     font-size: 15px;
     width: 100%;
     border:none;
-***REMOVED***
+}
 
-.btn:hover***REMOVED***
+.btn:hover{
 
     border:none;
-***REMOVED***
+}
 
-.forgot***REMOVED***
+.forgot{
     text-align:center;
     margin-top:30px;
     font-size:16px;
-***REMOVED***
+}

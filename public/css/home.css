@@ -1,15 +1,15 @@
 /* ------------- Body ------------ */
-@font-face ***REMOVED***
+@font-face {
     font-family: Source Sans Pro;
     src: url(./assets/fonts/SourceSansPro-Regular.otf);
-***REMOVED***
+}
 
-@font-face ***REMOVED***
+@font-face {
     font-family: Avenir Next;
     src: url(./assets/fonts/AvenirNext.ttc);
-***REMOVED***
+}
 
-body ***REMOVED***
+body {
     background-color: #2F394C;
     margin: 0;
     font-family: "Source Sans Pro", sans-serif;
@@ -18,66 +18,66 @@ body ***REMOVED***
     max-width: 100%;
     overflow-x: hidden;
     overflow-y: hidden;
-***REMOVED***
+}
 
-html ***REMOVED***
+html {
     overflow: scroll;
     overflow: -moz-scrollbars-none;
-***REMOVED***
+}
 
-::-webkit-scrollbar ***REMOVED***
+::-webkit-scrollbar {
     display: none;
     width: 7px;
-***REMOVED***
+}
 
-::-webkit-scrollbar-track ***REMOVED***
+::-webkit-scrollbar-track {
     -webkit-border-radius: 5px;
     border-radius: 5px;
     background: rgba(0, 0, 0, 0.1);
-***REMOVED***
+}
 
-::-webkit-scrollbar-thumb ***REMOVED***
+::-webkit-scrollbar-thumb {
     -webkit-border-radius: 5px;
     border-radius: 5px;
     background: rgba(0, 0, 0, 0.2);
-***REMOVED***
+}
 
-::-webkit-scrollbar-thumb:hover ***REMOVED***
+::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 0, 0, 0.4);
-***REMOVED***
+}
 
-::-webkit-scrollbar-thumb:window-inactive ***REMOVED***
+::-webkit-scrollbar-thumb:window-inactive {
     background:rgba(0, 0, 0, 0.05);
-***REMOVED***
+}
 
-::-webkit-scrollbar-track ***REMOVED***
+::-webkit-scrollbar-track {
     -webkit-border-radius: 5px;
     border-radius: 5px;
     background: rgba(0, 0, 0, 0.1);
-***REMOVED***
+}
 
-::-webkit-scrollbar-thumb ***REMOVED***
+::-webkit-scrollbar-thumb {
     -webkit-border-radius: 5px;
     border-radius: 5px;
     background:rgba(0, 0, 0, 0.2);
-***REMOVED***
+}
 
-::-webkit-scrollbar-thumb:hover ***REMOVED***
+::-webkit-scrollbar-thumb:hover {
     background:rgba(0, 0, 0, 0.4);
-***REMOVED***
+}
 
-::-webkit-scrollbar-thumb:window-inactive ***REMOVED***
+::-webkit-scrollbar-thumb:window-inactive {
     background:rgba(0, 0, 0, 0.05);
-***REMOVED***
+}
 
 /* link options */
-a ***REMOVED***
+a {
     font-family: "Source Sans Pro", sans-serif;
-***REMOVED***
+}
 
 /* ------------- Bottom Bar ------------ */
 
-#leftSide, #rightSide, #generateFilters, #closeButton, #geneatePlaylistBtn ***REMOVED***
+#leftSide, #rightSide, #generateFilters, #closeButton, #geneatePlaylistBtn {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
@@ -85,15 +85,15 @@ a ***REMOVED***
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently
                           supported by Chrome and Opera */
-***REMOVED***
+}
 
-#bottom-bar ***REMOVED***
+#bottom-bar {
     position: fixed;
     bottom: 0;
     width: 82%;
-***REMOVED***
+}
 
-#slideout ***REMOVED***
+#slideout {
     background: #212938;
     border-top: 1px solid #242A34;
     border-right: 1px solid #242A34;
@@ -108,13 +108,13 @@ a ***REMOVED***
     transition-property: all;
     transition-duration: .5s;
     transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-***REMOVED***
+}
 
-#slideout.on ***REMOVED***
+#slideout.on {
     max-height: 200px;
-***REMOVED***
+}
 
-.button_slide ***REMOVED***
+.button_slide {
     position: relative;
     left: 50%;
     width: 36px;
@@ -131,9 +131,9 @@ a ***REMOVED***
     cursor: pointer;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
-***REMOVED***
+}
 
-#innerRightDiv ***REMOVED***
+#innerRightDiv {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
@@ -141,25 +141,25 @@ a ***REMOVED***
     display: block;
     margin-left: auto;
     margin-right: auto;
-***REMOVED***
+}
 
-#leftSide ***REMOVED***
+#leftSide {
     margin-left: 2%;
     width: 48%;
     height: 100%;
     float: left;
-***REMOVED***
+}
 
-#rightSide ***REMOVED***
+#rightSide {
     width: 50%;
     height: 100%;
     float: left;
-***REMOVED***
+}
 
 /*  ------------- Checkboxes ------------ */
 
 /* Customize the label (the container) */
-.container2 ***REMOVED***
+.container2 {
     display: block;
     position: relative;
     padding-left: 35px;
@@ -172,48 +172,48 @@ a ***REMOVED***
     -ms-user-select: none;
     user-select: none;
     color: #fff;
-***REMOVED***
+}
 
 /* Hide the browser's default checkbox */
-.container2 input ***REMOVED***
+.container2 input {
     position: absolute;
     opacity: 0;
-***REMOVED***
+}
 
 /* Create a custom checkbox */
-.checkmark ***REMOVED***
+.checkmark {
     position: absolute;
     top: 0;
     left: 0;
     height: 15px;
     width: 15px;
     background-color: #eee;
-***REMOVED***
+}
 
 /* On mouse-over, add a grey background color */
-.container2:hover input ~ .checkmark ***REMOVED***
+.container2:hover input ~ .checkmark {
     background-color: #ccc;
-***REMOVED***
+}
 
 /* When the checkbox is checked, add a blue background */
-.container2 input:checked ~ .checkmark ***REMOVED***
+.container2 input:checked ~ .checkmark {
     background-color: #2196F3;
-***REMOVED***
+}
 
 /* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after ***REMOVED***
+.checkmark:after {
     content: "";
     position: absolute;
     display: none;
-***REMOVED***
+}
 
 /* Show the checkmark when checked */
-.container2 input:checked ~ .checkmark:after ***REMOVED***
+.container2 input:checked ~ .checkmark:after {
     display: block;
-***REMOVED***
+}
 
 /* Style the checkmark/indicator */
-.container2 .checkmark:after ***REMOVED***
+.container2 .checkmark:after {
     left: 4px;
     width: 5px;
     height: 10px;
@@ -222,18 +222,18 @@ a ***REMOVED***
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-***REMOVED***
+}
 
 /* ------------- Header ------------ */
-#tophead ***REMOVED***
+#tophead {
     height: 60px;
     margin: 0;
     background-color: #252F41;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
     border-bottom: .5px solid #242A34;
-***REMOVED***
+}
 
-.navbar ***REMOVED***
+.navbar {
     position: fixed;
     height: 60px;
     width: 100%;
@@ -241,9 +241,9 @@ a ***REMOVED***
     top: 15px;
     padding-left: 2vh;
     overflow: hidden;
-***REMOVED***
+}
 
-.floatright ***REMOVED***
+.floatright {
     position: fixed;
     font-size: 1.5em;
     font-weight: normal;
@@ -252,13 +252,13 @@ a ***REMOVED***
     vertical-align: middle;
     top: 15px;
     padding-right: 10vh;
-***REMOVED***
+}
 
-.floatright a ***REMOVED***
+.floatright a {
     color: #fff;
-***REMOVED***
+}
 
-.navbar a ***REMOVED***
+.navbar a {
     vertical-align: middle;
     display: block;
     height: 10px;
@@ -279,56 +279,56 @@ a ***REMOVED***
     transition-duration: .5s;
     transition-timing-function: ease-out;
     border-radius: 0;
-***REMOVED***
+}
 
-.navbar a:hover ***REMOVED***
+.navbar a:hover {
     color: #fff;
     background-color: #4B9877;
     border-color: #4B9877;
     transition-property: all;
     transition-duration: .5s;
-***REMOVED***
+}
 
-.navbar a:active ***REMOVED***
+.navbar a:active {
     background-color: #4B9877;
-***REMOVED***
+}
 
-.navbar .icon ***REMOVED***
+.navbar .icon {
     display: none;
-***REMOVED***
+}
 
-.navbar ul ***REMOVED***
+.navbar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-***REMOVED***
+}
 
-.navbar li ***REMOVED***
+.navbar li {
     display: inline;
-***REMOVED***
+}
   
-.littleleft ***REMOVED***
+.littleleft {
     margin-left: 25px;
-***REMOVED***
+}
 
 
 /* ------------- Top nav bar responsive  ------------ */
-@media screen and (min-width: 1000px)***REMOVED***
-    .menu-toggle, .helphide, .logouthide***REMOVED***
+@media screen and (min-width: 1000px){
+    .menu-toggle, .helphide, .logouthide{
         display:none !important;
-    ***REMOVED***
+    }
     
     .menu-toggle,
-    .main-menu .menu-close ***REMOVED***
+    .main-menu .menu-close {
         display: none;
-    ***REMOVED***
+    }
     
-    .main-menu .menu-toggle ***REMOVED***
+    .main-menu .menu-toggle {
         display:none;
-    ***REMOVED***
-***REMOVED***
+    }
+}
 
-.sr-only ***REMOVED***
+.sr-only {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -337,31 +337,31 @@ a ***REMOVED***
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
-***REMOVED***
+}
 
-@media screen and (max-width: 1000px) ***REMOVED***
+@media screen and (max-width: 1000px) {
 
-    .logouthide2 ***REMOVED***
+    .logouthide2 {
         display: none !important;
-    ***REMOVED***
+    }
     
-    .helphide ***REMOVED***
+    .helphide {
         display: inline-block;
-    ***REMOVED***
+    }
     
-    .littleleft ***REMOVED***
+    .littleleft {
         margin: 0;
-    ***REMOVED***
+    }
     
-    .menu-toggle ***REMOVED***
+    .menu-toggle {
         display: inline-block;
         padding: .75em 15px;
         line-height: 1em;
         font-size: 1em;
         border:none !important;
-    ***REMOVED***
+    }
     
-    .main-menu ***REMOVED***
+    .main-menu {
         position: absolute;
         left: -200px;
         top: 0;
@@ -371,9 +371,9 @@ a ***REMOVED***
         transition: left 0.3s ease,
                   box-shadow 0.3s ease;
         z-index: 999;
-    ***REMOVED***
+    }
     
-    .main-menu ul ***REMOVED***
+    .main-menu ul {
         list-style: none;
         margin: 0;
         padding: 2.5em 0 0;
@@ -384,72 +384,72 @@ a ***REMOVED***
         min-height: 100%;
         width: 200px;
         background: #212939;
-    ***REMOVED***
+    }
 
-    .main-menu li ***REMOVED***
+    .main-menu li {
         display: block;
         width: 100%;
-    ***REMOVED***
+    }
 
-    .main-close ***REMOVED***
-    ***REMOVED***
+    .main-close {
+    }
     
-    .main-close a ***REMOVED***
+    .main-close a {
         display: inline-block;
         padding: .75em 15px;
         line-height: 1em;
         font-size: 1em;
         color: #fff;
         text-decoration: none;
-    ***REMOVED***
+    }
     
-    .main-menu a ***REMOVED***
+    .main-menu a {
         display: inline-block;
         padding: .75em 15px;
         line-height: 1em;
         font-size: 1em;
         color: #fff;
         text-decoration: none;
-    ***REMOVED***
+    }
     
-    .main-menu li:first-child a ***REMOVED***
+    .main-menu li:first-child a {
         border-top: 1px solid #383838;
-    ***REMOVED***
+    }
 
     .main-menu a:hover,
-    .main-menu a:focus ***REMOVED***
+    .main-menu a:focus {
         background: #333;
         text-decoration: underline;
-    ***REMOVED***
+    }
 
-    .main-menu .menu-close ***REMOVED***
+    .main-menu .menu-close {
         position: absolute;
         right: 0;
         top: 0;
-    ***REMOVED***
+    }
 
     .main-menu:target,
-    .main-menu[aria-expanded="true"] ***REMOVED***
+    .main-menu[aria-expanded="true"] {
         left: 0;
         outline: none;
         -moz-box-shadow: 3px 0 12px rgba(20, 20, 20, .25);
         -webkit-box-shadow: 3px 0 12px rgba(20, 20, 20, .25);
         box-shadow: 3px 0 12px rgba(20, 20, 20, .25);
-    ***REMOVED***
+    }
 
     .main-menu:target .menu-close,
-    .main-menu[aria-expanded="true"] .menu-close ***REMOVED***
+    .main-menu[aria-expanded="true"] .menu-close {
         z-index: 1001;
-    ***REMOVED***
+    }
 
     .main-menu:target ul,
-    .main-menu[aria-expanded="true"] ul ***REMOVED***
+    .main-menu[aria-expanded="true"] ul {
         position: relative;
         z-index: 1000;
-    ***REMOVED***
+    }
     
     .main-menu:target + .backdrop,
-    .main-menu[aria-expanded="true"] + .backdrop ***REMOVED***
+    .main-menu[aria-expanded="true"] + .backdrop {
         position: absolute;
         display: block;  
         content: "";
@@ -461,17 +461,17 @@ a ***REMOVED***
         background: #252F41;
         background: rgba(20, 20, 20, .85);
         cursor: default;
-    ***REMOVED***
+    }
 
-    @supports (position: fixed) ***REMOVED***
+    @supports (position: fixed) {
     .main-menu,
     .main-menu:target + .backdrop,
-    .main-menu[aria-expanded="true"] + .backdrop ***REMOVED***
+    .main-menu[aria-expanded="true"] + .backdrop {
             position: fixed;
-        ***REMOVED***
-    ***REMOVED***
+        }
+    }
     
-    .navbar a ***REMOVED***
+    .navbar a {
         border:none;
         display:block;
         padding: .75em 15px;
@@ -479,12 +479,12 @@ a ***REMOVED***
         font-size: 1em;
         color: #fff;
         text-decoration: none;
-    ***REMOVED***
-***REMOVED***
+    }
+}
 
 /* ------------- Sidebar ------------ */
 
-#sidebar ***REMOVED***
+#sidebar {
     z-index: 5;
     position: fixed;
     right: 0;
@@ -493,20 +493,20 @@ a ***REMOVED***
     background-color: #252F41;
     border-left: .5px solid #242A34;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-***REMOVED***
+}
 
-.line-div ***REMOVED***
+.line-div {
     width: 100%;
     bottom: 0;
     border-bottom: .5px solid #242A34;
     padding-top: 1%;
-***REMOVED***
+}
 
-#detailsSVG ***REMOVED***
+#detailsSVG {
     width: 100%;
-***REMOVED***
+}
 
-#detailsGenres***REMOVED***
+#detailsGenres{
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 	font-size: 12px;
 	font-style: normal;
@@ -516,9 +516,9 @@ a ***REMOVED***
     background-color: #282828;
     display: none;
     padding: 5px 10px 5px 10px;
-***REMOVED***
+}
 
-.artabout***REMOVED***
+.artabout{
     font-family: "Source Sans Pro", sans-serif;
     color:#E5E4E5;
     font-weight: normal;
@@ -526,24 +526,24 @@ a ***REMOVED***
     font-height: .8em;
     margin-top: 5px;
     margin-bottom: 10px;
-***REMOVED***
+}
 
-.artabout h2***REMOVED***
+.artabout h2{
     font-size: 1.05em;
-***REMOVED***
+}
 
-#generateFilters ***REMOVED***
+#generateFilters {
     width: 87%;
     height: 130px;
     margin-left: 5%;
     margin-right: 8%;
-***REMOVED***
+}
 
-#generatedPlaylistTracks ***REMOVED***
+#generatedPlaylistTracks {
     display: none;
-***REMOVED***
+}
 
-.trackBox ***REMOVED***
+.trackBox {
     font-size: .8em;
     position: relative;
     width: 90%;
@@ -551,17 +551,17 @@ a ***REMOVED***
     background-color: #212938;
     outline: .5px solid #1f2126;
     color: #959da0;
-***REMOVED***
+}
 
-.trackBoxText ***REMOVED***
+.trackBoxText {
     width: 90%;
-***REMOVED***
+}
 
-#selectedTracks, #selectedArtists ***REMOVED***
+#selectedTracks, #selectedArtists {
     width: 100%;
-***REMOVED***
+}
 
-#closeButton ***REMOVED***
+#closeButton {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -570,22 +570,22 @@ a ***REMOVED***
     font-size: 18px;
     color: red;
     cursor: pointer;
-***REMOVED***
+}
 
 /* Artist and track container, contains an SVG for the 'Details' bars. */
-#at-container ***REMOVED***
+#at-container {
     width: 100%;
     height: 204px;
-***REMOVED***
+}
 
-.tabnav ***REMOVED***
+.tabnav {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
-***REMOVED***
+}
 
-.tablink ***REMOVED***
+.tablink {
   flex: 1;
   font-size: .9em;
   margin-right: 4px;
@@ -598,64 +598,64 @@ a ***REMOVED***
   transition: color 0.3s;
   height: 15px;
 
-***REMOVED***
+}
 
-.tablinkside ***REMOVED***
-***REMOVED***
+.tablinkside {
+}
 
-.tablink a ***REMOVED***
+.tablink a {
     font-size: 1em;
     letter-spacing: 1em;
-***REMOVED***
+}
 
-.tablink: last-child ***REMOVED***
+.tablink: last-child {
   margin-right: 0;
-***REMOVED***
+}
 
-.tablink: hover ***REMOVED***
+.tablink: hover {
   color: #212938;
 
-***REMOVED***
+}
 
-.tablink.is-active ***REMOVED***
+.tablink.is-active {
     color: #01B482;
     background-color: #252F41;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1px;
-***REMOVED***
+}
 
-.c-tab ***REMOVED***
+.c-tab {
     display: none;
-***REMOVED***
+}
 
-.c-tab.is-active ***REMOVED***
+.c-tab.is-active {
     display: block;
-***REMOVED***
+}
 
-.tabcontent ***REMOVED***
+.tabcontent {
     color: #fff;
     padding-left: 0.1rem;
     overflow-y: auto;
     overflow-x: hidden;
-***REMOVED***
+}
 
-.tabcontentinner ***REMOVED***
+.tabcontentinner {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     letter-spacing: 0.8px;
-***REMOVED***
+}
 
-.tabcontentinnerdif ***REMOVED***
+.tabcontentinnerdif {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     letter-spacing: 0.8px;
     background-color: #232f3f;
     height: 65%;
     overflow-y: auto;
-***REMOVED***
+}
 
-.tabcontent h2 ***REMOVED***
+.tabcontent h2 {
     font-family: "Avenir Next", sans-serif;
     line-height: 2em;
     height: 2em;
@@ -666,45 +666,45 @@ a ***REMOVED***
     padding: 3px;
     text-indent:2%;
     font-weight: normal;
-***REMOVED***
+}
 
-#selectedtab ***REMOVED***
+#selectedtab {
     margin-bottom: 5%;
-***REMOVED***
-.selectedtabwow ***REMOVED***
+}
+.selectedtabwow {
     margin-bottom: 5%;
     text-decoration: none;
-***REMOVED***
+}
 
 /* Tabs no-js fallback */
-.c-tabs.no-js .tabnav***REMOVED***
+.c-tabs.no-js .tabnav{
     display: none;
-***REMOVED***
+}
 
-.c-tabs.no-js .c-tab ***REMOVED***
+.c-tabs.no-js .c-tab {
     display: block;
     margin-bottom: 1.5rem;
-***REMOVED***
+}
 
-.c-tabs.no-js .c-tab: last-child ***REMOVED***
+.c-tabs.no-js .c-tab: last-child {
     margin-bottom: 0;
-***REMOVED***
+}
 
-#overflowss ***REMOVED***
+#overflowss {
     height: calc(95vh - 60px - 15px - 50px);
     overflow-y: auto;
     max-width: 100%;
     overflow-x: hidden;   
-***REMOVED***
+}
 
-#overflowing ***REMOVED***
+#overflowing {
     height: calc(95vh - 75px - 15px);
     overflow-y: auto;
     max-width: 100%;
     overflow-x: hidden;
-***REMOVED***
+}
 
-.playlistbtn ***REMOVED***
+.playlistbtn {
     position: fixed;
     background-color: #05AC81;
     width: 18%;
@@ -721,22 +721,22 @@ a ***REMOVED***
     transition-timing-function: ease-out;
     border-top: 1px solid #242A34;
     cursor: pointer;
-***REMOVED***
+}
 
-.playlistbtn:hover ***REMOVED***
+.playlistbtn:hover {
     background-color:#212938;
     border-top: 1px solid #242A34;
     transition-property: all;
     transition-duration: .5s;
     transition-timing-function: ease-out;
-***REMOVED***
+}
 
-.playlistbtn span ***REMOVED***
+.playlistbtn span {
     position: relative;
     top: calc(50% - 0.5em);
-***REMOVED***
+}
 
-.playlistbtn2 ***REMOVED***
+.playlistbtn2 {
     background-color: #05AC81;
     color: #fff;
     width: 100%;
@@ -751,16 +751,16 @@ a ***REMOVED***
     transition-property: all;
     transition-duration: .5s;
     transition-timing-function: ease-out;
-***REMOVED***
+}
 
-.descript ***REMOVED***
+.descript {
     margin: 20px;
     font-size: .9em;
-***REMOVED***
+}
 
 /*----------- Other ---------*/
 
-.spotbutton***REMOVED*** 
+.spotbutton{ 
     color: #fff;
     background-color: #00B685;
     float: left;
@@ -772,169 +772,169 @@ a ***REMOVED***
     text-align: center;
     display: block;
     margin: 0 auto;
-***REMOVED***
+}
 
 /* ------------- Main Body of the Tree Container ------------ */
 
-#tree-container ***REMOVED***
+#tree-container {
     position: fixed;
     margin-top: 0;
     width: 82%;
     height: calc(98vh - 60px);
     z-index: -111;
-***REMOVED***
+}
 
-.text-overflow ***REMOVED***
+.text-overflow {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 500px;
-***REMOVED***
+}
 
-.textboxLabel ***REMOVED***
+.textboxLabel {
     pointer-events: none;
-***REMOVED***
+}
 
-.tSpanText ***REMOVED***
+.tSpanText {
     fill: "#ff004e";
-***REMOVED***
+}
 
-.node ***REMOVED***
+.node {
     cursor: pointer;
-***REMOVED***
+}
 
-.overlay ***REMOVED***
-***REMOVED***
+.overlay {
+}
 
 
-.node circle, .node rect ***REMOVED***
+.node circle, .node rect {
     box-shadow: 10px 10px 5px #888888;
-***REMOVED***
+}
 
-.node text ***REMOVED***
+.node text {
     font-size: 10px;
     font-family: "Avenir Next", sans-serif;
-***REMOVED***
+}
 
-.link ***REMOVED***
+.link {
     fill: none;
     stroke: #979797;
     stroke-width: .8px;
-***REMOVED***
+}
 
-.line ***REMOVED***
+.line {
     cursor: none;
     pointer-events: none;
-***REMOVED***
+}
 
 /* ------------- Bottom Bar Sliders ------------ */
 
-.range-slider ***REMOVED***
+.range-slider {
     width: 150px;
     height: 2px !important;
-***REMOVED***
+}
 
-.generate-range-slider ***REMOVED***
+.generate-range-slider {
     width: 100%;
     height: 5px !important; 
-***REMOVED***
+}
 
-.range-slider .ui-slider-range, .generate-range-slider .ui-slider-range ***REMOVED***
+.range-slider .ui-slider-range, .generate-range-slider .ui-slider-range {
     height: 5px !important;  
     background: #4B9877;
-***REMOVED***
+}
 
-.range-slider .ui-slider-handle.ui-corner-all.ui-state-default, .generate-range-slider .ui-slider-handle.ui-corner-all.ui-state-default ***REMOVED***
+.range-slider .ui-slider-handle.ui-corner-all.ui-state-default, .generate-range-slider .ui-slider-handle.ui-corner-all.ui-state-default {
     background: #282828;
     height: 10px !important;  
-***REMOVED***
+}
 
-.range-slider2 .ui-slider-handle.ui-corner-all.ui-state-default ***REMOVED***
+.range-slider2 .ui-slider-handle.ui-corner-all.ui-state-default {
     background: #282828; 
-***REMOVED***
+}
 
-.range-slider-text ***REMOVED***
+.range-slider-text {
     margin-top: 5px;
     padding: .5%;
     height: 20px;
     color: #cfcfcf;
-***REMOVED***
+}
 
-.range-slider-text2 ***REMOVED***
+.range-slider-text2 {
     margin-top: 5px;
     padding: .5%;
     height: 20px;
     color: #000;
-***REMOVED***
+}
 
-li ***REMOVED***
+li {
     overflow: auto;
-***REMOVED***
+}
 
 /* --------- Select2 CSS for searching tracks and artists -------- */
-.clearfix: before, .clearfix: after ***REMOVED***
+.clearfix: before, .clearfix: after {
     content: " ";
     display: table;
-***REMOVED***
+}
 
-.clearfix: after ***REMOVED***
+.clearfix: after {
     clear: both;
-***REMOVED***
+}
 
-.select2-result-repository ***REMOVED***
+.select2-result-repository {
     padding-top: 4px;
     padding-bottom: 3px;
-***REMOVED***
+}
 
-.select2-result-repository__avatar ***REMOVED***
+.select2-result-repository__avatar {
     float: left;
     width: 40px;
     margin-right: 10px;
-***REMOVED***
+}
 
-.select2-result-repository__avatar img ***REMOVED***
+.select2-result-repository__avatar img {
     width: 100%;
     height: auto;
     border-radius: 2px;
-***REMOVED***
+}
 
-.select2-result-repository__meta ***REMOVED***
+.select2-result-repository__meta {
     margin-left: 15px;
-***REMOVED***
+}
 
-.select2-result-repository__title ***REMOVED***
+.select2-result-repository__title {
     color: black; font-weight: bold;
     word-wrap: break-word;
     line-height: auto;
     margin-bottom: 4px;
-***REMOVED***
+}
 
-.select2-result-repository__forks, .select2-result-repository__stargazers ***REMOVED***
+.select2-result-repository__forks, .select2-result-repository__stargazers {
     margin-right: 1em;
-***REMOVED***
-.select2-result-repository__forks, .select2-result-repository__stargazers, .select2-result-repository__watchers ***REMOVED***
+}
+.select2-result-repository__forks, .select2-result-repository__stargazers, .select2-result-repository__watchers {
     display: inline-block;
     color: #aaa;
     font-size: 11px;
-***REMOVED***
+}
 
-.select2-result-repository__description ***REMOVED***
+.select2-result-repository__description {
     font-size: 13px;
     color: #777;
     margin-top: 4px;
-***REMOVED***
+}
 
-.select2-results__option--highlighted .select2-result-repository__title ***REMOVED***
+.select2-results__option--highlighted .select2-result-repository__title {
     color: white;
-***REMOVED***
+}
 
-.select2-results__option--highlighted .select2-result-repository__forks, .select2-results__option--highlighted .select2-result-repository__stargazers, .select2-results__option--highlighted .select2-result-repository__description, .select2-results__option--highlighted .select2-result-repository__watchers ***REMOVED***
+.select2-results__option--highlighted .select2-result-repository__forks, .select2-results__option--highlighted .select2-result-repository__stargazers, .select2-results__option--highlighted .select2-result-repository__description, .select2-results__option--highlighted .select2-result-repository__watchers {
     color: #c6dcef;
-***REMOVED***
+}
 
-.select2-container--adwitt .select2-results > .select2-results__options ***REMOVED***
+.select2-container--adwitt .select2-results > .select2-results__options {
     max-height: 300px;
-***REMOVED***
-.select2-results__options ***REMOVED***
+}
+.select2-results__options {
     overflow-y: auto;
-***REMOVED***
+}

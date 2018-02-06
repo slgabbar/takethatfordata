@@ -1,15 +1,15 @@
-body ***REMOVED***
+body {
     background-color: #fff;
     margin: 0;
     font-family: "Source Sans Pro", sans-serif;
     font-size: 1.5em;
     line-height: 1em;
-***REMOVED***
-h1 ***REMOVED***
+}
+h1 {
     padding:.5em;
-***REMOVED***
+}
 
-.navbar ***REMOVED***
+.navbar {
     height: 60px !important;
     margin-bottom: 0;
     background-color: #fff;
@@ -20,30 +20,30 @@ h1 ***REMOVED***
     letter-spacing: 2px;
     border-radius: 0;
     border-bottom: .5px solid #DFDFDF;
-***REMOVED***
+}
 
-.navbar li a, .navbar .navbar-brand ***REMOVED***
+.navbar li a, .navbar .navbar-brand {
     color: #83C7F2 !important;
-***REMOVED***
+}
 
-.navbar-nav li a:hover, .navbar-nav li.active a ***REMOVED***
+.navbar-nav li a:hover, .navbar-nav li.active a {
     color: #fff !important;
     background-color: #83C7F2 !important;
-***REMOVED***
+}
 
-.navbar-default .navbar-toggle ***REMOVED***
+.navbar-default .navbar-toggle {
     border-color: transparent;
     color: #83C7F2 !important;
-***REMOVED***
+}
 
-.jumbotron ***REMOVED***
+.jumbotron {
  background-color:#fff;
-***REMOVED***
-.space***REMOVED***
+}
+.space{
    padding-top: 10em;
    margin-bottom: 10em;
-***REMOVED***
+}
 
-.btn***REMOVED***
+.btn{
     background-color: #83C7F2 !important;
-***REMOVED***
+}
