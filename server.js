@@ -65,3 +65,7 @@ app.get('/signin', function(req, res) {
 app.get('/input', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/add.html'));
 });
+
+app.get('/view', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/view.html'));
+});

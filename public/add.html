@@ -46,8 +46,9 @@ function test1() {
 	  var ref = db.ref("/users/" + user.uid + "/teams/");
 	  ref.on("child_added", function (snapshot) {
 	  var ss = snapshot.val();
+	  var key = snapshot.key;
 	  if (ss.name === x && l === ss.location) {
-		var reff = db.ref("/users/" + user.uid + "/teams/season_" + y + "/players/");
+		var reff = db.ref("/users/" + user.uid + "/teams/"+key+"/season_" + y + "/players/");
 		var obj = { "name" : z};
 		reff.push(obj);
 	  }
