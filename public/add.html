@@ -7,7 +7,6 @@
 <form method="get">
   Team Name: <input type="text" name="fname" id="fname"><br>
   Location: <input type="text" name="lname" id="lname"><br>
-  Season: <input type="text" name="season" id="season"><br>
   Result: <span id="result"> </span><br>
   <input type="button" name="submit" value="Submit" onClick="test()">
 </form>
@@ -16,12 +15,13 @@
 <h2>Input Player to team</h2>
 <form method="get">
   Team Name: <input type="text" name="tname" id="tname"><br>
+  Location: <input type="text" name="lname1" id="lname1"><br>
   Season: <input type="text" name="season1" id="season1"><br>
   Player Name: <input type="text" name="player" id="player"><br>
   Result: <span id="res"> </span><br>
   <input type="button" name="submit1" value="Submit" onClick="test1()">
 </form>
-<!-- <script src="test.js"></script> -->
+
 <script>
   // Initialize Firebase
   var config = {
@@ -36,15 +36,21 @@
 
 function test1() {
 	var x = document.getElementById("tname").value;
+	var l = document.getElementById("lname1").value;
 	var y = document.getElementById("season1").value;
 	var z = document.getElementById("player").value;
-	document.getElementById("res").innerHTML = x + " " + y + " " + z;
+	document.getElementById("res").innerHTML = x + " " + y + " " + l + " " + z;
 	var user = firebase.auth().currentUser;
 	if (user) {
 	  var db = firebase.database();
-	  var ref = db.ref("/users/" + user.uid + "/" + x + "/season/" + y + "/players");
-	  ref.push({
-		name : [z]
+	  var ref = db.ref("/users/" + user.uid + "/teams/");
+	  ref.on("child_added", function (snapshot) {
+	  var ss = snapshot.val();
+	  if (ss.name === x && l === ss.location) {
+		var reff = db.ref("/users/" + user.uid + "/teams/season_" + y + "/players/");
+		var obj = { "name" : z};
+		reff.push(obj);
+	  }
 	  });
 	} else {
 	  // No user is signed in.
@@ -55,16 +61,14 @@ function test1() {
 function test() {
 	var x = document.getElementById("fname").value;
 	var y = document.getElementById("lname").value;
-	var z = document.getElementById("season").value;
-	document.getElementById("result").innerHTML = x + " " + y + " " + z;
+	document.getElementById("result").innerHTML = x + " " + y;
 	var user = firebase.auth().currentUser;
 	if (user) {
 	  var db = firebase.database();
-	  var ref = db.ref("/users/" + user.uid + "/" + x);
-	  ref.set({
-		location: [y],
-		season: [z]
-	  });
+	  var ref = db.ref("/users/" + user.uid + "/teams");
+	  var obj = { "name" : x,"location" : y};
+	  ref.push(obj);
+	  
 	} else {
 	  // No user is signed in.
 	  console.log("Error not logged in");
