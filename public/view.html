@@ -35,9 +35,11 @@ function test() {
 	  var ref = db.ref("/users/" + user.uid + "/teams/");
 	  ref.on("child_added", function (snapshot) {
 	  var ss = snapshot.val();
-	  console.log(ss);
-	  console.log(ss.location);
-	  console.log(ss.name);
+	  if (ss.location === y && ss.name === x) {
+	    console.log(ss);
+	    console.log(ss.location);
+	    console.log(ss.name);
+	  }
 	  });
 	} else {
 	  // No user is signed in.
