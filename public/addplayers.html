@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head> 
@@ -43,44 +45,44 @@
 
 
 <div class="inner-form">
-              
-            <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
-                 <center><h1>Sign Up</h1> </center>
+
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+<center><h1>Create Team</h1> </center>
             
                    <form role="form">
                    <div class="row">
                           
                     <div class="col-lg-12">
-                        <label>Username</label>
+                        <label>Player's First Name</label>
                         <div class="form-group">
-                        <input type="text" name="fname" id="fname" class="form-control" placeholder="">
+                        <input type="text" name="pfname" id="pfname" class="form-control" placeholder="">
                       </div>
                     </div>
                     
                     <div class="col-lg-12">
-                        <label>Password</label>
+                        <label>Player's Last Name</label>
                         <div class="form-group">
-                      <input type="password" name="password" id="password" class="form-control" placeholder="">
+                      <input type="text" name="plname" id="pfname" class="form-control" placeholder="">
                       </div>
                     </div>
-                    <div class="col-lg-12">
-                        <label>Re-type Password</label>
+                     <div class="col-lg-12">
+                        <label>Player's Number </label>
                         <div class="form-group">
-                      <input type="password" name="password" id="password" class="form-control" placeholder="">
+                      <input type="text" name="school" id="school" class="form-control" placeholder="">
                       </div>
                     </div>
+
                     
                   <div class="col-lg-12">
-                      <a href="/create_tea"><input type="button" name="submit" value="CREATE ACCOUNT" onClick="test()" class="btn btn-default"></a>
+                  <input type="button" name="submit" value="Add More Players" onClick="test()" class="btn btn-default">
+                  <br>
+                     <a href="/input"><input type="button" name="submit" value="Next" onClick="test()" class="btn btn-default"></a>
                     
                     </button>
                   </div>
                   
-                  <div class="col-lg-12">
-                      <div class="forgot">
-                          <p>Already have an account?</p>
-                          <p><a href="../create_account"> Sign in Here</a></p>
-                      </div>
+                
                   </div>
                     
                    </div>
@@ -90,7 +92,6 @@
 
 
 
-</div>
 
 <!-- <script src="test.js"></script> -->
 
@@ -105,21 +106,76 @@
     messagingSenderId: "211430446462"
   };
   firebase.initializeApp(config);
-  const db = firebase.database(),
-      auth = firebase.auth();
+
+function test1() {
+	var x = document.getElementById("tname").value;
+
+	var y = document.getElementById("season1").value;
+	var z = document.getElementById("player").value;
+	document.getElementById("res").innerHTML = x + " " + y + " " + z;
+	var user = firebase.auth().currentUser;
+	if (user) {
+	  var db = firebase.database();
+	  var ref = db.ref("/users/" + user.uid + "/" + x + "/season/" + y + "/players");
+	  ref.push({
+		name : [z]
+
+	var l = document.getElementById("lname1").value;
+	var y = document.getElementById("season1").value;
+	var z = document.getElementById("player").value;
+	document.getElementById("res").innerHTML = x + " " + y + " " + l + " " + z;
+	var user = firebase.auth().currentUser;
+	if (user) {
+	  var db = firebase.database();
+	  var ref = db.ref("/users/" + user.uid + "/teams/");
+	  ref.on("child_added", function (snapshot) {
+	  var ss = snapshot.val();
+	  var key = snapshot.key;
+	  if (ss.name === x && l === ss.location) {
+		var reff = db.ref("/users/" + user.uid + "/teams/"+key+"/season_" + y + "/players/");
+		var obj = { "name" : z};
+		reff.push(obj);
+	  }
+
+	  });
+	} else {
+	  // No user is signed in.
+	  console.log("Error not logged in");
+	}
+}
 
 function test() {
-var x = document.getElementById("fname").value;
-var y = document.getElementById("lname").value;
-document.getElementById("result").innerHTML = x + " " + y;
-firebase.auth().createUserWithEmailAndPassword(x, y).catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // ...
+	var x = document.getElementById("fname").value;
+	var y = document.getElementById("lname").value;
 
-});
+	var z = document.getElementById("season").value;
+	document.getElementById("result").innerHTML = x + " " + y + " " + z;
+	var user = firebase.auth().currentUser;
+	if (user) {
+	  var db = firebase.database();
+	  var ref = db.ref("/users/" + user.uid + "/" + x);
+	  ref.set({
+		location: [y],
+		season: [z]
+	  });
+
+	document.getElementById("result").innerHTML = x + " " + y;
+	var user = firebase.auth().currentUser;
+	if (user) {
+	  var db = firebase.database();
+	  var ref = db.ref("/users/" + user.uid + "/teams");
+	  var obj = { "name" : x,"location" : y};
+	  ref.push(obj);
+	  
+	} else {
+	  // No user is signed in.
+	  console.log("Error not logged in");
+	}
 }
+
+
+
+
 </script>
 </body>
 </html>

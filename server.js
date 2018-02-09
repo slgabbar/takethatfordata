@@ -62,14 +62,22 @@ app.get('/signin', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/signin.html'));
 });
 
+app.get('/create_team', function(req, res) {
+
+    res.sendFile(path.join(__dirname + '/public/create.html'));
+});
+
+app.get('/create_players', function(req, res) {
+
+    res.sendFile(path.join(__dirname + '/public/addplayers.html'));
+});
 app.get('/input', function(req, res) {
-<<<<<<< HEAD
-    res.sendFile(path.join(__dirname + '/public/inputdata.html'));
-=======
+
     res.sendFile(path.join(__dirname + '/public/add.html'));
 });
 
+
 app.get('/view', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/view.html'));
->>>>>>> f0a3309bf3d418ac3987da6cb7dd420bf5ebbf13
+  
 });
