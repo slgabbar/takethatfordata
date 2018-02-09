@@ -63,5 +63,13 @@ app.get('/signin', function(req, res) {
 });
 
 app.get('/input', function(req, res) {
+<<<<<<< HEAD
     res.sendFile(path.join(__dirname + '/public/inputdata.html'));
+=======
+    res.sendFile(path.join(__dirname + '/public/add.html'));
+});
+
+app.get('/view', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/view.html'));
+>>>>>>> f0a3309bf3d418ac3987da6cb7dd420bf5ebbf13
 });

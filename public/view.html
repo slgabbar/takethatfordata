@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<h1>View Team Data</h1>
+<form method="get">
+  Team Name: <input type="text" name="fname" id="fname"><br>
+  Location: <input type="text" name="lname" id="lname"><br>
+  Result: <span id="result"> </span><br>
+  Data: <span id="data"> </span> <br>
+  <input type="button" name="submit" value="Submit" onClick="test()">
+</form>
+
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
+    authDomain: "takethatfordata-8f719.firebaseapp.com",
+    databaseURL: "https://takethatfordata-8f719.firebaseio.com",
+    projectId: "takethatfordata-8f719",
+    storageBucket: "takethatfordata-8f719.appspot.com",
+    messagingSenderId: "211430446462"
+  };
+  firebase.initializeApp(config);
+
+function test() {
+	var x = document.getElementById("fname").value;
+	var y = document.getElementById("lname").value;
+	document.getElementById("result").innerHTML = x + " " + y;
+	var user = firebase.auth().currentUser;
+	if (user) {
+	  var db = firebase.database();
+	  var ref = db.ref("/users/" + user.uid + "/teams/");
+	  ref.on("child_added", function (snapshot) {
+	  var ss = snapshot.val();
+	  if (ss.location === y && ss.name === x) {
+	    console.log(ss);
+	    console.log(ss.location);
+	    console.log(ss.name);
+	  }
+	  });
+	} else {
+	  // No user is signed in.
+	  console.log("Error not logged in");
+	}
+}
+
+
+
+
+</script>
+</body>
+</html>
