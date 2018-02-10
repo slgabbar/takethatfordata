@@ -9,6 +9,18 @@
 	 <link rel="stylesheet" type="text/css" href="/css/main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <title>Input Stats</title>
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="/js/d3-shotchart.js" ></script>
+    <script src="/js/shots.js" ></script>
+    <script src="/js/shotchart.js" ></script>
+    <link rel="stylesheet" href="/css/shotchart.css">
 
 </head>
 <body>
@@ -36,10 +48,13 @@
 
 <div class="jumbotron text-center">
 
-<h1>Add Shot Chart Here</h1>
-<p> add content here
-
-  </form>
+  <h1>Shot Chart</h1>
+  <div id="parent">
+    <div id="court" onclick="showCoords(event)"></div>
+    <div class="shot-chart"></div>
+  </div>
+				  
+</form>
 </div>
 </body>
 </html>
