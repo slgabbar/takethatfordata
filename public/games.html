@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<h1>Make Game</h1>
+Select a Team <br>
+<select id="SelectTeam"> </select>
+<form method="get">
+  Input Game Data <br>
+  Season: <input type="text" name="season" id="season"><br>
+  Opponent: <input type="text" name="opponent" id="opponent"><br>
+  Date: <input type="text" name="date" id="date"><br>
+  Result: <span id="result"> </span><br>
+  <input type="button" name="submit" value="Submit" onClick="test()">
+</form>
+
+<br>
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
+    authDomain: "takethatfordata-8f719.firebaseapp.com",
+    databaseURL: "https://takethatfordata-8f719.firebaseio.com",
+    projectId: "takethatfordata-8f719",
+    storageBucket: "takethatfordata-8f719.appspot.com",
+    messagingSenderId: "211430446462"
+  };
+  firebase.initializeApp(config);
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    var db = firebase.database();
+	
+	var ref = db.ref("/users/" + user.uid + "/teams");
+	var i = 0;
+	ref.on("child_added", function (snapshot) {
+	  var ss = snapshot.val();
+	  var form = document.getElementById('SelectTeam');
+	  form.options[i] = new Option(ss.name, ss.name);
+	  i++;
+	});
+  } else {
+    console.log("Error not logged in");
+  }
+  });
+function test() {
+    var x = document.getElementById("SelectTeam").value;
+	var z = document.getElementById("season").value;
+	var d = document.getElementById("date").value;
+	var o = document.getElementById("opponent").value;
+	document.getElementById("result").innerHTML = x+" "+z+" "+d+" "+o;
+	var user = firebase.auth().currentUser;
+	if (user) {
+	  var db = firebase.database();
+	  var ref = db.ref("/users/" + user.uid + "/teams");
+	  ref.on("child_added", function (snapshot) {
+	    var ss = snapshot.val();
+		var key = snapshot.key;
+	  	if (ss.name === x) {
+           var reff = db.ref("/users/" + user.uid + "/teams/" + key + "/games");
+		   var obj = { "opponent" : o, "date" : d};
+		   reff.push(obj);
+	    }
+	  });
+	} else {
+	  // No user is signed in.
+	  console.log("Error not logged in");
+	}
+}
+
+
+
+
+</script>
+</body>
+</html>
