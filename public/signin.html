@@ -118,8 +118,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 function test() {
 var x = document.getElementById("fname").value;
-var y = document.getElementById("lname").value;
-document.getElementById("result").innerHTML = x + " " + y;
+var y = document.getElementById("password").value;
 firebase.auth().signInWithEmailAndPassword(x, y).catch(function(error) {
   // Handle Errors here.
   var errorCode = error.code;
