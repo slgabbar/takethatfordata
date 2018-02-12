@@ -50,10 +50,17 @@
 
   <h1>Shot Chart</h1>
   <div id="parent">
-    <div id="court" onclick="showCoords(event)"></div>
-    <div class="shot-chart"></div>
+    <div id="left_court" onclick="showCoords(event)">
+    	<div id="button_layout">
+    		<input id="btn" type="button" value="Make" onclick="madeShot();">
+    		<input id="btn" type="button" value="Miss" onclick="missedShot();">
+  		</div>
+    </div>
+    <div id="left_sc" class="shot-chart"></div>
+    <div id="right_sc" class="shot-chart"></div>
   </div>
-				  
+
+
 </form>
 </div>
 </body>
