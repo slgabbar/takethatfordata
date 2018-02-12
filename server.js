@@ -63,26 +63,25 @@ app.get('/signin', function(req, res) {
 });
 
 app.get('/create_team', function(req, res) {
-
     res.sendFile(path.join(__dirname + '/public/create.html'));
 });
 
 app.get('/create_players', function(req, res) {
-
     res.sendFile(path.join(__dirname + '/public/addplayers.html'));
 });
-app.get('/input', function(req, res) {
 
+app.get('/input', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/add.html'));
 });
 
-
 app.get('/view', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/view.html'));
-  
 });
 
 app.get('/games', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/games.html'));
-  
+});
+
+app.get('/stats', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/playerstat.html'));
 });

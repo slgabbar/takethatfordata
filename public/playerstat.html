@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<h1>Input Game Statistics</h1>
+Select a Team and Season<br>
+<select id="SelectTeam"> </select>
+<input type="text" name="season" id="season"> <br>
+<input type="submit" onClick="fillgame()"> <br>
+<br>
+Select a Game <br>
+<select id="SelectGame"> </select> <br>
+<br>
+<form method="get">
+  Input Player Data <br>
+  Select Player: <select id="SelectPlayer"> </select> <br>
+  Statistic ex(Steals): <input type="text" name="stat" id="stat"><br>
+  Stat Value ex(1): <input type="text" name="val" id="val"><br>
+  <input type="button" name="submit" value="Submit" onClick="inputplayerstat()">
+</form>
+
+<br>
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
+    authDomain: "takethatfordata-8f719.firebaseapp.com",
+    databaseURL: "https://takethatfordata-8f719.firebaseio.com",
+    projectId: "takethatfordata-8f719",
+    storageBucket: "takethatfordata-8f719.appspot.com",
+    messagingSenderId: "211430446462"
+  };
+  firebase.initializeApp(config);
+  var db = firebase.database();
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+	var ref = db.ref("/users/" + user.uid + "/teams");
+	var i = 0;
+	ref.on("child_added", function(snapshot) {
+	  var ss = snapshot.val();
+	  var form = document.getElementById('SelectTeam');
+	  form.options[i] = new Option(ss.name, snapshot.key);
+	  i++;
+	});
+	
+  } else {
+    console.log("Error not logged in");
+  }
+  });
+  
+function fillgame() {
+  var user = firebase.auth().currentUser;
+  if (user) {
+    var key = document.getElementById('SelectTeam').value;
+	var season = document.getElementById('season').value;
+    var reff = db.ref("/users/" + user.uid + "/teams/" + key + "/season_" + season + "/games");
+    var j=0;
+    reff.on("child_added", function(snapshot) {
+      var sss = snapshot.val();
+	  var gameform = document.getElementById('SelectGame');
+	  gameform.options[j] = new Option(sss.date + " vs " + sss.opponent, snapshot.key);
+	  j++;
+    });
+	var reff = db.ref("/users/" + user.uid + "/teams/" + key + "/season_" + season + "/players");
+	j = 0;
+    reff.on("child_added", function(snapshot) {
+	  var sss = snapshot.val();
+	  var gameform = document.getElementById('SelectPlayer');
+	  gameform.options[j] = new Option(sss.name, snapshot.key);
+	  j++;
+	});
+  } else {
+  	  console.log("Error not logged in");
+  }
+}
+
+function inputplayerstat() {
+    var teamkey = document.getElementById("SelectTeam").value;
+	var season = document.getElementById("season").value;
+	var gamekey = document.getElementById("SelectGame").value;
+	var playerkey = document.getElementById("SelectPlayer").value;
+	var stat = document.getElementById("stat").value;
+	var val = document.getElementById("val").value;
+	var user = firebase.auth().currentUser;
+	if (user) {
+	  var ref = db.ref("/users/" + user.uid + "/teams/" + teamkey + "/season_" +
+	  season + "/games/" + gamekey + "/players/" + playerkey);
+	  var obj = { stat : val };
+	  ref.set(obj);
+	} else {
+	  // No user is signed in.
+	  console.log("Error not logged in");
+	}
+}
+
+
+
+
+</script>
+</body>
+</html>
