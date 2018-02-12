@@ -1,23 +1,43 @@
 var count = 0;
+var x_coord = -1;
+var y_coord = -1;
 
 function main() {
-    //fill_chart();
     set_chart();
 }
 
 function set_chart() {
-    var shot_chart = d3.select(".shot-chart");
-    var court = d3.court().width(700);
+    var left_chart = d3.select(document.getElementById("left_sc"));
+    var left_court = d3.court().width(700);
+    left_chart.call(left_court);
+
+    var right_chart = d3.select(document.getElementById("right_sc"));
+    var right_court = d3.court().width(700);
     var shots = d3.shots().shotRenderThreshold(1).displayToolTips(true).displayType("scatter");
-    shot_chart.call(court);
-    shot_chart.datum(data).call(shots);
+    right_chart.call(right_court);
+    right_chart.datum(data).call(shots);
+
+}
+
+function madeShot() {
+    console.log("Shot: Made");
+    add_data(x_coord, y_coord, count, 1);
+    count++;
+    set_chart();
+
+}
+
+function missedShot() {
+    console.log("Shot: Missed");
+    add_data(x_coord, y_coord, count, 0);
+    count++;
+    set_chart();
 }
 
 function showCoords(event) {
     var cX = event.clientX;
     var cY = event.clientY;
     var coords1 = "X coords: " + cX + ", Y coords: " + cY;
-    console.log(coords1);
     var size = '8px';
     var court = document.getElementById("court");
     $(court).append(
@@ -29,13 +49,12 @@ function showCoords(event) {
 	    .css('height', size)
 	    .css('background-color', 'red')
     );
-    var dX = cX/10;
-    var dY = 47 - cY/10;
-    add_data(dX, dY, count);
-    count++;
-    console.log("x: " + cX + " y: " + cY);
-    console.log("x: " + dX + " y: " + dY);
-    set_chart();
+    var x_adj = 294;
+    var y_adj = 210;
+    x_coord = (cX-x_adj)/8.75;
+    y_coord = (47-(cY-y_adj)/8.78);
+    //console.log("x: " + cX + " y: " + cY);
+    //console.log("x: " + dX + " y: " + dY);
 }
 
 
