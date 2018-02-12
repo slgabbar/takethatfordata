@@ -58,7 +58,7 @@ function test() {
 	    var ss = snapshot.val();
 		var key = snapshot.key;
 	  	if (ss.name === x) {
-           var reff = db.ref("/users/" + user.uid + "/teams/" + key + "/games");
+           var reff = db.ref("/users/" + user.uid + "/teams/" + key + "/season_" + z+ "/games");
 		   var obj = { "opponent" : o, "date" : d};
 		   reff.push(obj);
 	    }
