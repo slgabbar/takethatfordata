@@ -94,7 +94,6 @@
 
 
 
-<!-- <script src="test.js"></script> -->
 
 <script>
   // Initialize Firebase
@@ -120,24 +119,6 @@ function test1() {
 	  var ref = db.ref("/users/" + user.uid + "/" + x + "/season/" + y + "/players");
 	  ref.push({
 		name : [z]
-
-	var l = document.getElementById("lname1").value;
-	var y = document.getElementById("season1").value;
-	var z = document.getElementById("player").value;
-	document.getElementById("res").innerHTML = x + " " + y + " " + l + " " + z;
-	var user = firebase.auth().currentUser;
-	if (user) {
-	  var db = firebase.database();
-	  var ref = db.ref("/users/" + user.uid + "/teams/");
-	  ref.on("child_added", function (snapshot) {
-	  var ss = snapshot.val();
-	  var key = snapshot.key;
-	  if (ss.name === x && l === ss.location) {
-		var reff = db.ref("/users/" + user.uid + "/teams/"+key+"/season_" + y + "/players/");
-		var obj = { "name" : z};
-		reff.push(obj);
-	  }
-
 	  });
 	} else {
 	  // No user is signed in.
@@ -173,7 +154,7 @@ function test() {
 	  console.log("Error not logged in");
 	}
 }
-
+}
 
 
 
