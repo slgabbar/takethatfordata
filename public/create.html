@@ -78,7 +78,7 @@
                     </div>
                     
                   <div class="col-lg-12">
-                      <a href="../create_players"><input type="button" name="submit" value="Next" onClick="test()" class="btn btn-default"></a>
+                      <input type="button" name="submit" value="Next" onClick="test()" class="btn btn-default"></a>
                     
                     </button>
                   </div>
@@ -107,53 +107,23 @@
   };
   firebase.initializeApp(config);
 
-function test1() {
-	var x = document.getElementById("tname").value;
-
-	var y = document.getElementById("season1").value;
-	var z = document.getElementById("player").value;
-	document.getElementById("res").innerHTML = x + " " + y + " " + z;
-	var user = firebase.auth().currentUser;
-	if (user) {
-	  var db = firebase.database();
-	  var ref = db.ref("/users/" + user.uid + "/" + x + "/season/" + y + "/players");
-	  ref.push({
-		name : [z]
-	  });
-	} else {
-	  // No user is signed in.
-	  console.log("Error not logged in");
-	}
-}
 
 function test() {
 	var x = document.getElementById("fname").value;
-	var y = document.getElementById("lname").value;
-
+	var y = document.getElementById("location").value;
+	var s = document.getElementById("school").value;
 	var z = document.getElementById("season").value;
-	document.getElementById("result").innerHTML = x + " " + y + " " + z;
 	var user = firebase.auth().currentUser;
 	if (user) {
 	  var db = firebase.database();
-	  var ref = db.ref("/users/" + user.uid + "/" + x);
-	  ref.set({
-		location: [y],
-		season: [z]
-	  });
-
-	document.getElementById("result").innerHTML = x + " " + y;
-	var user = firebase.auth().currentUser;
-	if (user) {
-	  var db = firebase.database();
-	  var ref = db.ref("/users/" + user.uid + "/teams");
-	  var obj = { "name" : x,"location" : y};
+	  var ref = db.ref("/users/" + user.uid + "/teams/");
+	  var obj = { "name":x, "location":y, "active_season": z};
 	  ref.push(obj);
-	  
 	} else {
 	  // No user is signed in.
 	  console.log("Error not logged in");
 	}
-}
+    window.location.href = "create_players";
 }
 
 
