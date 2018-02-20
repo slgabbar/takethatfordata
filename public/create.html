@@ -118,7 +118,11 @@ function test() {
 	  var db = firebase.database();
 	  var ref = db.ref("/users/" + user.uid + "/teams/");
 	  var obj = { "name":x, "location":y, "active_season": z};
-	  ref.push(obj);
+	  if (ref===null) {
+	    ref.set(obj);
+	  } else {
+	    ref.push(obj);
+	  }
 	} else {
 	  // No user is signed in.
 	  console.log("Error not logged in");
