@@ -1,22 +1,34 @@
+//shotchart.js
 var count = 0;
 var x_coord = -1;
 var y_coord = -1;
+
+
+var margin = {top: 0, right: 0, bottom: 0, left: 0},
+    width = 500 - margin.left - margin.right,
+    height = 471 - margin.top - margin.bottom;
+
+
+//Making it responsive for each screen
+var ration = 471/500;
+var windowWidth = $(window).width();
+if(windowWidth < 500) {
+    width = windowWidth;
+    height = width * ratio;
+};
 
 function main() {
     set_chart();
 }
 
 function set_chart() {
-    var left_chart = d3.select(document.getElementById("left_sc"));
-    var left_court = d3.court().width(700);
-    left_chart.call(left_court);
-
-    var right_chart = d3.select(document.getElementById("right_sc"));
-    var right_court = d3.court().width(700);
+    add_data();
+    var shot_chart = d3.select(".shot-chart").attr('width', width - margin.left + margin.right);
+    var court = d3.court().width(500);
     var shots = d3.shots().shotRenderThreshold(1).displayToolTips(true).displayType("scatter");
-    right_chart.call(right_court);
-    right_chart.datum(data).call(shots);
-
+    shot_chart.call(court);
+    console.log("here");
+    shot_chart.datum(data).call(shots);
 }
 
 function madeShot() {
@@ -30,6 +42,11 @@ function madeShot() {
 function missedShot() {
     console.log("Shot: Missed");
     add_data(x_coord, y_coord, count, 0);
+    var court = document.getElementById("court");
+    $(court).append(
+    $('<div></div>')
+        .css('background-color', 'red')
+    );
     count++;
     set_chart();
 }
@@ -38,24 +55,31 @@ function showCoords(event) {
     var cX = event.clientX;
     var cY = event.clientY;
     var coords1 = "X coords: " + cX + ", Y coords: " + cY;
+    //console.log(coords1);
     var size = '8px';
     var court = document.getElementById("court");
     $(court).append(
-	$('<div></div>')
-	    .css('position', 'absolute')
-	    .css('top',cY + 'px')
-	    .css('left',cX + 'px')
-	    .css('width', size)
-	    .css('height', size)
-	    .css('background-color', 'red')
+    $('<div></div>')
+        .css('position', 'absolute')
+        .css('top',cY + 'px')
+        .css('left',cX + 'px')
+        .css('width', size)
+        .css('height', size)
+        .css('background-color', 'green')
+        .css('border', '1px black')
     );
-    var x_adj = 294;
-    var y_adj = 210;
-    x_coord = (cX-x_adj)/8.75;
-    y_coord = (47-(cY-y_adj)/8.78);
-    //console.log("x: " + cX + " y: " + cY);
-    //console.log("x: " + dX + " y: " + dY);
+    var dX = -30 + cX/10;
+    var dY = 68 - cY/10;
+    x_coord = dX;
+    y_coord = dY;
+    add_data(dX, dY, count);
+    count++;
+    //console.log("count:" + count);
+    console.log("x: " + cX + " y: " + cY);
+    console.log("x: " + dX + " y: " + dY);
+    set_chart();
 }
+
 
 
 $(document).ready(main);
