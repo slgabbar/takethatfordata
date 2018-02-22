@@ -39,9 +39,14 @@ function test() {
 	  ref.on("child_added", function (snapshot) {
 	    var ss = snapshot.val();
 		var key = snapshot.key;
-        var reff = db.ref("/users/" + user.uid + "/teams/" + key + "/season_" + ss.active_season + "/games");
 		var obj = { "opponent" : o, "date" : d, "location":l};
-		reff.push(obj);
+		var game_key = d + "_" + o + "_" + l;
+		game_key = encodeURIComponent(game_key);
+		var reff = db.ref("/users/" + user.uid + "/teams/" + key + "/season_" + 
+		  ss.active_season + "/games/" + game_key);
+		  reff.set(obj);
+		var reff = db.ref("/users/" + user.uid + "/teams/" + key);
+		reff.update({"active_game": game_key});
 	  });
 	} else {
 	  // No user is signed in.
