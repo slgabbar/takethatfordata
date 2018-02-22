@@ -1,12 +1,12 @@
 
 #court {
-    background:url("shot_chart.png");
-    width: 500px;
-    height: 470px;
+    width: 437.5px;
+    height: 412.867px;
+    position: absolute;
     border: solid 1px #000;
     display:block;
     float:left;
-    margin-left: 5em;
+    margin-left: 10em;
 }
 body { 
 
