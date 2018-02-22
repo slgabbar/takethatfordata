@@ -67,7 +67,6 @@ function add_data(x, y, index, made) {
 }
 
 function set_chart() {
-    add_data();
     var shot_chart = d3.select(".shot-chart").attr('width', width - margin.left + margin.right);
     var court = d3.court().width(700);
     var shots = d3.shots().shotRenderThreshold(1).displayToolTips(true).displayType("scatter");
@@ -80,7 +79,6 @@ function set_chart() {
 }
 
 function toHexbin() {
-    add_data();
     var shot_chart = d3.select(".shot-chart").attr('width', width - margin.left + margin.right);
     var court = d3.court().width(700);
     var shots = d3.shots().shotRenderThreshold(1).displayToolTips(true).displayType("hexbin");
