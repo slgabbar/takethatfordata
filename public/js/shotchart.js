@@ -69,8 +69,6 @@ function add_data(x, y, index, made) {
 function set_chart() {
     add_data();
     var shot_chart = d3.select(".shot-chart").attr('width', width - margin.left + margin.right);
-    // Don't need to get court id anymore
-    //var input_court = document.getElementById("court");
     var court = d3.court().width(700);
     var shots = d3.shots().shotRenderThreshold(1).displayToolTips(true).displayType("scatter");
     shot_chart.call(court);
@@ -81,40 +79,23 @@ function set_chart() {
     cmargin_top = $(".shot-chart").offset().top;
 }
 
+function toHexbin() {
+    add_data();
+    var shot_chart = d3.select(".shot-chart").attr('width', width - margin.left + margin.right);
+    var court = d3.court().width(700);
+    var shots = d3.shots().shotRenderThreshold(1).displayToolTips(true).displayType("hexbin");
+    shot_chart.call(court);
+    shot_chart.datum(data).call(shots);
+}
+
 function deleteShot() {
     console.log("Deleting shot");
     data.pop();
     if(count > 0) {
        count--;
     }   
-    /*for (i = 0; i <= edit_count; i++) {
-        data.pop();
-        if (count > 0) {
-            count--;
-        }
-    }*/
     set_chart();
 }
-
-/*function madeShot() {
-    console.log("Shot: Made");
-    //edit_count++;
-    //console.log(edit_count);
-    //count--;
-    add_data(x_coord, y_coord, count, 1);
-    //console.log(data);
-    count++;
-    set_chart();
-}
-
-function missedShot() {
-    console.log("Shot: Missed");
-    //edit_count++;
-    //console.log(edit_count);
-    add_data(x_coord, y_coord, count--, 0);
-    count++;
-    set_chart();
-}*/
 
 function showCoords(event, flag) {
     var cX = event.clientX;
