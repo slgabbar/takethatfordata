@@ -70,6 +70,10 @@ app.get('/create_players', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/addplayers.html'));
 });
 
+app.get('/dashboard', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/dashboard.html'));
+});
+
 app.get('/input', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/add.html'));
 });

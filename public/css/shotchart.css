@@ -11,6 +11,11 @@
 body { 
 
     font-size: 100%; 
+
+}
+p {
+  font-size: 12pt !important;
+  line-height: 12pt;
 }
 
 .navbar {
