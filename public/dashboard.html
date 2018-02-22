@@ -1,57 +1,76 @@
+
+ <!-- add.html -->
 <!DOCTYPE html>
 <html>
 
 <head> 
-	<title> Take that for Data! </title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	 <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <title> Take that for Data! </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="/css/main.css">
+   <link rel="stylesheet" href="/css/shotchart.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <title>Input Stats</title>
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="/js/d3-shotchart.js" ></script>
+    <!--<script src="/js/shots.js" ></script>-->
+    <script src="/js/shotchart.js" ></script>
+    
 </head>
 <body>
 
 <nav class="navbar navbar-default navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-		<a class="navbar-brand" href="/"> Take that for Data </a>
-	</div>
-		<div class="collapse navbar-collapse" id="top">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#about">About</a></li>
-				<li><a href="../signin"> Sign In </a></li>
-				<li><a href="../create_account">Sign Up </a></li>
-				<li><a href="../input">Input Data</a> </li>
-			</ul>
-		</div>
-	</div>
-</nav>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-3 col-lg-2">
-      <nav class="navbar navbar-default navbar-fixed-side">
-        <!-- normal collapsible navbar markup -->
-      </nav>
-    </div>
-    <div class="col-sm-9 col-lg-10">
-      <!-- your page content -->
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="/"> Take that for Data </a>
+  </div>
+    <div class="collapse navbar-collapse" id="top">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#about">About</a></li>
+        <li><a href="#"> Account </a></li>
+         <li><a href="#"> Logout </a></li>
+      </ul>
     </div>
   </div>
-</div>
+</nav>
 
+ <!-- Sidebar -->
+
+
+ <div id="sidebar-wrapper">
+    <div class="side-top">
+        Team Name
+    </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-dark"><a href="#">+ New Season  </a> </li>
+                <li class="sidebar-dark"> <a href="#">+ New Game </a> </li>
+                <li class="sidebar-dark"> <a href="#"> Edit Game</a> </li>
+                <li class="sidebar-dark"> <a href="#"> View stats</a></li>
+                  
+                
+                  <ul>
+  </div> <!-- #end sidebar-wrapper -->
 <div class="jumbotron text-center">
-	<div class="space">
-<h1>Dashboard</h1>
-
-  </form>
+  <h1>Dashboard</h1>
+  <p> (( add stats ?))
+  	<br> graph stats (overall team)
+  	<br> overall team percentage rate. ect.ect
+    
 </div>
+
 </body>
 </html>

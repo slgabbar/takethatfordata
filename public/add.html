@@ -22,7 +22,6 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
     <script src="/js/d3-shotchart.js" ></script>
-    <script src="/js/shots.js" ></script>
     <script src="/js/shotchart.js" ></script>
     
 </head>
@@ -57,31 +56,31 @@
         Team Name
     </div>
             <ul class="sidebar-nav">
-              <li class="sidebar-dark">
-                  <a href="#"> Season </a>
-                  </li>
                 <li class="sidebar-dark">
-                  <a href="#"> Game: 1/20/2018 </a>
-                  </li>
-                <li> <a href="#"> Player 1 </a>
-                  </li>
-                  <li> <a href="#"> Player 2 </a> </li>
-                  <li> <a href="#"> Player 3 </a></li>
-                  <li><a href="#"> Player 4 </a></li>
-                  <li><a href="#"> Player 5 </a></li>
-                  <li><a href="#"> Player 6 </a></li>
-                  <li><a href="#"> Player 7 </a></li>
-                  <ul>
+                    <a href="#"> Season </a>
+                </li>
+                <li class="sidebar-dark">
+                    <a href="#"> Game: 1/20/2018 </a>
+                </li>
+                <li> <a href="#"> Player 1 </a></li>
+                <li> <a href="#"> Player 2 </a> </li>
+                <li> <a href="#"> Player 3 </a> </li>
+                <li> <a href="#"> Player 4 </a> </li>
+                <li> <a href="#"> Player 5 </a> </li>
+                <li> <a href="#"> Player 6 </a> </li>
+                <li> <a href="#"> Player 7 </a> </li>
+            <ul>
   </div> <!-- #end sidebar-wrapper -->
 <div class="jumbotron text-center">
   <h1>Shot Chart</h1>
     <div id="inside">
 <div id="button_layout">
-        <input id="btn" type="button" value="Make" onclick="madeShot();">
-        <input id="btn" type="button" value="Miss" onclick="missedShot();">
+        <!--<input id="btn" type="button" value="Make" onclick="madeShot();">
+        <input id="btn" type="button" value="Miss" onclick="missedShot();">-->
+        <input id="btn" type="button" value="Delete" onclick="deleteShot();">
       </div>
-    <div id="court" onclick="showCoords(event)">
-    </div>
+    <!--<div id="court" onclick="showCoords(event, 1)"></div>-->
+    <!--div id="court" onclick="showCoords(event, 1)" ondblclick="showCoords(event, 0)"></div-->
     <div id="shot-chart" class="shot-chart"></div>
     <p id="coords1"></p>
    </div>
