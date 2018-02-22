@@ -1,0 +1,90 @@
+
+ <!-- add.html -->
+<!DOCTYPE html>
+<html>
+
+<head> 
+  <title> Take that for Data! </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="/css/main.css">
+   <link rel="stylesheet" href="/css/shotchart.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <title>Input Stats</title>
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="/js/d3-shotchart.js" ></script>
+    <script src="/js/shotchart.js" ></script>
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="/"> Take that for Data </a>
+  </div>
+    <div class="collapse navbar-collapse" id="top">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#about">About</a></li>
+        <li><a href="../signin"> Sign In </a></li>
+        <li><a href="../create_account">Sign Up </a></li>
+        <li><a href="../input">Input Data</a> </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+ <!-- Sidebar -->
+
+
+ <div id="sidebar-wrapper">
+    <div class="side-top">
+        Team Name
+    </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-dark">
+                    <a href="#"> Season </a>
+                </li>
+                <li class="sidebar-dark">
+                    <a href="#"> Game: 1/20/2018 </a>
+                </li>
+                <li> <a href="#"> Player 1 </a></li>
+                <li> <a href="#"> Player 2 </a> </li>
+                <li> <a href="#"> Player 3 </a> </li>
+                <li> <a href="#"> Player 4 </a> </li>
+                <li> <a href="#"> Player 5 </a> </li>
+                <li> <a href="#"> Player 6 </a> </li>
+                <li> <a href="#"> Player 7 </a> </li>
+            <ul>
+  </div> <!-- #end sidebar-wrapper -->
+<div class="jumbotron text-center">
+  <h1>Shot Chart</h1>
+    <div id="inside">
+<div id="button_layout">
+        <!--<input id="btn" type="button" value="Make" onclick="madeShot();">
+        <input id="btn" type="button" value="Miss" onclick="missedShot();">-->
+        <input id="btn" type="button" value="Delete" onclick="deleteShot();">
+      </div>
+    <!--<div id="court" onclick="showCoords(event, 1)"></div>-->
+    <!--div id="court" onclick="showCoords(event, 1)" ondblclick="showCoords(event, 0)"></div-->
+    <div id="shot-chart" class="shot-chart"></div>
+    <p id="coords1"></p>
+   </div>
+</div>
+
+</body>
+</html>
