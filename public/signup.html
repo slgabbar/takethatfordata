@@ -111,7 +111,6 @@
 function test() {
 var x = document.getElementById("fname").value;
 var y = document.getElementById("password").value;
-document.getElementById("result").innerHTML = x + " " + y;
 firebase.auth().createUserWithEmailAndPassword(x, y).catch(function(error) {
   // Handle Errors here.
   var errorCode = error.code;
