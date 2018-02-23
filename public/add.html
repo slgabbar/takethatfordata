@@ -13,6 +13,7 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
@@ -23,6 +24,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
     <script src="/js/d3-shotchart.js" ></script>
     <script src="/js/shotchart.js" ></script>
+	<script src="/js/buttons.js" ></script>
     
 </head>
 <body>
@@ -52,24 +54,19 @@
 
 
  <div id="sidebar-wrapper">
-    <div class="side-top">
+    <div class="side-top" id="teamname">
         Team Name
     </div>
-            <ul class="sidebar-nav">
-                <li class="sidebar-dark">
+            <ul class="sidebar-nav" id="playerbuttons">
+                <li class="sidebar-dark" id="active_season">
                     <a href="#"> Season </a>
                 </li>
-                <li class="sidebar-dark">
+                <li class="sidebar-dark" id="active_game">
                     <a href="#"> Game: 1/20/2018 </a>
                 </li>
-                <li> <a href="#"> Player 1 </a></li>
-                <li> <a href="#"> Player 2 </a> </li>
-                <li> <a href="#"> Player 3 </a> </li>
-                <li> <a href="#"> Player 4 </a> </li>
-                <li> <a href="#"> Player 5 </a> </li>
-                <li> <a href="#"> Player 6 </a> </li>
-                <li> <a href="#"> Player 7 </a> </li>
-            <ul>
+				<li id="playerkey" hidden> </li>
+				<li id="player" hidden> </li>
+            </ul>
   </div> <!-- #end sidebar-wrapper -->
 <div class="jumbotron text-center">
   <h1>Shot Chart</h1>
