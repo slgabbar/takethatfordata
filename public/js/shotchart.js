@@ -1,9 +1,8 @@
 //shotchart.js
 var data = []
-var x_coord = -1;
-var y_coord = -1;
+var home = 0;
+var visitor = 0;
 var count = 0;
-//var edit_count = 0;
 var cpixel_width = 0;
 var cpixel_height = 0;
 var cmargin_left = 0;
@@ -23,6 +22,8 @@ if(windowWidth < 500) {
 };
 
 function main() {
+    dispHome();
+    dispVisitor();
     set_chart();
 
     var doubleClickTime = 0;
@@ -37,10 +38,10 @@ function main() {
         if (singleClickTime - doubleClickTime > threshold) {
         setTimeout(function () {
             if (singleClickTime - doubleClickTime > threshold) {
-                console.log("SINGLE");
+                //console.log("SINGLE");
                 // Call show coords to log coordinates
                 showCoords(event, 1);
-                console.log(data);
+                //console.log(data);
             }
         },threshold);
     }
@@ -50,21 +51,21 @@ function main() {
     $('.shot-chart').dblclick(function(event){
         // Get time of double click
         doubleClickTime = new Date();
-        console.log("DOUBLE");
+        //console.log("DOUBLE");
         // Call show coords to log coordinates
         showCoords(event, 0);
-        console.log(data);
+        //console.log(data);
     });
 }
 
-function add_data(x, y, index, made) {
+/*function add_data(x, y, index, made) {
     data[index] = {
     "shot_attempted_flag": 1,
     "shot_made_flag": made,
     "x":x,
     "y":y
     };
-}
+}*/
 
 function set_chart() {
     var shot_chart = d3.select(".shot-chart").attr('width', width - margin.left + margin.right);
@@ -87,18 +88,64 @@ function toHexbin() {
 }
 
 function deleteShot() {
-    console.log("Deleting shot");
-    data.pop();
+    //console.log("Deleting shot");
+    var tmp = data.pop();
+    if (tmp.shot_made_flag == 1) {
+        home -= tmp.shot_attempted;
+    }
     if(count > 0) {
        count--;
     }   
     set_chart();
+    dispHome();
+}
+
+function pi_th(x, y) {
+    var a = x - 25;
+    var b = y - 5;
+    return Math.sqrt((a * a) + (b * b));
+}
+
+function checkThree(x,y) {
+    var dist = pi_th(x,y);
+    if (x < 2.3 || x > 47.7) {
+        return true;
+    } else if (dist >= 24.6) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function plot(x,y,flag) {
+    var value = 0;
+    if (checkThree(x,y)) {
+        value = 3;
+        if (flag == 1) {
+            home += 3;
+        }
+    } else {
+        value = 2;
+        if (flag == 1) {
+            home += 2;
+        }
+    }
+    data[count] = {
+        "shot_attempted_flag": 1,
+        "shot_attempted": value,
+        "shot_made_flag": flag,
+        "x":x,
+        "y":y
+    };
+    console.log(data[count]);
+    count++;
+    set_chart();
+    dispHome();
 }
 
 function showCoords(event, flag) {
     var cX = event.clientX;
     var cY = event.clientY;
-    var coords1 = "X coords: " + cX + ", Y coords: " + cY;
 
     var x_ratio = cpixel_width/50;//(actual pixel width)/50
     var y_ratio = cpixel_height/47;//(actual pixel height)/47
@@ -109,14 +156,40 @@ function showCoords(event, flag) {
     var dX = (margin_width + cX)/x_ratio;
     var dY = 47 - ((cY - margin_height)/y_ratio);
 
-    x_coord = dX;
-    y_coord = dY;
+    plot(dX, dY, flag);
+}
 
-    //edit_count = 0;
-    add_data(x_coord, y_coord, count, flag);
-    count++;
-    set_chart();
-    //console.log(data);
+function decrement(flag) {
+    if (flag == 1) {
+        if (home > 0)
+            home--;
+        dispHome();
+    } else {
+        if (visitor > 0)
+            visitor--;
+        dispVisitor();
+    }
+
+}
+
+function dispHome() {
+    document.getElementById("home_score").innerHTML = 
+                                      ("Home Score: " + home);
+}
+
+function dispVisitor() {
+    document.getElementById("visitor_score").innerHTML = 
+                                      ("Visitor Score: " + visitor);
+}
+
+function oppScore() {
+    visitor++;
+    dispVisitor();
+}
+
+function makeFT() {
+    home++;
+    dispHome();
 }
 
 $(document).ready(main);
