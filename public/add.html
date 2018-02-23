@@ -77,7 +77,15 @@
 <div id="button_layout">
         <input id="btn" type="button" value="Delete" onclick="deleteShot();">
         <input id="btn" type="button" value="Hexbin" onclick="toHexbin();">
+        <input id="btn" type="button" value="Home Score +1" onclick="makeFT();">
+        <input id="btn" type="button" value="Home Score -1" onclick="decrement(1);">
+         <input id="btn" type="button" value="Visitor Score +1" onclick="oppScore();">
+        <input id="btn" type="button" value="Visitor Score -1" onclick="decrement(0);">
+        <p id="home_score"></p>
+        <p id="visitor_score"></p>
       </div>
+
+
     <div id="shot-chart" class="shot-chart"></div>
     <p id="coords1"></p>
    </div>
