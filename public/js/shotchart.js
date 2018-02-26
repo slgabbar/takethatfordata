@@ -174,12 +174,12 @@ function decrement(flag) {
 
 function dispHome() {
     document.getElementById("home_score").innerHTML = 
-                                      ("Home Score: " + home);
+                                      ("Home: " + home);
 }
 
 function dispVisitor() {
     document.getElementById("visitor_score").innerHTML = 
-                                      ("Visitor Score: " + visitor);
+                                      ("Visitor: " + visitor);
 }
 
 function oppScore() {
