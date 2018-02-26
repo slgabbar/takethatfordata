@@ -108,6 +108,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   console.log(snapshot.val());
   }, function (error) {
     console.log("Error: " + error.code);
+
 	});
     // ...
   } else {
@@ -123,6 +124,7 @@ firebase.auth().signInWithEmailAndPassword(x, y).catch(function(error) {
   // Handle Errors here.
   var errorCode = error.code;
   var errorMessage = error.message;
+  alert('Incorrect e-mail / password combination');
   // ...
 
 });
