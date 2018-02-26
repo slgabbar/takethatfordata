@@ -10,9 +10,9 @@
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
    <link rel="stylesheet" type="text/css" href="/css/main.css">
    <link rel="stylesheet" href="/css/shotchart.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
@@ -22,8 +22,8 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
     <script src="/js/d3-shotchart.js" ></script>
-    <!--<script src="/js/shots.js" ></script>-->
     <script src="/js/shotchart.js" ></script>
+     <script src="/js/logout.js" ></script>
     
 </head>
 <body>
@@ -42,7 +42,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#about">About</a></li>
         <li><a href="#"> Account </a></li>
-         <li><a href="#"> Logout </a></li>
+         <li><a href="#" onclick="return signout();"> Logout </a></li>
       </ul>
     </div>
   </div>
@@ -71,6 +71,30 @@
   	<br> overall team percentage rate. ect.ect
     
 </div>
+ <!-- Javascript -->
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
+    authDomain: "takethatfordata-8f719.firebaseapp.com",
+    databaseURL: "https://takethatfordata-8f719.firebaseio.com",
+    projectId: "takethatfordata-8f719",
+    storageBucket: "takethatfordata-8f719.appspot.com",
+    messagingSenderId: "211430446462"
+  };
+
+  function signout(){
+    firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+   window.location = '../'; 
+}).catch(function(error) {
+  // An error happened.
+  console.log("Error: " + error.code);
+});
+return true;
+
+  }
+</script>
 
 </body>
 </html>
