@@ -20,18 +20,16 @@ firebase.auth().onAuthStateChanged(function(user) {
 	  reff.on("child_added", function (snapshot_player) {
 	    snap = snapshot_player.val();
 	    var ele = document.createElement("li");
-
 		var a = document.createElement("a");
+		var v = document.createTextNode(snap.firstname + " " + snap.lastname);
+		a.appendChild(v);
 		a.href = "#";
 		ele.appendChild(a);
-		
-	    var v = document.createTextNode(snap.firstname + " " + snap.lastname);
-		a.appendChild(v);
-	    //ele.value = snap.firstname + " " + snap.lastname;
-		//ele.name = snapshot_player.key;
+		ele.name = snapshot_player.key;
+		a.name = snap.firstname + " " + snap.lastname
 		ele.onclick = function() {
-		  document.getElementById("player").innerHTML = ele.value;
 		  document.getElementById("playerkey").innerHTML = ele.name;
+		  document.getElementById("playername").innerHTML = a.name;
 		};
 		var playerlist = document.getElementById("playerbuttons");
 		playerlist.appendChild(ele);
@@ -54,7 +52,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 	});
 	
 	//Creates stat labels with plus minus buttons
-	/*
+	
 	var ref = db.ref("/statistics");
 	ref.on("child_added", function (snapshot) {
 	  var element = document.createElement("div");
@@ -73,6 +71,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 	  var minus = document.createElement("input");
 	  minus.type = "button";
 	  minus.value = "-";
+	  minus.id = snapshot.key;
 	  minus.onclick = function() {
 	    plusminus(this.id, false);
 	  };
@@ -82,8 +81,47 @@ firebase.auth().onAuthStateChanged(function(user) {
 	  var form = document.getElementById("statbuttons");
 	  form.appendChild(element);
 	});
-	*/
+	
   } else {
     console.log("Error not logged in");
   }
 });
+
+function plusminus(stat,operation) {
+	    var user = firebase.auth().currentUser;
+		if (user) {
+		  var ref = db.ref("/users/" + user.uid + "/teams");
+	      ref.on("child_added", function (snapshot) {
+	        var ss = snapshot.val();
+		    var teamkey = snapshot.key;
+		    var gamekey = ss.active_game;
+			var playerkey = document.getElementById("playerkey").innerHTML;
+		    var season = ss.active_season;
+			var readstatref = db.ref("/users/" + user.uid + "/teams/" + teamkey + "/season_" +
+	          season + "/games/" + gamekey + "/players/" + playerkey + "/" + stat);
+			var val = 0;
+			readstatref.on("value", function(snap) {
+			  val = snap.val();
+			}, function(error) {});
+			if (operation) {
+			  val++;
+			} else {
+			  val--;
+			}
+	        var ref = db.ref("/users/" + user.uid + "/teams/" + teamkey + "/season_" +
+	          season + "/games/" + gamekey + "/players/" + playerkey);
+	        var obj = { [stat] : val };
+	        ref.update(obj);
+			var playername = document.getElementById("playername").innerHTML;
+			var string = "";
+			if (operation) {
+				string = playername + " " + stat + " + 1";
+			} else {
+				string = playername + " " + stat + " - 1";
+			}
+			document.getElementById("lastaction").innerHTML = string;
+	      });
+		} else {
+		  console.log("Error not logged in");
+		}
+}
