@@ -1,3 +1,5 @@
+
+
 //shotchart.js
 var data = []
 var home = 0;
@@ -138,6 +140,23 @@ function plot(x,y,flag) {
         "y":y
     };
     console.log(data[count]);
+	var user = firebase.auth().currentUser;
+	if (user) {
+		var ref = db.ref("/users/" + user.uid + "/teams");
+		ref.on("child_added", function (snapshot) {
+			var ss = snapshot.val();
+			var teamkey = snapshot.key;
+			var gamekey = ss.active_game;
+			var playerkey = document.getElementById("playerkey").innerHTML;
+			var season = ss.active_season;
+			var readstatref = db.ref("/users/" + user.uid + "/teams/" + teamkey + "/season_" +
+				  season + "/games/" + gamekey + "/players/" + playerkey + "/shots");
+			readstatref.push(data[count]);
+		});
+	} else {
+		console.log("Error not logged in");
+	}
+	
     count++;
     set_chart();
     dispHome();
