@@ -81,6 +81,9 @@ app.get('/input', function(req, res) {
 app.get('/view', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/view.html'));
 });
+app.get('/newgame', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/newgame.html'));
+});
 
 app.get('/games', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/games.html'));
