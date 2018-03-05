@@ -87,7 +87,9 @@
                     
                    </div>
                    </form>
-                   <p> Add the playeres below here:
+                   <p> Add the playeres below here:</p>
+				   <p id="players"></p>
+				   
                 <ul>
                 <li id="playerkey" hidden> </li>
               </ul>
@@ -109,14 +111,37 @@
     messagingSenderId: "211430446462"
   };
   firebase.initializeApp(config);
-
+  var db = firebase.database();
+  
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    //This code lists the players in the current team's active season
+    var ref = db.ref("/users/" + user.uid + "/teams");
+	ref.on("child_added", function (snapshot) {
+	  var ss = snapshot.val();
+	  var reff = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" +
+	    ss.active_season + "/players/");
+	  reff.on("child_added", function (snapshot_player) {
+	    snap = snapshot_player.val();
+	    var ele = document.createElement("li");
+		var text = document.createTextNode(snap.firstname + " " + snap.lastname);
+		ele.appendChild(text);
+		var playerlist = document.getElementById("players");
+		playerlist.appendChild(ele);
+	  });
+	});
+  } else {
+  	  console.log("Error not logged in");
+  }
+});
+  
 function test() {
 	var x = document.getElementById("pfname").value;
 	var y = document.getElementById("plname").value;
 	var z = document.getElementById("pnumber").value;
 	var user = firebase.auth().currentUser;
 	if (user) {
-	  var db = firebase.database();
+	  
 	  var ref = db.ref("/users/" + user.uid + "/teams/");
 	  ref.on("child_added", function(snapshot) {
 	    var ss = snapshot.val();
