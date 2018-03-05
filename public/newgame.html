@@ -152,6 +152,20 @@ function SubmitNewGame() {
   var location = document.getElementById("location").value;
   var opponent = document.getElementById("opponent").value;
   var homevisitor = document.getElementById("homevisitor").value;
+
+  if (!Date.parse(date)|| date=='') {
+    alert('Error: input date');
+    return;
+  }
+  if (location == null || location =='') {
+    alert('Error:input location');
+    return;
+  }
+  if (opponent == null || opponent =='') {
+    alert('Error: input opponent');
+    return;
+  }
+
   var user = firebase.auth().currentUser;
 	if (user) {
 	  var db = firebase.database();
@@ -180,14 +194,6 @@ function SubmitNewGame() {
 //    window.location = '../input'; //After successful login, user will be redirected to home.html
 //  }
 //});
-
-
-
-
-
-
-
-
 
 
 </script>

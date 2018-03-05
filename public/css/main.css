@@ -47,3 +47,8 @@ h1 {
 .btn{
     background-color: #83C7F2 !important;
 }
+
+select{
+   color: black;
+   background-color: white;
+}
