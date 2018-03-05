@@ -159,8 +159,8 @@ function SubmitNewGame() {
 	  ref.on("child_added", function (snapshot) {
 	    var ss = snapshot.val();
 		var key = snapshot.key;
-		var obj = { "opponent" : o, "date" : d, "location":l, "homevisitor":homevisitor};
-		var game_key = d + "_" + o + "_" + l;
+		var obj = { "opponent" : opponent, "date" : date, "location":location, "homevisitor":homevisitor};
+		var game_key = date + "_" + opponent + "_" + location;
 		game_key = encodeURIComponent(game_key);
 		var reff = db.ref("/users/" + user.uid + "/teams/" + key + "/season_" + 
 		  ss.active_season + "/games/" + game_key);
