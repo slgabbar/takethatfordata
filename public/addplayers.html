@@ -87,7 +87,10 @@
                     
                    </div>
                    </form>
-          
+                   <p> Add the playeres below here:
+                <ul>
+                <li id="playerkey" hidden> </li>
+              </ul>
                 </div> <!-- inner-form -->
 
 
@@ -117,15 +120,25 @@ function test() {
 	  var ref = db.ref("/users/" + user.uid + "/teams/");
 	  ref.on("child_added", function(snapshot) {
 	    var ss = snapshot.val();
-		var reff = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + ss.active_season + "/players");
-        var obj = { "firstname":x, "lastname":y, "number":z};
+		  var reff = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + ss.active_season + "/players");
+      var obj = { "firstname":x, "lastname":y, "number":z};
 	    reff.push(obj);	  
 	  });
 	} else {
 	  // No user is signed in.
 	  console.log("Error not logged in");
 	}
+
+// When User click "Next", sign up page is finished / complete then move onto the dashboard
+//firebase.auth().onAuthStateChanged(user => {
+ // if(user) {
+//    window.location = '../dashboard'; //After successful login, user will be redirected to home.html
+//  }
+//});
+
+
 }
+
 
 
 
