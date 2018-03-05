@@ -98,7 +98,6 @@
 
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfOoNFnfTmxyl-lScVug25FvUtQyCCVCM&sensor=false&libraries=places&type=school" type="text/javascript"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfOoNFnfTmxyl-lScVug25FvUtQyCCVCM&sensor=false&libraries=places&type=school" type="text/javascript"></script>
 <script type="text/javascript">
     function initialize() {
         var options = {
@@ -158,7 +157,7 @@ function test() {
     //window.location.href = "create_players";
     firebase.auth().onAuthStateChanged(user => {
   if(user) {
-    window.location = '../create_players'; //After succesful signup, user will be redirected to create_team
+    //window.location = '../create_players'; //After succesful signup, user will be redirected to create_team
   }
 });
 }
