@@ -192,6 +192,7 @@ path {
 
 .sidebar-nav li a:active, .sidebar-nav li a:focus {
   text-decoration: none;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .sidebar-nav>.sidebar-brand {

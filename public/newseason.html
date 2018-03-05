@@ -8,8 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
    <link rel="stylesheet" type="text/css" href="/css/main.css">
-   <link rel="stylesheet" href="/css/shotchart.css">
    <link rel="stylesheet" type="text/css" href="/css/login.css">
+   <link rel="stylesheet" href="/css/shotchart.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
@@ -37,7 +37,8 @@
     </div>
   </div>
 </nav>
- <!-- Sidebar -->
+
+<!-- Sidebar -->
 
 
  <div id="sidebar-wrapper">
@@ -53,7 +54,6 @@
                 
                   <ul>
   </div> <!-- #end sidebar-wrapper -->
-
   <div class="space container ">
 
     <div class="login">
@@ -65,46 +65,50 @@
 
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 
-<center><h1>New Game</h1> </center>
+<center><h1>New Season</h1> </center>
             
                    <form role="form">
                    <div class="row">
                           
-                    <div class="col-lg-12">
-                        <label>Date</label>
-                        <div class="form-group">
-                        <input type="date" name="date" id="date" class="form-control" placeholder="">
-                      </div>
-                    </div>
-                    
-                    <div class="col-lg-12">
-                        <label>Location</label>
-                        <div class="form-group">
-                      <input type="text" name="location" id="location" class="form-control" placeholder="">
-                      </div>
-                    </div>
-
-                     <div class="col-lg-12">
-                        <label>Opponent </label>
-                        <div class="form-group">
-                      <input type="text" name="opponent" id="opponent" class="form-control" placeholder="">
-                      </div>
-                    </div>
 
                     <div class="col-lg-12">
-                        <label>Are you Home or Visitor? </label>
+                        <label> What Season? </label>
                         <div class="form-group">
-                       <select name="homevisitor" id="homevisitor" class="form-control">
-                            <option value="1"> Home </option>
-                            <option value="2">Visitor </option>
+                       <select name="season" id="season" class="form-control">
+                            <option value="1"> 2018 </option>
+                            <option value="2">2018 - 2019 </option>
                           </select>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <label> Import Players from last season?</label>
+                        <div class="form-group">
+                       <select name="season" id="season" class="form-control">
+                            <option value="yes"> Yes</option>
+                            <option value="no">No </option>
+                          </select>
+                      </div>
+                    </div>
+
+                      <div class="col-lg-12">
+                        <label> Add / Delete Players Here</label>
+                        <div class="form-group">
+                             <ul>
+                            <li>Player 1</li>
+                            <li> Player 2</li>
+                            <li> Player 3 </li>
+                           </ul>
+                       <input name="season" id="season" class="form-control">
+                         </input>
+                          <input type="button" name="add" value="add new player" onClick="addplayers()" class="btn btn-default">
                       </div>
                     </div>
 
                     
                   <div class="col-lg-12">
                   <br>
-                    <input type="button" name="submit" value="Next" onClick="SubmitNewGame()" class="btn btn-default">
+                     <input type="button" name="submit" value="Next" onClick="SubmitNewSeason()" class="btn btn-default">
                     
                     </button>
                   </div>
@@ -147,18 +151,16 @@ return true;
 
   }
   
-function SubmitNewGame() {
-  var date = document.getElementById("date").value;
-  var location = document.getElementById("location").value;
-  var opponent = document.getElementById("opponent").value;
-  var homevisitor = document.getElementById("homevisitor").value;
+function SubmitNewSeason() {
+  var season = document.getElementById("season").value;
+
   
   }
 
 // after you click new game, it redirects to the input / add page
 //firebase.auth().onAuthStateChanged(user => {
  // if(user) {
-//    window.location = '../input'; //After successful login, user will be redirected to home.html
+//    window.location = '../new_players'; //After successful login, user will be redirected to home.html
 //  }
 //});
 
