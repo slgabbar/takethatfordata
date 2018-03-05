@@ -100,6 +100,35 @@ function deleteShot() {
     }   
     set_chart();
     dispHome();
+	/* //commented out until the shotchart looks at database
+	var user = firebase.auth().currentUser;
+	if (user) {
+		var ref = db.ref("/users/" + user.uid + "/teams");
+		ref.on("child_added", function (snapshot) {
+			var ss = snapshot.val();
+			var teamkey = snapshot.key;
+			var gamekey = ss.active_game;
+			var playerkey = document.getElementById("playerkey").innerHTML;
+			var season = ss.active_season;
+			var readshotref = db.ref("/users/" + user.uid + "/teams/" + teamkey + "/season_" +
+				  season + "/games/" + gamekey + "/players/" + playerkey + "/shots");
+			var highestcount = 0;
+			var shotkey = "";
+			readshotref.on("child_added", function(shotsnapshot) {
+				var snap = shotsnapshot.val();
+				console.log(snap);
+				if (snap.count > highestcount) {
+					highestcount = snap.count;
+					shotkey = shotsnapshot.key;
+				}
+			});
+			var delshotref = db.ref("/users/" + user.uid + "/teams/" + teamkey + "/season_" +
+				  season + "/games/" + gamekey + "/players/" + playerkey + "/shots" + shotkey);
+			delshotref.remove();
+		});
+	} else {
+		console.log("Error not logged in");
+	}*/
 }
 
 function pi_th(x, y) {
@@ -137,7 +166,8 @@ function plot(x,y,flag) {
         "shot_attempted": value,
         "shot_made_flag": flag,
         "x":x,
-        "y":y
+        "y":y,
+		"count": count
     };
     console.log(data[count]);
 	var user = firebase.auth().currentUser;
