@@ -1,5 +1,4 @@
-
- <!-- add.html -->
+ <!-- view.html -->
 <!DOCTYPE html>
 <html>
 
@@ -61,39 +60,63 @@
                 <li class="sidebar-dark" id="active_season">
                     <a href="#"> Season </a>
                 </li>
-                <li class="sidebar-dark" id="active_game">
-                    1/20/2018 (vs Team Blue)
+                <ul class="sidebar-nav" id="gamebuttons">
+                  <li class="sidebar-dark" id="game">
+                    <a href="#"> Game </a>
+                  </li>
+                </ul>
+                
+                <li class="sidebar-dark" id="player">
+                    <a href="#"> Player </a>
                 </li>
-				        <li id="playerkey" hidden> </li>
+				<li id="playerkey" hidden> </li>
+        <li id="gamekey" hidden> </li>
             </ul>
   </div> <!-- #end sidebar-wrapper -->
 <div class="jumbotron text-center">
-  <h5 id="home_score"></h5>  <h5 id="visitor_score"></h5>
     <div id="inside">
+
+
+<p></p>
+<p></p>
+
 <div id="button_layout">
-  <ul>
-        <li><input id="btn" type="button" value="Delete" onclick="deleteShot();"></li>
-        <li><input id="btn" type="button" value="Hexbin" onclick="toHexbin();"></li>
-
-  </ul>
-      </div>
-        <div id="button_layout2">
-         <li><input id="btn" type="button" value="Home Score +1" onclick="makeFT();"></li>
-        <li><input id="btn" type="button" value="Home Score -1" onclick="decrement(1);"></li>
-        <li><input id="btn" type="button" value="Visitor Score +1" onclick="oppScore();"></li>
-        <li><input id="btn" type="button" value="Visitor Score -1" onclick="decrement(0);"></li>
-        <p id="home_score"></p>
-        <p id="visitor_score"></p>
-		Current Active Player: <li id="playername"></li>
-		<li id="statbuttons"></li>
-		Last Action: <li id="lastaction"></li>
-    </div>
-
-    <div id="shot-chart" class="shot-chart"></div>
-    <p id="coords1"></p>
-
-   </div>
+    Current Active Player: <li id="playername"></li>
+    Current Game: <li id="gamename"></li>
 </div>
+
+
+<div>
+  <table> 
+    <tr>
+      <th>Assists</th>
+      <th>Rebounds</th>
+      <th>Steals</th>
+    </tr>
+    <tr>
+      <td id="assists"> </td>
+      <td id="rebounds"> </td>
+      <td id="steals"> </td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <ul id="shot_list">
+  
+  </ul>
+</div>
+
+<!--<div>
+  <table>
+    <tr>
+      <th>Shot Attempted Flag</th>
+      <th>Shot Made Flag</th>
+      <th>X Coordinate</th>
+      <th>Y Coordinate</th>
+    </tr>
+  </table>
+</div>-->
 
  <!-- Javascript -->
 <script>

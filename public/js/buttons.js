@@ -9,8 +9,60 @@
   firebase.initializeApp(config);
   var db = firebase.database();
 
+
+function statsTable(snapshot, game, player) {
+	var user = firebase.auth().currentUser;
+	var snap = snapshot.val();
+	var ref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season + "/games/" + game + "/players/" + player);
+	ref.once("value").then(function(snapshot_stats) {
+		snapshot_stats.forEach(function(child) {
+			var tmp = child.key;
+			var stats = child.val();
+			var ele;
+			var v = document.createTextNode(stats);
+			if (tmp == "assists") {
+				ele = document.getElementById("assists");
+				ele.innerHTML = " ";
+				ele.appendChild(v);
+			} else if (tmp == "rebounds") {
+				ele = document.getElementById("rebounds");
+				ele.innerHTML = " ";
+				ele.appendChild(v);
+			} else if (tmp == "steals") {
+				ele = document.getElementById("steals");
+				ele.innerHTML = " ";
+				ele.appendChild(v);
+
+			}
+		});
+	});
+
+	var query = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season + "/games/" + game + "/players/" + player + "/shots/");
+	query.once("value").then(function(snapshot_shot) {
+		snapshot_shot.forEach(function(child) {
+			var key = child.key;
+			var data = child.val();
+			//console.log(key);
+			//console.log(data);
+		});
+	});
+
+}
+
+
+
+
+
+
+
+
+
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
+  	var game;
+  	var player;
     //This code creates the player selection buttons
     var ref = db.ref("/users/" + user.uid + "/teams");
 	ref.on("child_added", function (snapshot) {
@@ -30,9 +82,34 @@ firebase.auth().onAuthStateChanged(function(user) {
 		ele.onclick = function() {
 		  document.getElementById("playerkey").innerHTML = ele.name;
 		  document.getElementById("playername").innerHTML = a.name;
+		  player = ele.name;
+		  //console.log(player);
+		  statsTable(snapshot, game, player);
+		 };
+		 var playerlist = document.getElementById("playerbuttons");
+		 playerlist.appendChild(ele);
+	  });
+	//THis code creates the game selection buttons for the view stats page
+		var gref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" +
+	    ss.active_season + "/games/");
+	  gref.on("child_added", function (snapshot_game) {
+		snap = snapshot_game.val();
+		var gele = document.createElement("li");
+		var ga = document.createElement("a");
+		var gv = document.createTextNode(snap.date + " vs. " + snap.opponent);
+		ga.appendChild(gv);
+		ga.href = "#";
+		gele.appendChild(ga);
+		gele.name = snapshot_game.key;
+		ga.name = snap.date + " vs. " + snap.opponent;
+		gele.onclick = function() {
+			document.getElementById("gamekey").innerHTML = gele.name;
+			document.getElementById("gamename").innerHTML = ga.name;
+			game = gele.name;
+			//console.log(game);
 		};
-		var playerlist = document.getElementById("playerbuttons");
-		playerlist.appendChild(ele);
+		var gamelist = document.getElementById("gamebuttons");
+		gamelist.appendChild(gele);
 	  });
 	});
 	
@@ -41,6 +118,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 		var ss = snapshot.val();
 		document.getElementById("teamname").innerHTML = ss.name;
 		document.getElementById("active_season").innerHTML = "Season " + ss.active_season;
+		document.getElementById("game").innerHTML = "Game";
 		var str = ss.active_game.split("_");
 		document.getElementById("active_game").innerHTML = "Game: " + decodeURIComponent(str[0]);
 		/*  
