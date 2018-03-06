@@ -50,7 +50,7 @@
 
 <center><h1>Add Players</h1> </center>
             
-                   <form role="form">
+                   <form id ="playerform" role="form">
                    <div class="row">
                           
                     <div class="col-lg-12">
@@ -75,9 +75,8 @@
 
                     
                   <div class="col-lg-12">
-                  <input type="button" name="submit" value="Add More Players" onClick="test()" class="btn btn-default">
-                  <br>
-                     <input type="button" name="submit" value="Next" onClick="test()" class="btn btn-default">
+                  <input type="button" name="submit" value="Add More Players" onClick="test()" class="btn btn-save">
+                      <input type="button" name="next" value="Next" onClick="nextbtn()" class="btn btn-default"></a>
                     
                     </button>
                   </div>
@@ -139,6 +138,7 @@ function test() {
 	var x = document.getElementById("pfname").value;
 	var y = document.getElementById("plname").value;
 	var z = document.getElementById("pnumber").value;
+  var form = document.getElementById("playerform").value;
 	var user = firebase.auth().currentUser;
 	if (user) {
 	  
@@ -148,6 +148,8 @@ function test() {
 		  var reff = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + ss.active_season + "/players");
       var obj = { "firstname":x, "lastname":y, "number":z};
 	    reff.push(obj);	  
+      clearFields()
+
 	  });
 	} else {
 	  // No user is signed in.
@@ -160,14 +162,17 @@ function test() {
 //    window.location = '../dashboard'; //After successful login, user will be redirected to home.html
 //  }
 //});
-
-
 }
 
+function clearFields(){
+  document.getElementById("pfname").value = "";
+  document.getElementById("plname").value = "";
+  document.getElementById("pnumber").value = "";
+}
 
-
-
-
+function nextbtn() {
+  window.location = '../dashboard'; //After succesful signup, user will be redirected to create_team
+}
 
 
 </script>

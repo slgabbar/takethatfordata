@@ -61,6 +61,12 @@ select {
     font-size: 15px;
     width: 100%;
     border:none;
+    margin:5px;
+}
+
+.btn-save {
+    background: #94d759 !important;
+
 }
 
 .btn:hover{
