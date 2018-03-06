@@ -15,12 +15,38 @@ function statsTable(snapshot, game, player) {
 	var snap = snapshot.val();
 	var ref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
 		snap.active_season + "/games/" + game + "/players/" + player);
+	/*
+	var table = document.createElement("table");
+	var tr1 = document.createElement("tr");
+	var td1 = document.createElement("td");
+	var tex1 = document.createTextNode("Assists");
+	td1.appendChild(tex1);
+	tr1.appendChild(td1);
+	var td2 = document.createElement("td");
+	var tex2 = document.createTextNode("Rebounds");
+	td2.appendChild(tex2);
+	tr1.appendChild(td2);
+	var td3 = document.createElement("td");
+	var tex3 = document.createTextNode("Steals");
+	td3.appendChild(tex3);
+	tr1.appendChild(td3);
+	table.appendChild(tr1);
+	*/
+	var tr2 = document.createElement("tr");
+	
 	ref.once("value").then(function(snapshot_stats) {
 		snapshot_stats.forEach(function(child) {
 			var tmp = child.key;
 			var stats = child.val();
-			var ele;
-			var v = document.createTextNode(stats);
+			//var ele;
+			if (tmp != "shots") {
+				var tds = document.createElement("td");
+				var v = document.createTextNode(stats);
+				tds.appendChild(v);
+				tr2.appendChild(tds);
+			}
+
+			/*
 			if (tmp == "assists") {
 				ele = document.getElementById("assists");
 				ele.innerHTML = " ";
@@ -35,8 +61,12 @@ function statsTable(snapshot, game, player) {
 				ele.appendChild(v);
 
 			}
+			*/
 		});
 	});
+	//table.appendChild(tr2);
+	var tableid = document.getElementById("stats_table");
+	tableid.appendChild(tr2);
 
 	var query = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
 		snap.active_season + "/games/" + game + "/players/" + player + "/shots/");
