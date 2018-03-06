@@ -26,7 +26,7 @@ if(windowWidth < 500) {
 function main() {
     dispHome();
     dispVisitor();
-    set_chart();
+    set_chart(data);
 
     var doubleClickTime = 0;
     var threshold = 250;
@@ -69,12 +69,12 @@ function main() {
     };
 }*/
 
-function set_chart() {
+function set_chart(shot_data) {
     var shot_chart = d3.select(".shot-chart").attr('width', width - margin.left + margin.right);
     var court = d3.court().width(700);
     var shots = d3.shots().shotRenderThreshold(1).displayToolTips(true).displayType("scatter");
     shot_chart.call(court);
-    shot_chart.datum(data).call(shots);
+    shot_chart.datum(shot_data).call(shots);
     cpixel_width = $(".shot-chart").width() + 2;
     cpixel_height = $(".shot-chart").height() + 2;
     cmargin_left = $(".shot-chart").offset().left;
@@ -98,7 +98,7 @@ function deleteShot() {
     if(count > 0) {
        count--;
     }   
-    set_chart();
+    set_chart(data);
     dispHome();
 	/* //commented out until the shotchart looks at database
 	var user = firebase.auth().currentUser;
@@ -188,7 +188,7 @@ function plot(x,y,flag) {
 	}
 	
     count++;
-    set_chart();
+    set_chart(data);
     dispHome();
 }
 

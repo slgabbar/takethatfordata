@@ -23,7 +23,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
     <script src="/js/d3-shotchart.js" ></script>
     <script src="/js/shotchart.js" ></script>
-	<script src="/js/buttons.js" ></script>
+	<script src="/js/view_stats.js" ></script>
     
 </head>
 <body>
@@ -86,6 +86,10 @@
 </div>
 
 
+<div id="shot-chart" class="shot-chart"></div>
+
+
+
 <table id = "stats_table">
   <tr>
     <th>Game</th>
@@ -93,36 +97,7 @@
     <th>Rebounds</th>
     <th>Steals</th>
   </tr>
-  <!--table> 
-    <tr>
-      <th>Assists</th>
-      <th>Rebounds</th>
-      <th>Steals</th>
-    </tr>
-    <tr>
-      <td id="assists"> </td>
-      <td id="rebounds"> </td>
-      <td id="steals"> </td>
-    </tr>
-  </table-->
 </table>
-
-<div>
-  <ul id="shot_list">
-  
-  </ul>
-</div>
-
-<!--<div>
-  <table>
-    <tr>
-      <th>Shot Attempted Flag</th>
-      <th>Shot Made Flag</th>
-      <th>X Coordinate</th>
-      <th>Y Coordinate</th>
-    </tr>
-  </table>
-</div>-->
 
  <!-- Javascript -->
 <script>

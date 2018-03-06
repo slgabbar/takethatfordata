@@ -1,5 +1,3 @@
- var data = []
-
  var config = {
     apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
     authDomain: "takethatfordata-8f719.firebaseapp.com",
@@ -11,75 +9,8 @@
   firebase.initializeApp(config);
   var db = firebase.database();
 
-
-function statsTable(snapshot, game, player) {
-	var user = firebase.auth().currentUser;
-	var snap = snapshot.val();
-	var ref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
-		snap.active_season + "/games/" + game + "/players/" + player);
-	var gameref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
-		snap.active_season + "/games/" + game);
-	var tr2 = document.createElement("tr");
-	gameref.once("value").then(function(snapshot_game){
-		var gameval = snapshot_game.val();
-		var gameinfo = gameval.date + " vs. " + gameval.opponent;
-		var gametd = document.createElement("td");
-		var gametext = document.createTextNode(gameinfo);
-		gametd.appendChild(gametext);
-		tr2.appendChild(gametd);
-	});
-	ref.once("value").then(function(snapshot_stats) {
-		snapshot_stats.forEach(function(child) {
-			var tmp = child.key;
-			var stats = child.val();
-			//var ele;
-			if (tmp != "shots") {
-				var tds = document.createElement("td");
-				var v = document.createTextNode(stats);
-				tds.appendChild(v);
-				tr2.appendChild(tds);
-			}
-		});
-	});
-	//table.appendChild(tr2);
-	var tableid = document.getElementById("stats_table");
-	tableid.appendChild(tr2);
-
-	var query = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
-		snap.active_season + "/games/" + game + "/players/" + player + "/shots/");
-	query.once("value").then(function(snapshot_shot) {
-		snapshot_shot.forEach(function(child) {
-			var key = child.key;
-			var data = child.val();
-			printShotStats(data.x, data.y, 
-				data.shot_attempted_flag, data.shot_attempted);
-		});
-	});
-
-}
-
-
-function printShotStats(x, y, make, dist) {
-	console.log("New Shot");
-	console.log("x coord: " + x);
-	console.log("y coord: " + y);
-	console.log("attempted: " + dist);
-	if (make == 1) {
-		console.log("shot made");
-	} else {
-		console.log("shot missed");
-	}
-}
-
-
-
-
-
-
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-  	var game;
-  	var player;
     //This code creates the player selection buttons
     var ref = db.ref("/users/" + user.uid + "/teams");
 	ref.on("child_added", function (snapshot) {
@@ -99,34 +30,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 		ele.onclick = function() {
 		  document.getElementById("playerkey").innerHTML = ele.name;
 		  document.getElementById("playername").innerHTML = a.name;
-		  player = ele.name;
-		  //console.log(player);
-		  statsTable(snapshot, game, player);
-		 };
-		 var playerlist = document.getElementById("playerbuttons");
-		 playerlist.appendChild(ele);
-	  });
-	//THis code creates the game selection buttons for the view stats page
-		var gref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" +
-	    ss.active_season + "/games/");
-	  gref.on("child_added", function (snapshot_game) {
-		snap = snapshot_game.val();
-		var gele = document.createElement("li");
-		var ga = document.createElement("a");
-		var gv = document.createTextNode(snap.date + " vs. " + snap.opponent);
-		ga.appendChild(gv);
-		ga.href = "#";
-		gele.appendChild(ga);
-		gele.name = snapshot_game.key;
-		ga.name = snap.date + " vs. " + snap.opponent;
-		gele.onclick = function() {
-			document.getElementById("gamekey").innerHTML = gele.name;
-			document.getElementById("gamename").innerHTML = ga.name;
-			game = gele.name;
-			//console.log(game);
 		};
-		var gamelist = document.getElementById("gamebuttons");
-		gamelist.appendChild(gele);
+		var playerlist = document.getElementById("playerbuttons");
+		playerlist.appendChild(ele);
 	  });
 	});
 	
@@ -135,7 +41,6 @@ firebase.auth().onAuthStateChanged(function(user) {
 		var ss = snapshot.val();
 		document.getElementById("teamname").innerHTML = ss.name;
 		document.getElementById("active_season").innerHTML = "Season " + ss.active_season;
-		document.getElementById("game").innerHTML = "Game";
 		var str = ss.active_game.split("_");
 		document.getElementById("active_game").innerHTML = "Game: " + decodeURIComponent(str[0]);
 		/*  
