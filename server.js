@@ -101,3 +101,7 @@ app.get('/editgame', function(req, res) {
 app.get('/stats', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/playerstat.html'));
 });
+
+app.get('/viewstats', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/viewstats.html'));
+});
