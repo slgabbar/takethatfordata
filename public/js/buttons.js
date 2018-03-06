@@ -1,3 +1,5 @@
+ var data = []
+
  var config = {
     apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
     authDomain: "takethatfordata-8f719.firebaseapp.com",
@@ -15,23 +17,7 @@ function statsTable(snapshot, game, player) {
 	var snap = snapshot.val();
 	var ref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
 		snap.active_season + "/games/" + game + "/players/" + player);
-	/*
-	var table = document.createElement("table");
-	var tr1 = document.createElement("tr");
-	var td1 = document.createElement("td");
-	var tex1 = document.createTextNode("Assists");
-	td1.appendChild(tex1);
-	tr1.appendChild(td1);
-	var td2 = document.createElement("td");
-	var tex2 = document.createTextNode("Rebounds");
-	td2.appendChild(tex2);
-	tr1.appendChild(td2);
-	var td3 = document.createElement("td");
-	var tex3 = document.createTextNode("Steals");
-	td3.appendChild(tex3);
-	tr1.appendChild(td3);
-	table.appendChild(tr1);
-	*/
+
 	var tr2 = document.createElement("tr");
 	
 	ref.once("value").then(function(snapshot_stats) {
@@ -45,23 +31,6 @@ function statsTable(snapshot, game, player) {
 				tds.appendChild(v);
 				tr2.appendChild(tds);
 			}
-
-			/*
-			if (tmp == "assists") {
-				ele = document.getElementById("assists");
-				ele.innerHTML = " ";
-				ele.appendChild(v);
-			} else if (tmp == "rebounds") {
-				ele = document.getElementById("rebounds");
-				ele.innerHTML = " ";
-				ele.appendChild(v);
-			} else if (tmp == "steals") {
-				ele = document.getElementById("steals");
-				ele.innerHTML = " ";
-				ele.appendChild(v);
-
-			}
-			*/
 		});
 	});
 	//table.appendChild(tr2);
@@ -74,15 +43,25 @@ function statsTable(snapshot, game, player) {
 		snapshot_shot.forEach(function(child) {
 			var key = child.key;
 			var data = child.val();
-			//console.log(key);
-			//console.log(data);
+			printShotStats(data.x, data.y, 
+				data.shot_attempted_flag, data.shot_attempted);
 		});
 	});
 
 }
 
 
-
+function printShotStats(x, y, make, dist) {
+	console.log("New Shot");
+	console.log("x coord: " + x);
+	console.log("y coord: " + y);
+	console.log("attempted: " + dist);
+	if (make == 1) {
+		console.log("shot made");
+	} else {
+		console.log("shot missed");
+	}
+}
 
 
 
