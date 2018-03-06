@@ -17,9 +17,17 @@ function statsTable(snapshot, game, player) {
 	var snap = snapshot.val();
 	var ref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
 		snap.active_season + "/games/" + game + "/players/" + player);
-
+	var gameref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season + "/games/" + game);
 	var tr2 = document.createElement("tr");
-	
+	gameref.once("value").then(function(snapshot_game){
+		var gameval = snapshot_game.val();
+		var gameinfo = gameval.date + " vs. " + gameval.opponent;
+		var gametd = document.createElement("td");
+		var gametext = document.createTextNode(gameinfo);
+		gametd.appendChild(gametext);
+		tr2.appendChild(gametd);
+	});
 	ref.once("value").then(function(snapshot_stats) {
 		snapshot_stats.forEach(function(child) {
 			var tmp = child.key;
