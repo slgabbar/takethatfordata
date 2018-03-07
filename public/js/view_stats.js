@@ -64,6 +64,30 @@ function statsTable(snapshot, game, player) {
 
 }
 
+var margin = {top: 0, right: 0, bottom: 0, left: 0},
+    width = 500 - margin.left - margin.right,
+    height = 471 - margin.top - margin.bottom;
+
+//Making it responsive for each screen
+var ration = 471/500;
+var windowWidth = $(window).width();
+//console.log(windowWidth);
+if(windowWidth < 500) {
+    width = windowWidth;
+    height = width * ratio;
+};
+
+function set_chart(shot_data) {
+    var shot_chart = d3.select(".shot-chart").attr('width', width - margin.left + margin.right);
+    var court = d3.court().width(700);
+    var shots = d3.shots().shotRenderThreshold(1).displayToolTips(true).displayType("scatter");
+    shot_chart.call(court);
+    shot_chart.datum(shot_data).call(shots);
+    cpixel_width = $(".shot-chart").width() + 2;
+    cpixel_height = $(".shot-chart").height() + 2;
+    cmargin_left = $(".shot-chart").offset().left;
+    cmargin_top = $(".shot-chart").offset().top;
+}
 
 function teamShotChart() {
 
@@ -108,7 +132,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 		  player = ele.name;
 		  //console.log(player);
 		  statsTable(snapshot, game, player);
-		  set_chart();
+		  //set_chart();
 		 };
 		 var playerlist = document.getElementById("playerbuttons");
 		 playerlist.appendChild(ele);
@@ -144,7 +168,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 		document.getElementById("active_season").innerHTML = "Season " + ss.active_season;
 		document.getElementById("game").innerHTML = "Game";
 		var str = ss.active_game.split("_");
-		document.getElementById("active_game").innerHTML = "Game: " + decodeURIComponent(str[0]);
+		//document.getElementById("active_game").innerHTML = "Game: " + decodeURIComponent(str[0]);
 		/*  
 		var reff = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" 
 		  + ss.active_season + "/games/" + ss.active_game);
