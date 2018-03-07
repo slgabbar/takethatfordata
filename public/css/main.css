@@ -53,13 +53,14 @@ select{
    background-color: white;
 }
 
-#stats_table, tr, th, td {
-    margin-top: 10%;
-    margin-left: 30%;
+#stats_table {
+    margin-top: 5%;
+    margin-left: 23%;
     border: 1px solid black;
-    font-size: 15px;
 }
 
-th, td {
+tr, th, td {
     padding: 5px;
+    border: 1px solid black;
+    font-size: 15px;
 }
