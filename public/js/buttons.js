@@ -30,6 +30,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 		ele.onclick = function() {
 		  document.getElementById("playerkey").innerHTML = ele.name;
 		  document.getElementById("playername").innerHTML = a.name;
+		  fillData();
 		};
 		var playerlist = document.getElementById("playerbuttons");
 		playerlist.appendChild(ele);

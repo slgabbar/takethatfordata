@@ -91,6 +91,8 @@ function toHexbin() {
 
 function deleteShot() {
     //console.log("Deleting shot");
+	
+	delLastShot();
     var tmp = data.pop();
     if (tmp.shot_made_flag == 1) {
         home -= tmp.shot_attempted;
@@ -100,7 +102,10 @@ function deleteShot() {
     }   
     set_chart(data);
     dispHome();
-	/* //commented out until the shotchart looks at database
+}
+
+function delLastShot() {
+	//deletes last shot from the firebase database, last shot = highest count
 	var user = firebase.auth().currentUser;
 	if (user) {
 		var ref = db.ref("/users/" + user.uid + "/teams");
@@ -123,12 +128,13 @@ function deleteShot() {
 				}
 			});
 			var delshotref = db.ref("/users/" + user.uid + "/teams/" + teamkey + "/season_" +
-				  season + "/games/" + gamekey + "/players/" + playerkey + "/shots" + shotkey);
+				  season + "/games/" + gamekey + "/players/" + playerkey + "/shots/" + shotkey);
+		    console.log(delshotref);
 			delshotref.remove();
 		});
 	} else {
 		console.log("Error not logged in");
-	}*/
+	}
 }
 
 function pi_th(x, y) {
@@ -239,6 +245,38 @@ function oppScore() {
 function makeFT() {
     home++;
     dispHome();
+}
+
+function fillData() { //empties chart, then fills shot chart with active player's shots
+	count = 0;
+	data = [];
+    var user = firebase.auth().currentUser;
+	var teamref = db.ref("/users/" + user.uid + "/teams");
+	teamref.on("child_added", function (snapshot) {
+	  snap = snapshot.val();
+	  var player = document.getElementById("playerkey").innerHTML;
+	  var query = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season + "/games/" + snap.active_game + "/players/" + player + "/shots/");
+	  query.once("value").then(function(snapshot_shot) {
+		count = 0;
+		data = [];
+		snapshot_shot.forEach(function(child) {
+		  var key = child.key;
+		  var shotdata = child.val();
+		  data[shotdata.count] = {
+			"shot_attempted_flag": 1,
+			"shot_attempted": shotdata.shot_attempted,
+			"shot_made_flag": shotdata.shot_made_flag,
+			"x": shotdata.x,
+		    "y": shotdata.y,
+			"count": shotdata.count
+	      };
+		  set_chart(data);
+		  count ++ ;
+		});
+	  });
+	});	
+	set_chart(data);
 }
 
 $(document).ready(main);
