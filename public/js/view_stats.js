@@ -54,6 +54,7 @@ function statsTable(snapshot, game, player) {
 		snap.active_season + "/games/" + game + "/players/" + player + "/shots/");
 	query.once("value").then(function(snapshot_shot) {
 		count = 0;
+		player_data = [];
 		snapshot_shot.forEach(function(child) {
 			var key = child.key;
 			var data = child.val();
@@ -132,7 +133,6 @@ firebase.auth().onAuthStateChanged(function(user) {
 		  player = ele.name;
 		  //console.log(player);
 		  statsTable(snapshot, game, player);
-		  //set_chart();
 		 };
 		 var playerlist = document.getElementById("playerbuttons");
 		 playerlist.appendChild(ele);
