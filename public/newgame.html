@@ -173,6 +173,7 @@ function SubmitNewGame() {
 	  var db = firebase.database();
 	  var ref = db.ref("/users/" + user.uid + "/teams");
 	  ref.on("child_added", function (snapshot) {
+	    //make new game in database and set as active
 	    var ss = snapshot.val();
 		var key = snapshot.key;
 		var obj = { "opponent" : opponent, "date" : date, "location":location, "homevisitor":homevisitor};
@@ -183,7 +184,23 @@ function SubmitNewGame() {
 		  reff.set(obj);
 		var reff = db.ref("/users/" + user.uid + "/teams/" + key);
 		reff.update({"active_game": game_key});
+		
+		//set all statistics for all players to zero
+		var playref = db.ref("/users/" + user.uid + "/teams/" + key + "/season_" + 
+		  ss.active_season + "/players");
+		playref.on("child_added",function(play_snap) {
+		  var statref = db.ref("/statistics/");
+		  var playerkey = play_snap.key;
+		  statref.on("child_added",function(stat_snap) {
+		    var stat = stat_snap.key;
+			var gameref = db.ref("/users/" + user.uid + "/teams/" + key + "/season_" + 
+		      ss.active_season + "/games/" + game_key + "/players/" + playerkey);
+			  var obj = { [stat] : 0};
+		    gameref.update(obj);
+		  });
+		});
 	  });
+	  
     alert('saved!');
 
 	} else {
