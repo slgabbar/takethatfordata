@@ -127,6 +127,20 @@ function test() {
 	var z = document.getElementById("pnumber").value;
   var form = document.getElementById("playerform").value;
 	var user = firebase.auth().currentUser;
+
+  if ( x.length < 1) {
+  alert('Error: Please enter name');
+  return;
+}
+  if (y.length < 1) {
+    alert('Error: Please enter last name');
+    return;
+  }
+
+  if (z.length < 1) {
+    alert('Error: Please enter Player Number');
+    return;
+  }
 	if (user) {
 	  
 	  var ref = db.ref("/users/" + user.uid + "/teams/");

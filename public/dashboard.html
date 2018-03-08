@@ -21,8 +21,9 @@
     <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
-
-     <script src="/js/logout.js" ></script>
+    <script src = "/js/dashboard.js"></script>
+    <script src="/js/d3-shotchart.js" ></script>
+    <script src="/js/logout.js" ></script>
     
 </head>
 <body>
@@ -63,12 +64,20 @@
                 
                   <ul>
   </div> <!-- #end sidebar-wrapper -->
+
+
 <div class="jumbotron text-center">
-  <h1>Dashboard</h1>
-  <p> (( add stats ?))
-  	<br> graph stats (overall team)
-  	<br> overall team percentage rate. ect.ect
-    
+  <h2 id="team_name"></h2>
+  <p id="active_season"></p>
+  <h3 id="school"></h3>
+  <h3 id="location"></h3>
+  
+
+
+
+
+<div id="shot-chart" class="shot-chart"></div>
+
 </div>
  <!-- Javascript -->
 <script>
