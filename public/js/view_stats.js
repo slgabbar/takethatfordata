@@ -37,25 +37,31 @@ function statsTable(snapshot, game, player) {
 		gametd.appendChild(gametext);
 		tr2.appendChild(gametd);
 	});
-	// Points, Attempts
+	// Points, Attempts, FTs, other stats
 	generatePoints(snapshot, game, player, tr2);
-	
-	ref.once("value").then(function(snapshot_stats) {
-		snapshot_stats.forEach(function(child) {
-			var tmp = child.key;
-			var stats = child.val();
-			//var ele;
-			if (tmp != "shots" && tmp != "ftmake" && tmp != "ftmiss") {
-				var tds = document.createElement("td");
-				var v = document.createTextNode(stats);
-				tds.appendChild(v);
-				tr2.appendChild(tds);
-			}
-		});
-	});
- 	
+	generateStat(snapshot, game, player, tr2, "rebounds");
+ 	generateStat(snapshot, game, player, tr2, "assists");
+ 	generateStat(snapshot, game, player, tr2, "fouls");
+ 	generateStat(snapshot, game, player, tr2, "steals");
+ 	generateStat(snapshot, game, player, tr2, "turnovers");
+ 	generateStat(snapshot, game, player, tr2, "blocks");
 	var tableid = document.getElementById("stats_table");
 	tableid.appendChild(tr2);
+}
+
+
+function generateStat(snapshot, game, player, tr, stat) {
+	var user = firebase.auth().currentUser;
+	var snap = snapshot.val();
+	var ref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season + "/games/" + game + "/players/" + player + "/" + stat + "/");
+	ref.once("value").then(function(snapshot_stats) {
+		var stats = snapshot_stats.val();
+		var tds = document.createElement("td");
+		var v = document.createTextNode(stats);
+		tds.appendChild(v);
+		tr.appendChild(tds);
+	});
 }
 
 function generatePoints(snapshot, game, player, tr) {
@@ -98,7 +104,6 @@ function generatePoints(snapshot, game, player, tr) {
 		var a = document.createTextNode(makes+"/"+attempts);
 		tda.appendChild(a);
 		tr.appendChild(tda);
-		console.log("HERE");
 		var tdt = document.createElement("td"); 
 		var ta = document.createTextNode(makes3+"/"+attempts3);
 		tdt.appendChild(ta);
@@ -173,7 +178,6 @@ function playerShotChart(snapshot, game_id, player_id) {
 		player_count = 0;
 		player_data = [];
 		snapshot_shot.forEach(function(child) {
-			var key = child.key;
 			var data = child.val();
 			player_data[player_count] = {
         		"shot_attempted_flag": data.shot_attempted_flag,
@@ -189,6 +193,41 @@ function playerShotChart(snapshot, game_id, player_id) {
 	});
 }
 
+function teamShotChart(snapshot, game) {
+	var user = firebase.auth().currentUser;
+	var snap = snapshot.val();
+	var query = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season + "/games/" + game + "/players/");
+	query.once("value").then(function(snapshot_player) {
+		team_count = 0;
+		team_data = [];
+		snapshot_player.forEach(function(child) {
+			var shotquery = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
+				snap.active_season + "/games/" + game + "/players/"+ child.key + "/shots/");
+			shotquery.once("value").then(function(snapshot_shot) {
+				snapshot_shot.forEach(function(schild) {
+					var data = schild.val();
+					team_data[team_count] = {
+						"shot_attempted_flag": data.shot_attempted_flag,
+        				"shot_attempted": data.shot_attempted,
+        				"shot_made_flag": data.shot_made_flag,
+        				"x":data.x,
+        				"y":data.y,
+						"count": data.count
+					}
+					team_count++;
+				});
+				set_chart(team_data);
+			});
+		});
+	});
+}
+
+function clearChart() {
+	player_data = []
+	set_chart(player_data);
+}
+
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
   	var game;
@@ -196,52 +235,57 @@ firebase.auth().onAuthStateChanged(function(user) {
     //This code creates the player selection buttons
     var ref = db.ref("/users/" + user.uid + "/teams");
 	ref.on("child_added", function (snapshot) {
-	  var ss = snapshot.val();
-	  var reff = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" +
-	    ss.active_season + "/players/");
-	  reff.on("child_added", function (snapshot_player) {
-	    snap = snapshot_player.val();
-	    var ele = document.createElement("li");
-		var a = document.createElement("a");
-		var v = document.createTextNode(snap.firstname + " " + snap.lastname);
-		a.appendChild(v);
-		a.href = "#";
-		ele.appendChild(a);
-		ele.name = snapshot_player.key;
-		a.name = snap.firstname + " " + snap.lastname
-		ele.onclick = function() {
-		  document.getElementById("playerkey").innerHTML = ele.name;
-		  document.getElementById("playername").innerHTML = a.name;
-		  player = ele.name;
-		  playerShotChart(snapshot, game, player);
-		  statsTable(snapshot, game, player);
-		 };
-		 var playerlist = document.getElementById("playerbuttons");
-		 playerlist.appendChild(ele);
-	  });
-	//THis code creates the game selection buttons for the view stats page
+		var ss = snapshot.val();
+		var reff = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" +
+	    			ss.active_season + "/players/");
+	  	reff.on("child_added", function (snapshot_player) {
+	    	snap = snapshot_player.val();
+	    	var ele = document.createElement("li");
+			var a = document.createElement("a");
+			var v = document.createTextNode(snap.firstname + " " + snap.lastname);
+			a.appendChild(v);
+			a.href = "#";
+			ele.appendChild(a);
+			ele.name = snapshot_player.key;
+			a.name = snap.firstname + " " + snap.lastname
+			ele.onclick = function() {
+		  		document.getElementById("playerkey").innerHTML = ele.name;
+		  		document.getElementById("playername").innerHTML = a.name;
+		  		player = ele.name;
+		  		playerShotChart(snapshot, game, player);
+		  		statsTable(snapshot, game, player);
+		 	};
+		 	var playerlist = document.getElementById("playerbuttons");
+		 	playerlist.appendChild(ele);
+	  	});
+		//THis code creates the game selection buttons for the view stats page
 		var gref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" +
-	    ss.active_season + "/games/");
-	  gref.on("child_added", function (snapshot_game) {
-		snap = snapshot_game.val();
-		var gele = document.createElement("li");
-		var ga = document.createElement("a");
-		var gv = document.createTextNode(snap.date + " vs. " + snap.opponent);
-		ga.appendChild(gv);
-		ga.href = "#";
-		gele.appendChild(ga);
-		gele.name = snapshot_game.key;
-		ga.name = snap.date + " vs. " + snap.opponent;
-		gele.onclick = function() {
-			document.getElementById("gamekey").innerHTML = gele.name;
-			document.getElementById("gamename").innerHTML = ga.name;
-			game = gele.name;
-		};
-		var gamelist = document.getElementById("gamebuttons");
-		gamelist.appendChild(gele);
-	  });
+					ss.active_season + "/games/");
+		gref.on("child_added", function (snapshot_game) {
+			snap = snapshot_game.val();
+			var gele = document.createElement("li");
+			var ga = document.createElement("a");
+			var gv = document.createTextNode(snap.date + " vs. " + snap.opponent);
+			ga.appendChild(gv);
+			ga.href = "#";
+			gele.appendChild(ga);
+			gele.name = snapshot_game.key;
+			ga.name = snap.date + " vs. " + snap.opponent;
+			gele.onclick = function() {
+				document.getElementById("gamekey").innerHTML = gele.name;
+				document.getElementById("gamename").innerHTML = ga.name;
+				game = gele.name;
+				//playerShotChart(snapshot, game, player);
+				clearChart();
+				setTimeout(function() {
+					teamShotChart(snapshot, game);
+				}, 1020);
+				//teamShotChart(snapshot, game);
+			};
+			var gamelist = document.getElementById("gamebuttons");
+			gamelist.appendChild(gele);
+	  	});
 	});
-	
 	//Fill Team, Season, Game info
 	ref.on("child_added", function (snapshot) {
 		var ss = snapshot.val();
@@ -249,7 +293,6 @@ firebase.auth().onAuthStateChanged(function(user) {
 		document.getElementById("active_season").innerHTML = "Season " + ss.active_season;
 		document.getElementById("game").innerHTML = "Game";
 	});
-	
   } else {
     console.log("Error not logged in");
   }
