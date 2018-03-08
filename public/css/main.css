@@ -55,7 +55,7 @@ select{
 
 #stats_table {
     margin-top: 5%;
-    margin-left: 10%;
+    margin-left: 13%;
     border: 1px solid black;
 }
 
@@ -63,4 +63,33 @@ tr, th, td {
     padding: 5px;
     border: 1px solid black;
     font-size: 15px;
+}
+
+#active {
+    position:relative;
+    display:inline-block;
+    float: left;
+    font-size: 20px;
+}
+
+#active li{
+  list-style: none;
+  padding-top: 20px;
+  padding-bottom:  20px;
+}
+
+#scat_hex {
+    float: right;
+    padding-right: 5%;
+}
+
+#scat_hex li {
+    list-style: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#scat_hex button {
+    font-size: 16px;
+    padding: 5px 5px;
 }

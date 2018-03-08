@@ -78,9 +78,18 @@
 <p></p>
 <p></p>
 
-<div id="button_layout">
-    Current Active Player: <li id="playername"></li>
-    Current Game: <li id="gamename"></li>
+<div id="active">
+    Game: <li id="gamename"></li>
+    Player: <li id="playername"></li>
+</div>
+
+<div id="scat_hex">
+  <li>
+    <button onclick=toScatter()>Scatter</button>
+  </li>
+  <li>
+    <button onclick=toHexbin()>Hexbin</button>
+  </li>
 </div>
 
 
@@ -90,7 +99,7 @@
 
 <table id = "stats_table">
   <tr>
-    <th>Game</th>
+    <th>Player</th>
     <th>Points</th>
     <th>FG</th>
     <th>3FG</th>
