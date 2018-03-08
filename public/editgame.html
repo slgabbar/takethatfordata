@@ -21,8 +21,6 @@
     <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
-    <script src="/js/d3-shotchart.js" ></script>
-    <script src="/js/shotchart.js" ></script>
      <script src="/js/logout.js" ></script>
     
 </head>
@@ -60,36 +58,59 @@
                 <li class="sidebar-dark"><a href="/newseason">+ New Season  </a> </li>
                 <li class="sidebar-dark"> <a href="/newgame">+ New Game </a> </li>
                 <li class="sidebar-dark"> <a href="/editgame"> Edit Game</a> </li>
-                <li class="sidebar-dark"> <a href="#"> View stats</a></li>
+                <li class="sidebar-dark"> <a href="/viewstats"> View stats</a></li>
                   
                 
                   <ul>
   </div> <!-- #end sidebar-wrapper -->
 <div class="jumbotron text-center">
   <h1>Edit Game</h1>
-  <p> Populate the list of games here
-    <ul>
-      <li> 1/20/2018 -  vs Orange Team </li>
-      <li> 1/22/2018 -  vs Green Team </li>
-      <li> 1/28/2018 -  vs Blue Team </li>
-      <li> 2/04/2018 -  vs Yellow Team </li>
-      <li> 3/09/2018 -  vs Pink Team </li>
+  <p> Your Games
+    <ul id = "gamelist">
     </ul>
-    
+
+	<form action="../input">
+    <input type="submit" value="Go to Game" />
+</form>
 </div>
  <!-- Javascript -->
 <script>
   // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
-    authDomain: "takethatfordata-8f719.firebaseapp.com",
-    databaseURL: "https://takethatfordata-8f719.firebaseio.com",
-    projectId: "takethatfordata-8f719",
-    storageBucket: "takethatfordata-8f719.appspot.com",
-    messagingSenderId: "211430446462"
-  };
+var db = firebase.database();
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+	var ref = db.ref("/users/" + user.uid + "/teams");
+	ref.on("child_added", function (snapshot) {
+	  var ss = snapshot.val();
+	  var key = snapshot.key;
+	  var reff = db.ref("/users/" + user.uid + "/teams/" + key + "/season_" + 
+		ss.active_season + "/games/");
+	  reff.on("child_added", function(game_snap) {
+		var gss = game_snap.val();
+		var ele = document.createElement("li");
+		var a = document.createElement("a");
+		var v = document.createTextNode(gss.date + " at " + gss.location + " vs " + gss.opponent);
+		a.appendChild(v);
+		a.href = "#";
+		ele.appendChild(a);
+		ele.name = game_snap.key;
+		ele.onclick = function() {
+			var actgameref = db.ref("/users/" + user.uid + "/teams/" + key);
+			actgameref.update({"active_game": ele.name});
+		};
+		var gamelist = document.getElementById("gamelist");
+		gamelist.appendChild(ele);
+		});		
+	});
+	
+  } else { 
+  
+  }
+ });
+ 
 
-  function signout(){
+ 
+function signout(){
     firebase.auth().signOut().then(function() {
   // Sign-out successful.
    window.location = '../'; 
