@@ -3,6 +3,22 @@
  var player_count = 0;
  var team_count = 0;
 
+ var total_points = 0;
+ var total_makes = 0;
+ var total_attempts = 0;
+ var total_makes3 = 0;
+ var total_attempts3 = 0;
+ var total_ftmakes = 0;
+ var total_ftattempts = 0;
+ var total_rebounds = 0;
+ var total_assists = 0;
+ var total_fouls = 0;
+ var total_steals = 0;
+ var total_turnovers = 0;
+ var total_blocks = 0;
+
+ var fake = 0;
+
  var config = {
     apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
     authDomain: "takethatfordata-8f719.firebaseapp.com",
@@ -16,19 +32,21 @@
 
 
 function statsTable(snapshot, game, player) {
-	//creates the stats table
+	//creates the player stats table
 	var user = firebase.auth().currentUser;
 	var snap = snapshot.val();
 	var ref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
 		snap.active_season + "/games/" + game + "/players/" + player);
 	var gameref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
 		snap.active_season + "/games/" + game);
+	// Remove previous stats table
 	if (document.getElementById("statsrow")) {
 		document.getElementById("statsrow").remove();
 	}
+	// Create the row
 	var tr2 = document.createElement("tr");
 	tr2.id = "statsrow";
-
+	// Get the game
 	gameref.once("value").then(function(snapshot_game){
 		var gameval = snapshot_game.val();
 		var gameinfo = gameval.date + " vs. " + gameval.opponent;
@@ -38,33 +56,129 @@ function statsTable(snapshot, game, player) {
 		tr2.appendChild(gametd);
 	});
 	// Points, Attempts, FTs, other stats
-	generatePoints(snapshot, game, player, tr2);
-	generateStat(snapshot, game, player, tr2, "rebounds");
- 	generateStat(snapshot, game, player, tr2, "assists");
- 	generateStat(snapshot, game, player, tr2, "fouls");
- 	generateStat(snapshot, game, player, tr2, "steals");
- 	generateStat(snapshot, game, player, tr2, "turnovers");
- 	generateStat(snapshot, game, player, tr2, "blocks");
+	generatePoints(snapshot, game, player, tr2, 0);
+	generateStat(snapshot, game, player, tr2, "rebounds", 0);
+ 	generateStat(snapshot, game, player, tr2, "assists", 0);
+ 	generateStat(snapshot, game, player, tr2, "fouls", 0);
+ 	generateStat(snapshot, game, player, tr2, "steals", 0);
+ 	generateStat(snapshot, game, player, tr2, "turnovers", 0);
+ 	generateStat(snapshot, game, player, tr2, "blocks", 0);
+ 	// Append to the table
 	var tableid = document.getElementById("stats_table");
 	tableid.appendChild(tr2);
 }
 
+// Create the team stats table
+function teamStatsTable(snapshot, game) {
+	total_points = 0;
+	total_makes = 0;
+	total_attempts = 0;
+	total_makes3 = 0;
+	total_attempts3 = 0;
+	total_ftmakes = 0;
+	total_ftattempts = 0;
+	total_rebounds = 0;
+ 	total_assists = 0;
+ 	total_fouls = 0;
+ 	total_steals = 0;
+ 	total_turnovers = 0;
+ 	total_blocks = 0;
+	var user = firebase.auth().currentUser;
+	var snap = snapshot.val();
+	var query = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season + "/games/" + game + "/players/");
+	var gameref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season + "/games/" + game);
+	// Remove the current stats table
+	if (document.getElementById("statsrow")) {
+		document.getElementById("statsrow").remove();
+	}
+	var tr2 = document.createElement("tr");
+	tr2.id = "statsrow";
+	// Get the game
+	gameref.once("value").then(function(snapshot_game){
+		var gameval = snapshot_game.val();
+		var gameinfo = gameval.date + " vs. " + gameval.opponent;
+		var gametd = document.createElement("td");
+		var gametext = document.createTextNode(gameinfo);
+		gametd.appendChild(gametext);
+		tr2.appendChild(gametd);
+	});
+	// For each player in the game
+	query.once("value").then(function(snapshot_player) {
+		snapshot_player.forEach(function(child) {
+			// Generate the total stats
+			generatePoints(snapshot, game, child.key, tr2, 1);
+			generateStat(snapshot, game, child.key, tr2, "rebounds", 1);
+			generateStat(snapshot, game, child.key, tr2, "assists", 1);
+			generateStat(snapshot, game, child.key, tr2, "fouls", 1);
+			generateStat(snapshot, game, child.key, tr2, "steals", 1);
+			generateStat(snapshot, game, child.key, tr2, "turnovers", 1);
+			generateStat(snapshot, game, child.key, tr2, "blocks", 1);
+		});
+		// Timeout function, for some reason needed in order to work
+		setTimeout(function() {
+			// Make element for all the stat categories
+			makeElement(total_points, tr2)
+			var fgs = total_makes + "/" + total_attempts;
+			makeElement(fgs, tr2);
+			var fgs3 = total_makes3 + "/" + total_attempts3;
+			makeElement(fgs3, tr2);
+			var ft = total_ftmakes + "/" + total_ftattempts;
+			makeElement(ft, tr2);
+			makeElement(total_rebounds, tr2);
+			makeElement(total_assists, tr2);
+			makeElement(total_fouls, tr2);
+			makeElement(total_steals, tr2);
+			makeElement(total_turnovers, tr2);
+			makeElement(total_blocks, tr2);
+		}, 0);
+	});
+ 	// Append to the table
+	var tableid = document.getElementById("stats_table");
+	tableid.appendChild(tr2);
+}
 
-function generateStat(snapshot, game, player, tr, stat) {
+// Make table element
+function makeElement(statv, tr) {
+	var te = document.createElement("td");
+	var tn = document.createTextNode(statv);
+	te.appendChild(tn);
+	tr.appendChild(te);
+}
+
+// Generate stat
+function generateStat(snapshot, game, player, tr, stat, flag) {
 	var user = firebase.auth().currentUser;
 	var snap = snapshot.val();
 	var ref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
 		snap.active_season + "/games/" + game + "/players/" + player + "/" + stat + "/");
 	ref.once("value").then(function(snapshot_stats) {
 		var stats = snapshot_stats.val();
-		var tds = document.createElement("td");
-		var v = document.createTextNode(stats);
-		tds.appendChild(v);
-		tr.appendChild(tds);
+		if (stat == "rebounds") {
+			total_rebounds += stats;
+		}else if (stat == "assists") {
+			total_assists += stats;
+		}else if (stat == "fouls") {
+			total_fouls += stats;
+		}else if (stat == "steals") {
+			total_steals += stats;
+		}else if (stat == "turnovers") {
+			total_turnovers += stats;
+		}else if (stat == "blocks") {
+			total_blocks += stats;
+		}
+		if (flag == 0) {
+			var tds = document.createElement("td");
+			var v = document.createTextNode(stats);
+			tds.appendChild(v);
+			tr.appendChild(tds);
+		}
 	});
 }
 
-function generatePoints(snapshot, game, player, tr) {
+// Generate points, attempts, freethrows
+function generatePoints(snapshot, game, player, tr, flag) {
 	//generates the poinjts from the shot data
 	var user = firebase.auth().currentUser;
 	var snap = snapshot.val();
@@ -76,7 +190,6 @@ function generatePoints(snapshot, game, player, tr) {
 		var makes = 0;
 		var attempts3 = 0;
 		var makes3 = 0;
-
 		snapshot_shot.forEach(function(child) {
 			attempts++;
 			var shot = child.val();
@@ -96,25 +209,34 @@ function generatePoints(snapshot, game, player, tr) {
 				}
 			}
 		});
-
-		var tdp = document.createElement("td");
- 		generateFTPoints(snapshot, game, player, points, tdp);
-		tr.appendChild(tdp);
-		var tda = document.createElement("td"); 
-		var a = document.createTextNode(makes+"/"+attempts);
-		tda.appendChild(a);
-		tr.appendChild(tda);
-		var tdt = document.createElement("td"); 
-		var ta = document.createTextNode(makes3+"/"+attempts3);
-		tdt.appendChild(ta);
-		tr.appendChild(tdt);
-		var tdf = document.createElement("td");
-		generateFTA(snapshot, game, player, tdf);
-		tr.appendChild(tdf);	
+		if (flag == 1) {
+			total_makes += makes;
+			total_attempts += attempts;
+			total_makes3 += makes3;
+			total_attempts3 += attempts3;
+	 		generateFTPoints(snapshot, game, player, points, tdp, flag);
+			generateFTA(snapshot, game, player, tdf, flag);
+		}else {
+			var tdp = document.createElement("td");
+		 	generateFTPoints(snapshot, game, player, points, tdp, flag);
+			tr.appendChild(tdp);
+			var tda = document.createElement("td"); 
+			var a = document.createTextNode(makes+"/"+attempts);
+			tda.appendChild(a);
+			tr.appendChild(tda);
+			var tdt = document.createElement("td"); 
+			var ta = document.createTextNode(makes3+"/"+attempts3);
+			tdt.appendChild(ta);
+			tr.appendChild(tdt);
+			var tdf = document.createElement("td");
+			generateFTA(snapshot, game, player, tdf, flag);
+			tr.appendChild(tdf);
+		}
+			
 	});
 }
 
-function generateFTPoints(snapshot, game, player, points, tdp) {
+function generateFTPoints(snapshot, game, player, points, tdp, flag) {
 	//generates ft points from shot data
 	var user = firebase.auth().currentUser;
 	var snap = snapshot.val();
@@ -123,12 +245,15 @@ function generateFTPoints(snapshot, game, player, points, tdp) {
 	fref.once("value").then(function(snapshot_stat) {
 		var stat = snapshot_stat.val();
 		points += stat.ftmake;
-		var p = document.createTextNode(points);
-		tdp.appendChild(p);
+		total_points += points;
+		if (flag == 0) {
+			var p = document.createTextNode(points);
+			tdp.appendChild(p);
+		}
 	});
 }
 
-function generateFTA(snapshot, game, player, tdf) {
+function generateFTA(snapshot, game, player, tdf, flag) {
 	//generates ft attempts from shot data
 	var user = firebase.auth().currentUser;
 	var snap = snapshot.val();
@@ -137,8 +262,12 @@ function generateFTA(snapshot, game, player, tdf) {
 	fref.once("value").then(function(snapshot_stat) {
 		var stat = snapshot_stat.val();
 		var ftattempts = stat.ftmake + stat.ftmiss;
-		var f = document.createTextNode(stat.ftmake+"/"+ftattempts);
-		tdf.appendChild(f);
+		total_ftmakes += stat.ftmake;
+		total_ftattempts += ftattempts;
+		if (flag == 0) {
+			var f = document.createTextNode(stat.ftmake+"/"+ftattempts);
+			tdf.appendChild(f);
+		}
 	});
 }
 
@@ -149,7 +278,6 @@ var margin = {top: 0, right: 0, bottom: 0, left: 0},
 //Making it responsive for each screen
 var ration = 471/500;
 var windowWidth = $(window).width();
-//console.log(windowWidth);
 if(windowWidth < 500) {
     width = windowWidth;
     height = width * ratio;
@@ -223,6 +351,7 @@ function teamShotChart(snapshot, game) {
 	});
 }
 
+// Clear the player chart
 function clearChart() {
 	player_data = []
 	set_chart(player_data);
@@ -252,6 +381,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 		  		document.getElementById("playerkey").innerHTML = ele.name;
 		  		document.getElementById("playername").innerHTML = a.name;
 		  		player = ele.name;
+		  		// Generate player shot chart and stat table
 		  		playerShotChart(snapshot, game, player);
 		  		statsTable(snapshot, game, player);
 		 	};
@@ -275,12 +405,14 @@ firebase.auth().onAuthStateChanged(function(user) {
 				document.getElementById("gamekey").innerHTML = gele.name;
 				document.getElementById("gamename").innerHTML = ga.name;
 				game = gele.name;
-				//playerShotChart(snapshot, game, player);
+				// Clear player chart, for some reason necessary 
 				clearChart();
 				setTimeout(function() {
+					// Generate team shot chart
 					teamShotChart(snapshot, game);
 				}, 1020);
-				//teamShotChart(snapshot, game);
+				// Generate team stats table
+				teamStatsTable(snapshot, game);
 			};
 			var gamelist = document.getElementById("gamebuttons");
 			gamelist.appendChild(gele);
