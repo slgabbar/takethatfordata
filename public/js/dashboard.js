@@ -52,6 +52,7 @@ function printTable(avg) {
 		makeElement(ftg, tr2);
 		makeElement((stats[i].orebounds/avg).toFixed(1), tr2);
 		makeElement((stats[i].drebounds/avg).toFixed(1), tr2);
+		makeElement(((stats[i].orebounds + stats[i].drebounds)/avg).toFixed(1), tr2);
 		makeElement((stats[i].assists/avg).toFixed(1), tr2);
 		makeElement((stats[i].fouls/avg).toFixed(1), tr2);
 		makeElement((stats[i].steals/avg).toFixed(1), tr2);
