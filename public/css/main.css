@@ -53,32 +53,32 @@ select{
    background-color: white;
 }
 
-#stats_table {
+#stats_table, #dashboard_table {
     margin-top: 3%;
     margin-left: 15%;
     border: 1px solid black;
 }
 
-#stats_table tr, th, td {
+#stats_table, #dashboard_table tr, th, td {
     padding: 5px;
     border: 1px solid black;
     font-size: 15px;
 }
 
-#advtitle {
+#advtitle, #dash_advtitle {
     padding-top: 3%;
     padding-bottom: 5px;
     margin-left: -600px;
     font-size: 15px;
 }
 
-#advstats_table {
+#advstats_table, #dash_advstats_table {
     
     margin-left: 15%;
     border: 1px solid black;
 }
 
-#advstats_table tr, th, td {
+#advstats_table, #dash_advstats_table tr, th, td {
     padding: 5px;
     border: 1px solid black;
     font-size: 15px;

@@ -19,6 +19,51 @@ var config = {
   var db = firebase.database();
 
 
+function loadAverages(snapshot) {
+	var user = firebase.auth().currentUser;
+	var snap = snapshot.val();
+	var ref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season +"/games/");
+	ref.once("value").then(function(snapshot_game) {
+		var num_games = 0;
+		snapshot_game.forEach(function(game) {
+			num_games++;
+		});
+		printTable(num_games);
+	});
+}
+
+
+function printTable(avg) {
+	//print stats table averages over avg number of games
+	for (var i = 0; i < stats.length; i++) {
+		var tr2 = document.createElement("tr");
+		tr2.id = "statsrow";
+		var p_info = "#" + stats[i].number + " " + stats[i].firstname + " " +  
+			stats[i].lastname;
+		makeElement(p_info, tr2);
+		makeElement((stats[i].points/avg).toFixed(1), tr2);
+		var fgg = (stats[i].fgm/avg).toFixed(1) + "/" + (stats[i].fga/avg).toFixed(1);
+		makeElement(fgg, tr2);
+		var tfgg = (stats[i].fgm3/avg).toFixed(1) + "/" + (stats[i].fga3/avg).toFixed(1);
+		makeElement(tfgg, tr2);
+		var ftg = (stats[i].ftmake/avg).toFixed(1) + "/" + 
+			((stats[i].ftmiss + stats[i].ftmake)/avg).toFixed(1);
+		makeElement(ftg, tr2);
+		makeElement((stats[i].orebounds/avg).toFixed(1), tr2);
+		makeElement((stats[i].drebounds/avg).toFixed(1), tr2);
+		makeElement((stats[i].assists/avg).toFixed(1), tr2);
+		makeElement((stats[i].fouls/avg).toFixed(1), tr2);
+		makeElement((stats[i].steals/avg).toFixed(1), tr2);
+		makeElement((stats[i].turnovers/avg).toFixed(1), tr2);
+		console.log(stats[i].blocks/avg);
+		makeElement((stats[i].blocks/avg).toFixed(1), tr2);
+		var table = document.getElementById("dashboard_table");
+		table.appendChild(tr2);
+	}
+
+}
+
 function playerSize(snapshot) {
 	var user = firebase.auth().currentUser;
 	var snap = snapshot.val();
@@ -206,7 +251,7 @@ function advancedStats() {
 								  (stats[i].turnovers * 1.0);
 	}
 	console.log(stats);
-	console.log(adv_stats);
+	//console.log(adv_stats);
 }
 
 
@@ -238,6 +283,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 			//this is where to call advanced stats functions
 			advancedStats();	
 		}, 1000);
+		setTimeout (function() {
+			loadAverages(snapshot);
+		}, 1000);
 	});
 });
 
@@ -266,3 +314,10 @@ function set_chart(shot_data) {
     cmargin_top = $(".shot-chart").offset().top;
 }
 
+// Make table element
+function makeElement(statv, tr) {
+	var te = document.createElement("td");
+	var tn = document.createTextNode(statv);
+	te.appendChild(tn);
+	tr.appendChild(te);
+}
