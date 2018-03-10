@@ -1,7 +1,11 @@
 //dashboard
-var data = []
-var count = 0
-
+var data = [];
+var stats = [];
+var adv_stats = [];
+var count = 0;
+var assists = 0;
+var first = 0;
+var games = 0;
 
 var config = {
     apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
@@ -15,26 +19,45 @@ var config = {
   var db = firebase.database();
 
 
+function playerSize(snapshot) {
+	var user = firebase.auth().currentUser;
+	var snap = snapshot.val();
+	var ref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season +"/players/");
+	ref.once("value").then(function(snapshot_player) {
+		var team_length = 0;
+		snapshot_player.forEach(function(player) {
+			team_length++;;
+		});
+		initializeJson(team_length);
+	});
+}
 
-function loadData(snapshot) {
+function loadShots(snapshot) {
+	//sums shot data for all players and all games
 	count = 0;
+	playerSize(snapshot);	
 	var user = firebase.auth().currentUser;
 	var snap = snapshot.val();
 	var ref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
 		snap.active_season +"/games/");
 	ref.once("value").then(function(snapshot_game) {
 		snapshot_game.forEach(function(game) {
+			setTimeout (function() {
+				loadPlayerStats(snapshot, game);	
+			}, 0);
 			var team_query = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + 
 			"/season_" + snap.active_season + "/games/" + game.key + "/players/");
 			team_query.once("value").then(function(snapshot_player) {
+				var player_count = 0;
 				snapshot_player.forEach(function(player) {
 					var player_query = db.ref("/users/" + user.uid + "/teams/" + 
 						snapshot.key + "/season_" + snap.active_season + "/games/" + 
 						game.key + "/players/" + player.key + "/shots/")
 					player_query.once("value").then(function(snapshot_shot) {
+						var stat = snapshot_shot.val();
 						snapshot_shot.forEach(function(shot) {
 							var shot_data = shot.val();
-							console.log(count + ":" + shot_data.x);
 							data[count] = {
         						"shot_attempted_flag": shot_data.shot_attempted_flag,
         						"shot_attempted": shot_data.shot_attempted,
@@ -43,10 +66,11 @@ function loadData(snapshot) {
         						"y":shot_data.y,
 								"count": shot_data.count
 							}
-							console.log(data[count].x);
+							loadAdvShot(player_count, shot_data.shot_made_flag, shot_data.shot_attempted);
 							count++;
 						});
 						set_chart(data);
+						player_count++;
 					});
 				});
 			});
@@ -54,10 +78,142 @@ function loadData(snapshot) {
 	});
 }
 
+function loadAdvShot(shot_count, made, dist) {
+	//console.log(shot_count);
+	stats[shot_count].fga += 1;
+	if (dist == 3) {
+		stats[shot_count].fga3 += 1;
+	}
+	if (made == 1) {
+		stats[shot_count].fgm += 1;
+		stats[shot_count].points += 2;
+		if (dist == 3) {
+			stats[shot_count].fgm3 += 1;
+			stats[shot_count].points += 1;
+		}
+	}
+}
+
+function initializeJson(length) {
+	for (var i = 0; i < length; i++) {
+		stats[i] = {
+			"firstname": "",
+			"lastname": "",
+			"number": "",
+			"assists": 0,
+			"blocks": 0,
+			"fouls": 0,
+			"ftmake": 0,
+			"ftmiss": 0,
+			"drebounds": 0,
+			"orebounds": 0,
+			"steals": 0,
+			"turnovers": 0,
+			"fga": 0,
+			"fgm": 0,
+			"fga3": 0,
+			"fgm3": 0,
+			"points": 0
+		}
+		adv_stats[i] = {
+			"true_shooting": 0,
+			"eff_fg": 0,
+			"two_freq": 0,
+			"three_freq": 0,
+			"ft_rate": 0,
+			"at_ratio": 0,
+			"a_ratio": 0,
+			"to_ratio": 0,
+			"off_rating": 0,
+			"game_score": 0
+		}
+	}
+}
+
+function playerInfo(snapshot) {
+	//loads player name and number
+	var user = firebase.auth().currentUser;
+	var snap = snapshot.val();
+	var ref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season + "/players/");
+	ref.once("value").then(function(snapshot_player) {
+		var player_count = 0;
+		snapshot_player.forEach(function(player) {
+			var info = player.val();
+			stats[player_count].firstname += info.firstname;
+			stats[player_count].lastname += info.lastname;
+			stats[player_count].number += info.number;
+			player_count++;
+		});
+	});
+}
+
+
+function loadPlayerStats(snapshot, game) {
+	//cumilates all stats for players for each game
+	var user = firebase.auth().currentUser;
+	var snap = snapshot.val();
+	var ref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season +"/games/" + game.key + "/players/");
+	ref.once("value").then(function(snapshot_players) {
+		var player_count = 0;
+		snapshot_players.forEach(function(player) {
+			var data = player.val();
+			stats[player_count].assists += data.assists;
+			stats[player_count].blocks += data.blocks;
+			stats[player_count].fouls += data.fouls;
+			stats[player_count].ftmake += data.ftmake;
+			stats[player_count].points += data.ftmake;
+			stats[player_count].ftmiss += data.ftmiss;
+			stats[player_count].drebounds += data.drebounds;
+			stats[player_count].orebounds += data.orebounds;
+			stats[player_count].steals += data.steals;
+			stats[player_count].turnovers += data.turnovers;
+			player_count++;
+		});
+	});
+}
+
+function advancedStats() {
+	for (var i = 0; i < stats.length; i++) {
+		adv_stats[i].true_shooting = stats[i].points / [2*(stats[i].fga + 
+			 (.44*(stats[i].ftmake + stats[i].ftmiss)))];
+		adv_stats[i].eff_fg = ((stats[i].fgm + (.5 * stats[i].fgm3)))
+			 / stats[i].fga;
+		adv_stats[i].two_freq = (stats[i].fga - stats[i].fga3)/stats[i].fga;
+		adv_stats[i].three_freq = stats[i].fga3 / stats[i].fga;
+		adv_stats[i].ft_rate = (stats[i].ftmake + stats[i].ftmiss) / stats[i].fga;
+		adv_stats[i].at_ratio = stats[i].assists / stats[i].turnovers;
+		adv_stats[i].a_ratio = (stats[i].assists * 100) / (stats[i].fga + 
+			 ((stats[i].ftmiss + stats[i].ftmake)*.44) + stats[i].assists +
+			  stats[i].turnovers);
+		adv_stats[i].to_ratio = (stats[i].turnovers * 100) / (stats[i].fga + 
+			 ((stats[i].ftmiss + stats[i].ftmake)*.44) + stats[i].assists +
+			  stats[i].turnovers);
+		adv_stats[i].off_rating = (stats[i].points * 100) / (stats[i].fga + 
+			 stats[i].turnovers + ((stats[i].ftmiss + stats[i].ftmake)*.44) - 
+			 stats[i].orebounds);
+		adv_stats[i].game_score = (stats[i].points * 1.0) + 
+								  (stats[i].fgm * .4) - 
+								  (stats[i].fga * .7) - 
+								  (stats[i].ftmiss * .4) + 
+								  (stats[i].orebounds * .7) + 
+								  (stats[i].drebounds * .3) + 
+								  (stats[i].steals * 1.0) + 
+								  (stats[i].assists * .7) + 
+								  (stats[i].blocks * .7) - 
+								  (stats[i].fouls * .4) - 
+								  (stats[i].turnovers * 1.0);
+	}
+	console.log(stats);
+	console.log(adv_stats);
+}
+
 
 
 
 function setHeader(name, school, loc, season) {
+	//set html headers
 	document.getElementById("team_name").innerHTML = name;
 	document.getElementById("school").innerHTML = school;
 	document.getElementById("location").innerHTML = loc;
@@ -74,9 +230,15 @@ firebase.auth().onAuthStateChanged(function(user) {
 		var location = ss.location;
 		var season = ss.active_season;
 		setHeader(name, school, location, season);
-		loadData(snapshot);
+		loadShots(snapshot);
+		setTimeout (function() {
+			playerInfo(snapshot);	
+		}, 0);
+		setTimeout (function() {
+			//this is where to call advanced stats functions
+			advancedStats();	
+		}, 1000);
 	});
-	set_chart(data);
 });
 
 var margin = {top: 0, right: 0, bottom: 0, left: 0},
