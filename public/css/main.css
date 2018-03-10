@@ -65,6 +65,25 @@ select{
     font-size: 15px;
 }
 
+#advtitle {
+    padding-top: 3%;
+    padding-bottom: 5px;
+    margin-left: -600px;
+    font-size: 15px;
+}
+
+#advstats_table {
+    
+    margin-left: 15%;
+    border: 1px solid black;
+}
+
+#advstats_table tr, th, td {
+    padding: 5px;
+    border: 1px solid black;
+    font-size: 15px;
+}
+
 #active {
     position:relative;
     display:inline-block;
