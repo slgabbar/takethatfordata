@@ -66,6 +66,10 @@
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 
 <center><h1>New Game</h1> </center>
+<div id="message" class="alert alert-success"> Saved! </div>
+ <div id="errormessage" class="alert alert-danger"><strong> Error: </strong> Input Date. </div>
+ <div id="errormessage1" class="alert alert-danger"><strong> Error: </strong> Input Location. </div>
+ <div id="errormessage2" class="alert alert-danger"><strong> Error: </strong> Input Opponent Name. </div>
             
                    <form role="form">
                    <div class="row">
@@ -156,15 +160,21 @@ function SubmitNewGame() {
   var homevisitor = document.getElementById("homevisitor").value;
 
   if (!Date.parse(date)|| date=='') {
-    alert('Error: input date');
+   document.getElementById("errormessage").style.display = "block";
+    document.getElementById("errormessage1").style.display = "none";
+     document.getElementById("errormessage2").style.display = "none";
     return;
   }
   if (location == null || location =='') {
-    alert('Error:input location');
+    document.getElementById("errormessage").style.display = "none";
+    document.getElementById("errormessage1").style.display = "block";
+     document.getElementById("errormessage2").style.display = "none";
     return;
   }
   if (opponent == null || opponent =='') {
-    alert('Error: input opponent');
+    document.getElementById("errormessage").style.display = "none";
+    document.getElementById("errormessage1").style.display = "none";
+    document.getElementById("errormessage2").style.display = "block";
     return;
   }
 
@@ -201,7 +211,10 @@ function SubmitNewGame() {
 		});
 	  });
 	  
-    alert('saved!');
+    document.getElementById("message").style.display = "block";
+     document.getElementById("errormessage").style.display = "none";
+    document.getElementById("errormessage1").style.display = "none";
+    document.getElementById("errormessage2").style.display = "none";
 
 	} else {
 	  // No user is signed in.
