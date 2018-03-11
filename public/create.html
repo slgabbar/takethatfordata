@@ -47,6 +47,9 @@
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 
 <center><h1>Create Team</h1> </center>
+        <div id="message" class="alert alert-success"> Saved! </div>
+        <div id="errormessage" class="alert alert-danger"> <strong>Error:</strong> Please enter team name. </div>
+        <div id="errormessage1" class="alert alert-danger"> <strong>Error:</strong> Please enter location. </div>
             
                    <form role="form">
                    <div class="row">
@@ -135,12 +138,15 @@ function test() {
 	var user = firebase.auth().currentUser;
 
   if (team.length < 1) {
-    alert('please enter team name');
+
+    document.getElementById("errormessage").style.display = "block";
+    document.getElementById("errormessage1").style.display = "none";
     return;
   }
 
   if (location.length < 1) {
-    alert('please enter location');
+     document.getElementById("errormessage1").style.display = "block";
+     document.getElementById("errormessage").style.display = "none";
   }
 
 	if (user) {
@@ -151,7 +157,7 @@ function test() {
 	    ref.set(obj);
 	  } else {
 	    ref.push(obj);
-      alert('saved!');
+      document.getElementById("message").style.display = "block";
 	  }
 	} else {
 	  // No user is signed in.

@@ -44,7 +44,8 @@
 
             <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
                  <center><h1>Sign In</h1> </center>
-            
+           
+                <div id="errormessage" class="alert alert-danger"><strong> Error: </strong> Incorrect e-mail / password. Please try again. </div>
                    <form role="form">
                    <div class="row">
                           
@@ -70,7 +71,7 @@
                   
                   <div class="col-lg-12">
                       <div class="forgot">
-                          <p>Forgot Password or Email?</p>
+                          <p><a href="../reset">Forgot Password or Email?</a></p>
                           <p><a href="../create_account"> New? Sign Up Here</a></p>
                       </div>
                   </div>
@@ -123,7 +124,7 @@ firebase.auth().signInWithEmailAndPassword(x, y).catch(function(error) {
   // Handle Errors here.
   var errorCode = error.code;
   var errorMessage = error.message;
-  alert('Incorrect e-mail / password combination');
+   document.getElementById("errormessage").style.display = "block";
   // ...
 
 });

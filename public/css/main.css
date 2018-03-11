@@ -149,5 +149,15 @@ table{
 #dash_advstats_table tr:nth-child(even){background-color: #f2f2f2;}
 
 
-.gameliststyle{
+#message{
+    display:none;
+}
+#errormessage{
+    display:none;
+}
+#errormessage1{
+    display:none;
+}
+#errormessage2{
+    display:none;
 }

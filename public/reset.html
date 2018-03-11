@@ -44,7 +44,8 @@
 
             <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
                  <center><h1>Reset Password</h1> </center>
-            
+                <div id="message" class="alert alert-info"> Password Sent! Check your E-mail </div>
+                <div id="errormessage" class="alert alert-danger"> Error. E-mail doesn't exist. </div>
                    <form role="form">
                    <div class="row">
                           
@@ -57,7 +58,7 @@
                     
                     
                   <div class="col-lg-12">
-                      <input type="button" name="submit" value="Reset Password" onClick="reset()" class="btn btn-default">
+                      <input type="button" name="submit" value="Reset Password" onClick="resetButton()" class="btn btn-default">
                     
                     </button>
                   </div>
@@ -111,14 +112,16 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
-function reset() {
+function resetButton() {
 var x = document.getElementById("email").value;
 firebase.auth().sendPasswordResetEmail(x).then(function() {
+  document.getElementById("message").style.display = "block";
+  document.getElementById("errormessage").style.display = "none";
   // Email sent.
-  alert('password reset');
 }).catch(function(error) {
   // An error happened.
-  alert('wrong email');
+   document.getElementById("errormessage").style.display = "block";
+   document.getElementById("message").style.display = "none";
 });
 
 firebase.auth().onAuthStateChanged(user => {
