@@ -127,16 +127,17 @@ table{
     border-collapse: : border-collapse;
 }
 
-#playerstable, #dashboard_table, #dash_advstats_table{
+#playerstable, #dashboard_table, #dash_advstats_table, #stats_table, #advstats_table{
     border: 1px solid #ddd;
     padding: 8px;
 }
-#playerstable td, #playerstable th, #dashboard_table td, #dashboard_table th, #dash_advstats_table td, #dash_advstats_table th {
+#playerstable td, #playerstable th, #dashboard_table td, #dashboard_table th, #dash_advstats_table td, #dash_advstats_table th,
+#stats_table td, #stats_table th, #advstats_table td, #advstats_table th {
     border-bottom:1px solid #ddd;
     border-left:1px solid #ddd;
     border-right:1px solid #ddd;
 }
-#playerstable th, #dashboard_table th, #dash_advstats_table th {
+#playerstable th, #dashboard_table th, #dash_advstats_table th, #advstats_table th, #stats_table th  {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -147,6 +148,8 @@ table{
 #playerstable tr:nth-child(even){background-color: #f2f2f2;}
 #dashboard_table tr:nth-child(even){background-color: #f2f2f2;}
 #dash_advstats_table tr:nth-child(even){background-color: #f2f2f2;}
+#advstats_table tr:nth-child(even){background-color: #f2f2f2;}
+#stats_table tr:nth-child(even){background-color: #f2f2f2;}
 
 
 #message{
@@ -160,4 +163,30 @@ table{
 }
 #errormessage2{
     display:none;
+}
+
+.insideo {
+  background-color: #fdfdfd !important;
+}
+
+.desc{
+    font-size: 12px;
+    line-height: 12px;
+    background-color: #302f2f;
+    color: #fff;
+    padding: .4em;
+}
+.desc2{
+    background-color: #83c7f2;
+    font-size: 14px;
+    padding: .4em;
+}
+
+#leftside{
+    position:relative;
+  display:inline-block;
+  float: left;
+  width: 20%;
+  text-align: left;
+  margin-left: 5em;
 }

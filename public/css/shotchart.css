@@ -11,8 +11,10 @@
 body { 
 
     font-size: 100%; 
+  background-color: #fdfdfd !important;
 
 }
+
 p {
   font-size: 12pt !important;
   line-height: 12pt;
@@ -220,3 +222,13 @@ path {
     color:#999999;
 }
 
+.jumbotron {
+ background-color:#fdfdfd !important;
+}
+
+.topwhite{
+  background-color: #fff;
+  border: solid 1px #dfdfdf;
+  padding: 5em;
+  min-height: 400px;
+}
