@@ -9,6 +9,9 @@ h1 {
     padding:.5em;
 }
 
+h3 {
+    font-size: 1.5em;
+}
 .navbar {
     height: 60px !important;
     margin-bottom: 0;
@@ -112,4 +115,39 @@ select{
 #scat_hex button {
     font-size: 16px;
     padding: 5px 5px;
+}
+
+ul {
+    padding: 5px;
+    font-size: 12px !important;
+    list-style-type: none;
+}
+
+table{
+    border-collapse: : border-collapse;
+}
+
+#playerstable, #dashboard_table, #dash_advstats_table{
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+#playerstable td, #playerstable th, #dashboard_table td, #dashboard_table th, #dash_advstats_table td, #dash_advstats_table th {
+    border-bottom:1px solid #ddd;
+    border-left:1px solid #ddd;
+    border-right:1px solid #ddd;
+}
+#playerstable th, #dashboard_table th, #dash_advstats_table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #222c32;
+    color: white;
+}
+
+#playerstable tr:nth-child(even){background-color: #f2f2f2;}
+#dashboard_table tr:nth-child(even){background-color: #f2f2f2;}
+#dash_advstats_table tr:nth-child(even){background-color: #f2f2f2;}
+
+
+.gameliststyle{
 }

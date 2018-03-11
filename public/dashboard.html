@@ -40,11 +40,13 @@
   </div>
     <div class="collapse navbar-collapse" id="top">
       <ul class="nav navbar-nav navbar-right">
+         <li><a href="../"> Search </a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#"> Account </a></li>
          <li><a href="#" onclick="return signout();"> Logout </a></li>
       </ul>
     </div>
+
   </div>
 </nav>
 
@@ -74,7 +76,7 @@
   
 <div id="shot-chart" class="shot-chart"></div>
 
-<table id = "dashboard_table">
+<table class="table-striped" id = "dashboard_table">
   <tr>
     <th>Player</th>
     <th>PTS/G</th>
@@ -92,10 +94,12 @@
   </tr>
 </table>
 
+
+    <h2>Advanced Stats:</h2>
+
+
+
 <table id = "dash_advstats_table">
-  <div id = "dash_advtitle">
-    Advanced Stats:
-  </div>
   <tr id = "dash_advhead">
     <th>Player</th>
     <th>TS%</th>
@@ -140,6 +144,15 @@
 return true;
 
   }
+ 
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+  } else {
+    // No user is signed in.
+    window.location = '../'; 
+  }
+});
 </script>
 
 </body>
