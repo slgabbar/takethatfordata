@@ -597,12 +597,14 @@ firebase.auth().onAuthStateChanged(function(user) {
 		  		document.getElementById("playername").innerHTML = a.name;
 		  		player = ele.name;
 		  		// Generate player shot chart and stat table
+		  		if (game) {
 		  		playerShotChart(snapshot, game, player);
 		  		statsTable(snapshot, game, player, 0);
 		  		setTimeout(function() {
 		  			advTable();
 		  		}, 0);
 		  		team = 0;
+		  	}
 		 	};
 		 	var playerlist = document.getElementById("playerbuttons");
 		 	playerlist.appendChild(ele);

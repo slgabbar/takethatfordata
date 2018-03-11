@@ -68,15 +68,15 @@ function printTable(avg) {
 		var p_info = "#" + stats[i].number + " " + stats[i].firstname + " " +
 			stats[i].lastname;
 		makeElement(p_info, tr2);
-		makeElement((((adv_stats[i].true_shooting)*100)/avg).toFixed(2), tr2);
-		makeElement((((adv_stats[i].eff_fg)*100)/avg).toFixed(2), tr2);
-		makeElement((((adv_stats[i].two_freq)*100)/avg).toFixed(2), tr2);
-		makeElement((((adv_stats[i].three_freq)*100)/avg).toFixed(2), tr2);
-		makeElement((((adv_stats[i].ft_rate))/avg).toFixed(2), tr2);
-		makeElement((((adv_stats[i].at_ratio))/avg).toFixed(2), tr2);
-		makeElement((((adv_stats[i].a_ratio))/avg).toFixed(2), tr2);
-		makeElement((((adv_stats[i].to_ratio))/avg).toFixed(2), tr2);
-		makeElement((((adv_stats[i].off_rating))/avg).toFixed(2), tr2);
+		makeElement((((adv_stats[i].true_shooting)*100)).toFixed(2), tr2);
+		makeElement((((adv_stats[i].eff_fg)*100)).toFixed(2), tr2);
+		makeElement((((adv_stats[i].two_freq)*100)).toFixed(2), tr2);
+		makeElement((((adv_stats[i].three_freq)*100)).toFixed(2), tr2);
+		makeElement((((adv_stats[i].ft_rate))).toFixed(2), tr2);
+		makeElement((((adv_stats[i].at_ratio))).toFixed(2), tr2);
+		makeElement((((adv_stats[i].a_ratio))).toFixed(2), tr2);
+		makeElement((((adv_stats[i].to_ratio))).toFixed(2), tr2);
+		makeElement((((adv_stats[i].off_rating))).toFixed(2), tr2);
 		makeElement((((adv_stats[i].game_score))/avg).toFixed(2), tr2);
 		var table = document.getElementById("dash_advstats_table");
 		table.appendChild(tr2);
