@@ -176,6 +176,13 @@ table{
     color: #fff;
     padding: .4em;
 }
+.desc p{
+    font-size: 12px;
+    line-height: 12px;
+    background-color: #302f2f;
+    color: #fff;
+    padding: .4em;
+}
 .desc2{
     background-color: #83c7f2;
     font-size: 14px;
