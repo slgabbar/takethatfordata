@@ -1,6 +1,16 @@
 const admin = require('firebase-admin');
 const path = require('path');
 const cert = require('./db-credentials.json');
+var algoliasearch = require('algoliasearch');
+var client = algoliasearch('CPXKNGPIA3','5c48ad9a063387024679616778114894');
+var index = client.initIndex('team_players')
+
+index.setSettings({
+  searchableAttributes: [
+  'name',
+  'location',
+  'unordered(school)']
+})
 
 admin.initializeApp({
   credential: admin.credential.cert(cert),
@@ -105,3 +115,9 @@ app.get('/stats', function(req, res) {
 app.get('/viewstats', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/viewstats.html'));
 });
+
+app.get('/search', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/search.html'));
+});
+
+
