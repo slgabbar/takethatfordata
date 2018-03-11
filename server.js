@@ -72,6 +72,10 @@ app.get('/signin', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/signin.html'));
 });
 
+app.get('/reset', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/reset.html'));
+});
+
 app.get('/create_team', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/create.html'));
 });
