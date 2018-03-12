@@ -163,10 +163,10 @@ function SubmitNewSeason() {
 	  if (imp == "yes") {
 	    var oldplayerref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + ss.active_season + "/players");
 		oldplayerref.on("child_added", function(playersnap) {
-		  var newplayerref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + season + "/players");
+		  var newplayerref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + season + "/players/" + playersnap.key);
 		  var playerdata = playersnap.val();
 		  var obj = {"firstname" : playerdata.firstname, "lastname" : playerdata.lastname, "number" : playerdata.number };
-		  newplayerref.push(obj);
+		  newplayerref.set(obj);
 		});
 	  }
 	  var teamref = db.ref("/users/" + user.uid + "/teams/" + key);
