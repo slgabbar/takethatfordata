@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <title> Take that for Data! </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="footer, contact, form, icons" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/about.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+</head>
+
+
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="/"> Take that for Data </a>
+  </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="../about">About</a></li>
+        <li><a href="../signin"> Sign In </a></li>
+        <li><a href="../create_account">Sign Up </a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="bg"> 
+    <div class="aboutSpace">
+      <center>
+        <span class="letter" data-letter="T">T</span>
+        <i>ake</i>
+        <span class="letter" data-letter="T">T</span>
+        <i>hat</i>
+        <span class="letter" data-letter="F">F</span>
+        <i>or</i>
+        <span class="letter" data-letter="D">D</span>
+        <i>ata</i>
+      </center>
+      
+    </div>
+  </div>
+
+
+
+  <div id="main-wrap">
+          <div id="sidebar">
+              <div class="vertical-menu">
+                <a href="#contentAbout" id="aboutSelected" onclick="aboutClicked(this.id)">About</a>
+                <a href="#contentMission" id="missionSelected" onclick="missionClicked(this.id)">Mission</a>
+                <a href="#contentTeam" id="teamSelected" onclick="teamClicked(this.id)">Team</a>
+                <a href="#contentContact" id="contactSelected" onclick="contactClicked(this.id)">Contact Us</a>
+              </div>
+          </div>
+
+          <div id="content-wrap">
+
+            <div class="contentAbout" id="contentAbout">
+                <h2>About</h2>
+                <p>
+                    Interactive web application that allows users to scout basketball games and view advanced statistics. Users are able to input stats from games, or use our interactive application to log stats real time during a game. All player and team statistics are stored in a database so any user can look them up our website.
+                 </p>
+              </div> 
+
+
+
+              <div class="contentMission" id="contentMission">
+                <h2>Mission</h2>
+                  <p>
+                      Our Mission is to provide athletes, coaches and teams with the platform to gain the right partnership. Using our product athletes are able to show their stats and increase their visiblity to recruiters. Coaches are also able to conduct effective practices, understand their weakness and strengths, motivate their athletes, and instruct athletes in game strategies and techniques where they need it most. 
+                   </p>
+                  
+              </div> 
+
+
+
+              <div class="contentTeam" id="contentTeam">
+                <h2>Team</h2>
+
+
+                <div class="row">
+                    <div class="column">
+                      <div class="card">
+                        <div class="container">
+                          <h3>Micheal Yang</h3>
+                          <p class="title">Developer</p>
+                          <p>Some text that describes me.</p>
+                          <p>myang31@ucsc.edu</p>
+                          <p><a href="mailto:myang31@ucsc.edu"><button class="button"> Contact</button></a></p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="column">
+                      <div class="card">
+                        <div class="container">
+                          <h3>Sam Gabbards</h3>
+                          <p class="title">Developer</p>
+                          <p>Some text that describes me.</p>
+                          <p>slgabbar@ucsc.edu</p>
+                          <p><a href="mailto:slgabbar@ucsc.edu"><button class="button">Contact</button></a></p>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="column">
+                      <div class="card">
+                        <div class="container">
+                          <h3>Kristine Nguyen</h3>
+                          <p class="title">Developer</p>
+                          <p>Some text that describes me.</p>
+                          <p>krkinguy@ucsc.edu</p>
+                          <p><a href="mailto:krkinguy@ucsc.edu"><button class="button">Contact</button></a></p>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="column">
+                      <div class="card">
+                        <div class="container">
+                          <h3>Evan Louie</h3>
+                          <p class="title">Developer</p>
+                          <p>Some text that describes me.</p>
+                          <p>ejlouie@ucsc.edu</p>
+                          <p><a href="mailto:ejlouie@ucsc.edu"><button class="button">Contact</button></a></p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="column">
+                      <div class="card">
+                        <div class="container">
+                          <h3>Gugsa Gemeda</h3>
+                          <p class="title">Developer</p>
+                          <p>Some text that describes me.</p>
+                          <p>ggemeda@ucsc.edu</p>
+                          <p><a href="mailto:ggemeda@ucsc.edu"><button class="button">Contact</button></a></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div> 
+
+
+          </div>
+  </div>  
+    
+
+  <footer class="footer-distributed">
+
+
+
+      <div class="footer-left">
+        <h3>Take That<span> For Data</span></h3>
+        <p class="footer-links">
+        </p>
+        <p class="footer-company-name">Take That For Data &copy; 2018</p>
+      </div>
+
+
+
+      <div id="contentContact" class="footer-right">
+        <p>Contact Us</p>
+        <form action="#" method="post">
+          <input type="text" name="email" placeholder="Email" />
+          <textarea name="message" placeholder="Message"></textarea>
+          <button>Send</button>
+        </form>
+      </div>
+
+
+
+  </footer> 
+
+  <script type="text/javascript">
+    function aboutClicked(x){
+      document.getElementById("aboutSelected").style.backgroundColor="#82C8F2";
+      document.getElementById("missionSelected").style.backgroundColor="#eee";
+      document.getElementById("teamSelected").style.backgroundColor="#eee";
+      document.getElementById("contactSelected").style.backgroundColor="#eee";
+    }
+
+    function missionClicked(x){
+      document.getElementById("aboutSelected").style.backgroundColor="#eee";
+      document.getElementById("missionSelected").style.backgroundColor="#82C8F2";
+      document.getElementById("teamSelected").style.backgroundColor="#eee";
+      document.getElementById("contactSelected").style.backgroundColor="#eee";
+    }
+
+    function teamClicked(x){
+      document.getElementById("aboutSelected").style.backgroundColor="#eee";
+      document.getElementById("missionSelected").style.backgroundColor="#eee";
+      document.getElementById("teamSelected").style.backgroundColor="#82C8F2";
+      document.getElementById("contactSelected").style.backgroundColor="#eee";
+
+
+    }
+
+    function contactClicked(x){
+      document.getElementById("aboutSelected").style.backgroundColor="#eee";
+      document.getElementById("missionSelected").style.backgroundColor="#eee";
+      document.getElementById("teamSelected").style.backgroundColor="#eee";
+      document.getElementById("contactSelected").style.backgroundColor="#82C8F2";
+    }
+
+
+
+  </script> 
+ 
+</body>
+</html>
