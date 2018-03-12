@@ -13,6 +13,7 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
@@ -21,9 +22,8 @@
     <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
-    <script src = "/js/dashboard.js"></script>
     <script src="/js/d3-shotchart.js" ></script>
-    <script src="/js/logout.js" ></script>
+   
     
 </head>
 <body>
@@ -94,7 +94,7 @@
 </div> </div><!-- end of topwhite class-->
 
 <div id="insideplayer" class="box textleft">
-  <h2><a href="../create_players"> Edit Players </a> </h2>
+  <h2> Edit Players  </h2>
   <form id="playerform">
   <div class="form-row">
     <div class="col-md-3 mb-3">
@@ -153,6 +153,111 @@
   firebase.initializeApp(config);
   var db = firebase.database();
   updatelist();
+
+function addnewplayer() {
+  var x = document.getElementById("firstname").value;
+  var y = document.getElementById("lastname").value;
+  var z = document.getElementById("number").value;
+  var form = document.getElementById("playerform").value;
+  var user = firebase.auth().currentUser;
+
+  if ( x.length < 1) {
+  alert('Error: Please enter name');
+  return;
+}
+  if (y.length < 1) {
+    alert('Error: Please enter last name');
+    return;
+  }
+
+  if (z.length < 1) {
+    alert('Error: Please enter Player Number');
+    return;
+  }
+  if (user) {
+    
+    var ref = db.ref("/users/" + user.uid + "/teams/");
+    ref.on("child_added", function(snapshot) {
+      var ss = snapshot.val();
+      var reff = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + ss.active_season + "/players");
+      var obj = { "firstname":x, "lastname":y, "number":z};
+      reff.push(obj);   
+      clearFields()
+
+    });
+  } else {
+    // No user is signed in.
+    console.log("Error not logged in");
+    }
+  }
+function del(playerkey) {
+  var user = firebase.auth().currentUser;
+  if (user) {
+    var ref = db.ref("/users/" + user.uid + "/teams/");
+    ref.on("child_added", function(snapshot) {
+      var ss = snapshot.val();
+    var reff = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + ss.active_season + "/players/" + playerkey );
+    reff.remove();
+    });
+  } else {
+    // No user is signed in.
+    console.log("Error not logged in");
+  }
+  updatelist();
+}
+
+function clearFields(){
+  document.getElementById("pfname").value = "";
+  document.getElementById("plname").value = "";
+  document.getElementById("pnumber").value = "";
+}
+
+function updatelist() {
+var playerlist = document.getElementById("players");
+while (playerlist.childNodes.length > 2) {
+  playerlist.removeChild(playerlist.lastChild);
+}
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    //This code lists the players in the current team's active season
+    var ref = db.ref("/users/" + user.uid + "/teams");
+  ref.on("child_added", function (snapshot) {
+    var ss = snapshot.val();
+    var reff = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" +
+      ss.active_season + "/players/");
+    reff.on("child_added", function (snapshot_player) {
+      snap = snapshot_player.val();
+    var row = document.createElement("tr");
+    var firstname = document.createElement("td");
+    var lastname = document.createElement("td");
+    var number = document.createElement("td");
+    firstname.innerHTML = snap.firstname;
+    lastname.innerHTML = snap.lastname;
+    number.innerHTML = snap.number;
+    row.appendChild(firstname);
+    row.appendChild(lastname);
+    row.appendChild(number);
+    var col = document.createElement("td");
+    var delbutton = document.createElement("input");
+    delbutton.type = "button";
+    delbutton.value = "Delete";
+    delbutton.id = snapshot_player.key;
+    delbutton.onclick = function() {
+      del(this.id);
+    };
+    col.appendChild(delbutton);
+    row.appendChild(col);
+    var playerlist = document.getElementById("players");
+    playerlist.appendChild(row);
+    
+    
+    });
+  });
+  } else {
+      console.log("Error not logged in");
+  }
+});
+} 
 
 
 // -- signout--
