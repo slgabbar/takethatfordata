@@ -95,6 +95,7 @@
 
 <div id="insideplayer" class="box textleft">
   <h2><a href="../create_players"> Edit Players </a> </h2>
+  <form id="playerform">
   <div class="form-row">
     <div class="col-md-3 mb-3">
       <label for="validationCustom01">First name</label>
@@ -110,8 +111,11 @@
       <label for="validationCustomUsername">Number</label>
      <input type="text" class="form-control" id="number" placeholder="Number">
   </div>
+
   <p><br>
-      <input type="button" name="submit" value="Add" onClick="addplayers()" class="btn btn-save">
+      <input type="button" name="submit" value="Add" onClick="addnewplayer()" class="btn btn-save">
+      </form>
+
       <table id="playerstable" class="table table-striped"> 
             
               <tr id="first">
@@ -127,7 +131,6 @@
                 <ul>
                 <li id="playerkey" hidden> </li>
               </ul>
-                </div> <!-- inner-form -->
 
 
 </div>
@@ -147,7 +150,12 @@
     storageBucket: "takethatfordata-8f719.appspot.com",
     messagingSenderId: "211430446462"
   };
+  firebase.initializeApp(config);
+  var db = firebase.database();
+  updatelist();
 
+
+// -- signout--
   function signout(){
     firebase.auth().signOut().then(function() {
   // Sign-out successful.
@@ -159,7 +167,8 @@
 return true;
 
   }
- 
+
+ // if the user is not sign it, they cannot access this page
   firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
