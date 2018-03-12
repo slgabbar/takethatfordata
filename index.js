@@ -29,13 +29,14 @@ ref.on("child_removed", deleteIndexRecord);
     teamref.on("child_added", function(teamss) {
       var teamkey = teamss.key;
     var teamdata = teamss.val();
-
+	var fullreference = "/users/" + userkey + "/teams/" + teamkey;
     var teamobj = { 
         
         "name" : teamdata.name,
         "location" : teamdata.location,
-        "school" : teamdata.school
-        }
+        "school" : teamdata.school,
+		"reference" : fullreference
+        };
     
   teamobj.objectID = teamkey;
   teams.teams.push(teamobj);
@@ -47,11 +48,13 @@ ref.on("child_removed", deleteIndexRecord);
       playerref.on("child_added", function(playerss) {
         playerkey = playerss.key;
         playerdata = playerss.val();
+		fullreference = "/users/" + userkey + "/teams/" + teamkey + "/" + seasonkey + "/players/" + playerkey;
         var playerobj = {
         "name" : playerdata.firstname + " " + playerdata.lastname,
         "number" : playerdata.number,
     "school" : teamdata.school,
-    "location" : teamdata.location
+    "location" : teamdata.location,
+	"reference" : fullreference
         };
     playerobj.objectID = playerkey;
     players.players.push(playerobj);

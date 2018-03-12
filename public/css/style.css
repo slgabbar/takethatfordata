@@ -35,6 +35,7 @@ header img {
 }
 .ais-search-box {
   max-width: none;
+
 }
 .ais-search-box--reset {
   top: 16px;
@@ -194,8 +195,6 @@ header img {
 #pagination li.ais-pagination--item__disabled a:hover {
   background: none;
 }
-
-
 
 
 #type.facet .ais-refinement-list--checkbox {
