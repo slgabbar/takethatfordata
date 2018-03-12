@@ -39,6 +39,7 @@ h3 {
     color: #83C7F2 !important;
 }
 
+
 .jumbotron {
  background-color:#fff;
 }
@@ -125,14 +126,21 @@ ul {
 
 table{
     border-collapse: : border-collapse;
+  
+    border-radius-left: 5px;
+    border-radius-right: 5px;
+    border-style: hidden; /* hide standard table (collapsed) border */
 }
 
+
 #playerstable, #dashboard_table, #dash_advstats_table, #stats_table, #advstats_table{
+     border-radius: 5px;
     border: 1px solid #ddd;
     padding: 8px;
 }
 #playerstable td, #playerstable th, #dashboard_table td, #dashboard_table th, #dash_advstats_table td, #dash_advstats_table th,
 #stats_table td, #stats_table th, #advstats_table td, #advstats_table th {
+    border-top:;
     border-bottom:1px solid #ddd;
     border-left:1px solid #ddd;
     border-right:1px solid #ddd;
@@ -196,4 +204,60 @@ table{
   width: 20%;
   text-align: left;
   margin-left: 5em;
+}
+
+a.fill-div {
+    display:block;
+    height:100%;
+    width: 100%;
+}
+
+a:hover.hit-content{
+    display:block;
+    height:100%;
+    width: 100%;
+    background-color: #efefef;
+}
+
+
+
+.gameliststyle li{
+    margin:0 auto;
+    display:block;
+    background-color:#e6f8ff;
+    width:600px;
+    padding: 15px;
+    font-size: 13px;
+margin-bottom:-1px;
+    border: 1px solid #ececec;
+    border-radius: 5px;
+    margin: 5px;
+    
+   
+}
+
+.gameliststyle li a{
+  color:#302f2f;
+}
+
+.gameliststyle li:hover, .gameliststyle li:nth-child(even):hover{
+    border-left: 5px solid #8dd9f9;
+    color: white;
+}
+.gameliststyle li:active, .gameliststyle li:nth-child(even):active{
+    border-left: 5px solid #302f2f;
+    color: white;
+}
+
+.gameliststyle li:nth-child(even) {
+    background-color:#fff;
+}
+
+.btn{
+    color: white;
+    border:none;
+}
+.btn:hover{
+    background-color: #d8d7e9!important;
+    color:#285982;
 }

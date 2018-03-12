@@ -121,9 +121,11 @@ header img {
 
 .hit-content em {
   font-style: normal;
-  color: #83C7F2;
-  border-bottom: solid 1px rgba(244, 107, 91, 0.5);
+  color: #fff;
+  background-color: rgba(87, 168, 244, 1);
+ 
 }
+
 
 .hit-content p {
   font-size: 13px;
