@@ -65,7 +65,7 @@ function statsTable(snapshot, game, player, flag) {
 	if (flag == 0) {
 		for (var i = 0; i < rowcount; i++) {
 			if (document.getElementById("statsrow")) {
-				document.getElementById("statsrow").remove();
+				//document.getElementById("statsrow").remove();
 			}
 		}
 	}
@@ -128,7 +128,7 @@ function teamStatsTable(snapshot, game) {
 	// Remove the current stats table
 	for (var i = 0; i < rowcount + 1; i++) {
 		if (document.getElementById("statsrow")) {
-			document.getElementById("statsrow").remove();
+			//document.getElementById("statsrow").remove();
 		}
 	}
 
@@ -179,7 +179,7 @@ function teamStatsTable(snapshot, game) {
  
 	});
  	// Append to the table
- 	rowcount = 0;
+ 	//rowcount = 0;
  	setTimeout (function() {
 		var tableid = document.getElementById("stats_table");
 		tableid.appendChild(tr2);
@@ -190,6 +190,10 @@ function advTable() {
 	if (document.getElementById("advstatsrow")) {
 		document.getElementById("advstatsrow").remove();
 	}
+	if (document.getElementById("adv_player")) {
+		document.getElementById("adv_player").remove();
+	}
+
 	if (document.getElementById("gscore")) {
 		document.getElementById("gscore").remove();
 	}
@@ -227,6 +231,9 @@ function teamAdvTable() {
 	if (document.getElementById("advstatsrow")) {
 		document.getElementById("advstatsrow").remove();
 	}
+	if (document.getElementById("adv_player")) {
+		document.getElementById("adv_player").remove();
+	}
 	if (document.getElementById("gscore")) {
 		document.getElementById("gscore").remove();
 	}
@@ -250,27 +257,42 @@ function teamAdvTable() {
 }
 
 function trueShooting(pts, ats, ftats, tr) {
-	var ts = (pts / (2*(ats + (0.44*ftats))));
+	var ts = 0;
+	if (((2*(ats + (0.44*ftats)))) != 0) {
+		ts = (pts / (2*(ats + (0.44*ftats))));
+	}
 	makeElement((ts*100).toFixed(2), tr);
 }
 
 function effectiveFG (mks, mks3, ats, tr) {
-	var eFG = ((mks + (0.5 * mks3)) / ats);
-	makeElement((eFG*100).toFixed(2), tr);
+	var efg = 0;
+	if (ats != 0) {
+		efg = ((mks + (0.5 * mks3)) / ats);
+	}
+	makeElement((efg*100).toFixed(2), tr);
 }
 
 function frequency2 (ats2, ats, tr) {
-	var freq2 = (ats2/ats);
+	var freq2 = 0;
+	if (ats != 0) {
+		freq2 = (ats2/ats);
+	}	
 	makeElement((freq2*100).toFixed(2), tr);
 }
 
 function frequency3 (ats3, ats, tr) {
-	var freq3 = (ats3/ats);
+	var freq3 = 0;
+	if (ats != 0) {
+		freq3 = (ats3/ats);
+	}
 	makeElement((freq3*100).toFixed(2), tr);
 }
 
 function ftRate (ftats, ats, tr) {
-	var ftR = (ftats/ats);
+	var ftR = 0;
+	if (ats != 0) {
+		ftR = (ftats/ats);
+	}
 	makeElement(ftR.toFixed(3), tr);
 }
 
@@ -283,17 +305,26 @@ function assTurn (ass, turn, tr) {
 }
 
 function assRat (ass, ats, ftats, turn, tr) {
-	var ar = (((ass * 100) / (ats + (ftats * 0.44) + ass + turn)));
+	var ar = 0;
+	if ( (ats + (ftats * 0.44) + ass + turn) != 0) {
+		ar = (((ass * 100) / (ats + (ftats * 0.44) + ass + turn)));
+	}
 	makeElement(ar.toFixed(2), tr);
 }
 
 function tovRat (turn, ats, ftats, ass, tr) {
-	var trat = (((turn * 100) / (ats + (ftats * 0.44) + ass + turn)));
+	var trat = 0;
+	if ((ats + (ftats * 0.44) + ass + turn) != 0) {
+		trat = (((turn * 100) / (ats + (ftats * 0.44) + ass + turn)));
+	}
 	makeElement(trat.toFixed(2), tr);
 }
 
 function oRTG (pts, ats, turn, ftats, oreb, tr) {
-	var ort = ((100 * pts) / (ats + turn + (0.44 * ftats) - oreb));
+	var ort = 0;
+	if ((ats + turn + (0.44 * ftats) - oreb) != 0) {
+		ort = ((100 * pts) / (ats + turn + (0.44 * ftats) - oreb));
+	}
 	makeElement(ort.toFixed(2), tr);
 }
 
@@ -474,7 +505,7 @@ function set_chart(shot_data) {
 	//draws shotchart with shot_data
     var shot_chart = d3.select(".shot-chart").attr('width', width - margin.left + margin.right);
     var court = d3.court().width(700);
-    var shots = d3.shots().shotRenderThreshold(1).displayToolTips(true).displayType("scatter");
+    var shots = d3.shots().shotRenderThreshold(1).displayToolTips(false).displayType("scatter");
     shot_chart.call(court);
     shot_chart.datum(shot_data).call(shots);
     cpixel_width = $(".shot-chart").width() + 2;
@@ -506,7 +537,7 @@ function toScatter() {
 	}
     var shot_chart = d3.select(".shot-chart").attr('width', width - margin.left + margin.right);
     var court = d3.court().width(700);
-    var shots = d3.shots().shotRenderThreshold(1).displayToolTips(true).displayType("scatter");
+    var shots = d3.shots().shotRenderThreshold(1).displayToolTips(false).displayType("scatter");
     shot_chart.call(court);
     shot_chart.datum(sdata).call(shots);
 }
@@ -566,6 +597,14 @@ function teamShotChart(snapshot, game) {
 	});
 }
 
+
+/*function remGS() {
+	if ()
+	var tmp = document.getElementById("gamescore");
+
+}*/
+
+
 // Clear the player chart
 function clearChart() {
 	player_data = []
@@ -580,6 +619,19 @@ firebase.auth().onAuthStateChanged(function(user) {
     var ref = db.ref("/users/" + user.uid + "/teams");
 	ref.on("child_added", function (snapshot) {
 		var ss = snapshot.val();
+		loadShots(snapshot);
+		setTimeout (function() {
+			playerInfo(snapshot);	
+		}, 0);
+		setTimeout (function() {
+			//this is where to call advanced stats functions
+			advancedStats();	
+		}, 1000);
+		setTimeout (function() {
+			loadAverages(snapshot);
+		}, 1000);
+
+
 		var reff = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" +
 	    			ss.active_season + "/players/");
 	  	reff.on("child_added", function (snapshot_player) {
@@ -593,6 +645,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 			ele.name = snapshot_player.key;
 			a.name = "#" + snap.number + " " +snap.firstname + " " + snap.lastname
 			ele.onclick = function() {
+				deleteTables(rowcount);
+				rowcount = 0;
 		  		document.getElementById("playerkey").innerHTML = ele.name;
 		  		document.getElementById("playername").innerHTML = a.name;
 		  		player = ele.name;
@@ -623,6 +677,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 			gele.name = snapshot_game.key;
 			ga.name = snap.date + " vs. " + snap.opponent;
 			gele.onclick = function() {
+				deleteTables(rowcount);
+				rowcount = 0;
 				document.getElementById("gamekey").innerHTML = gele.name;
 				document.getElementById("playername").innerHTML = "All";
 				document.getElementById("gamename").innerHTML = ga.name;

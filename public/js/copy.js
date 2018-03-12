@@ -1,3 +1,5 @@
+//this is a copy so we can import dashboard functions in the view stats page
+// without having the onstate changed being called twice
 //dashboard
 var data = [];
 var stats = [];
@@ -59,12 +61,26 @@ function printTable(avg) {
 		makeElement((stats[i].turnovers/avg).toFixed(1), tr2);
 		console.log(stats[i].blocks/avg);
 		makeElement((stats[i].blocks/avg).toFixed(1), tr2);
-		var table = document.getElementById("dashboard_table");
+		var table = document.getElementById("stats_table");
 		table.appendChild(tr2);
 	}
+	var headid = document.getElementById("advhead");
+
+	var pl = document.createElement("th");
+	var plg = document.createTextNode("Player");
+	pl.appendChild(plg);
+	pl.id = "adv_player";
+	headid.prepend(pl);
+
+	var th2 = document.createElement("th");
+	var ht = document.createTextNode("Game Score");
+	th2.appendChild(ht);
+	th2.id = "gscore";
+	headid.appendChild(th2);
+
 	for (var i = 0; i < adv_stats.length; i++) {
 		var tr2 = document.createElement("tr");
-		tr2.id = "statsrow";
+		tr2.id = "adv_statsrow";
 		var p_info = "#" + stats[i].number + " " + stats[i].firstname + " " +
 			stats[i].lastname;
 		makeElement(p_info, tr2);
@@ -78,7 +94,7 @@ function printTable(avg) {
 		makeElement((((adv_stats[i].to_ratio))).toFixed(2), tr2);
 		makeElement((((adv_stats[i].off_rating))).toFixed(2), tr2);
 		makeElement((((adv_stats[i].game_score))/avg).toFixed(2), tr2);
-		var table = document.getElementById("dash_advstats_table");
+		var table = document.getElementById("advstats_table");
 		table.appendChild(tr2);
 	}
 
@@ -100,6 +116,7 @@ function playerSize(snapshot) {
 
 function loadShots(snapshot) {
 	//sums shot data for all players and all games
+	console.log("we amde it");
 	count = 0;
 	playerSize(snapshot);	
 	var user = firebase.auth().currentUser;
@@ -116,6 +133,7 @@ function loadShots(snapshot) {
 			team_query.once("value").then(function(snapshot_player) {
 				var player_count = 0;
 				snapshot_player.forEach(function(player) {
+					rowcount++;
 					var player_query = db.ref("/users/" + user.uid + "/teams/" + 
 						snapshot.key + "/season_" + snap.active_season + "/games/" + 
 						game.key + "/players/" + player.key + "/shots/")
@@ -304,18 +322,22 @@ function advancedStats() {
 	//console.log(adv_stats);
 }
 
-
-
-
-function setHeader(name, school, loc, season) {
-	//set html headers
-	document.getElementById("team_name").innerHTML = name;
-	document.getElementById("school").innerHTML = school;
-	document.getElementById("location").innerHTML = loc;
-	document.getElementById("active_season").innerHTML = "Active Season: "+ season;
+function deleteTables(team_length) {
+	console.log(team_length);
+	for (var i = 0; i < team_length+1; i++) {
+		if (document.getElementById("statsrow")) {
+			document.getElementById("statsrow").remove();
+		}
+	}	
+	for (var i = 0; i < team_length; i++) {
+		if (document.getElementById("adv_statsrow")) {	
+					document.getElementById("adv_statsrow").remove();
+		}
+	}
 }
 
-firebase.auth().onAuthStateChanged(function(user) {
+
+/*firebase.auth().onAuthStateChanged(function(user) {
 	var user = firebase.auth().currentUser;
 	var ref = db.ref("/users/" + user.uid + "/teams");
 	ref.on("child_added", function (snapshot) {
@@ -337,7 +359,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 			loadAverages(snapshot);
 		}, 1000);
 	});
-});
+});*/
 
 var margin = {top: 0, right: 0, bottom: 0, left: 0},
     width = 500 - margin.left - margin.right,

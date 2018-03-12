@@ -72,7 +72,7 @@ function main() {
 function set_chart(shot_data) {
     var shot_chart = d3.select(".shot-chart").attr('width', width - margin.left + margin.right);
     var court = d3.court().width(700);
-    var shots = d3.shots().shotRenderThreshold(1).displayToolTips(true).displayType("scatter");
+    var shots = d3.shots().shotRenderThreshold(1).displayToolTips(false).displayType("scatter");
     shot_chart.call(court);
     shot_chart.datum(shot_data).call(shots);
     cpixel_width = $(".shot-chart").width() + 2;
