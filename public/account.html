@@ -1,5 +1,5 @@
 
- <!-- add.html -->
+ <!-- account.html -->
 <!DOCTYPE html>
 <html>
 
@@ -41,7 +41,7 @@
     <div class="collapse navbar-collapse" id="top">
       <ul class="nav navbar-nav navbar-right">
          <li><a href="../"> Search </a></li>
-        <li><a href="#about">About</a></li>
+        <li><a href="../about">About</a></li>
         <li><a href="#"> Account </a></li>
          <li><a href="#" onclick="return signout();"> Logout </a></li>
       </ul>
@@ -55,7 +55,7 @@
 
  <div id="sidebar-wrapper">
     <div class="side-top">
-        <a href="/dashboard"> Team Name</a>
+        <a href="../">Search</a>
     </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-dark"><a href="/newseason">+ New Season  </a> </li>
@@ -69,8 +69,68 @@
 
 
 <div class="jumbotron text-center">
- 
+  <div id="inside" class="textleft">
+    <p></p>
+<p></p>
+  <div class="topwhite">
+    <h2> Your information </h2>
+    <form>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Email address</label>
+    <input type="email" class="form-control" id="email" placeholder="name@example.com">
 
+    <br><label for="exampleFormControlInput1">Team Name</label>
+    <input type="email" class="form-control" id="teamname" placeholder="Team name">
+    <br>
+  <br><label for="exampleFormControlInput1">New Password</label>
+    <input type="email" class="form-control" id="newpassword" placeholder="new password">
+
+    <br><label for="exampleFormControlInput1">Confirm New Password</label>
+    <input type="email" class="form-control" id="new password" placeholder="new password">
+  </div>
+  </form>
+
+  <input type="button" name="submit" value="Save" onClick="saveinfo()" class="btn btn-save">
+</div> </div><!-- end of topwhite class-->
+
+<div id="insideplayer" class="box textleft">
+  <h2><a href="../create_players"> Edit Players </a> </h2>
+  <div class="form-row">
+    <div class="col-md-3 mb-3">
+      <label for="validationCustom01">First name</label>
+      <input type="text" class="form-control" id="firstname" placeholder="First name">
+    
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationCustom02">Last name</label>
+      <input type="text" class="form-control" id="lastname" placeholder="Last name">
+   
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationCustomUsername">Number</label>
+     <input type="text" class="form-control" id="number" placeholder="Number">
+  </div>
+  <p><br>
+      <input type="button" name="submit" value="Add" onClick="addplayers()" class="btn btn-save">
+      <table id="playerstable" class="table table-striped"> 
+            
+              <tr id="first">
+                <th>First Name</th>
+              <th>Last Name</th> 
+              <th>Number</th>
+              <th></th>
+              </tr>
+          
+               <tbody id="players"></tbody>
+           </table>
+           
+                <ul>
+                <li id="playerkey" hidden> </li>
+              </ul>
+                </div> <!-- inner-form -->
+
+
+</div>
 </div>
 
 

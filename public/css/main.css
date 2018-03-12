@@ -98,6 +98,11 @@ h3 {
   padding-bottom:  15px;
 }
 
+.btn-save {
+    background: #94d759 !important;
+
+}
+
 #scat_hex {
     float: right;
     padding-right: 5%;
@@ -256,4 +261,17 @@ margin-bottom:-1px;
 .btn:hover{
     background-color: #d8d7e9!important;
     color:#285982;
+}
+
+.textleft{
+    text-align: left;
+    font-size: 13px;
+}
+
+.box{
+  background-color: #fff;
+  border: solid 1px #dfdfdf;
+  padding: 5em;
+  margin: 1em;
+  min-height: 100px;
 }

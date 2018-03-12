@@ -128,4 +128,8 @@ app.get('/search', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/search.html'));
 });
 
+app.get('/account', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/account.html'));
+});
+
 
