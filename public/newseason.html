@@ -70,7 +70,7 @@
                    <form role="form">
                    <div class="row">
                           
-
+			<div id="message" class="alert alert-success"> Saved! </div>
                     <div class="col-lg-12">
                         <label> What Season? </label>
                         <div class="form-group">
@@ -108,7 +108,7 @@
                     
                   <div class="col-lg-12">
                   <br>
-                     <input type="button" name="submit" value="Next" onClick="SubmitNewSeason()" class="btn btn-default">
+                     <input type="button" name="submit" value="Save" onClick="SubmitNewSeason()" class="btn btn-default">
                     
                     </button>
                   </div>
@@ -171,7 +171,7 @@ function SubmitNewSeason() {
 	  }
 	  var teamref = db.ref("/users/" + user.uid + "/teams/" + key);
 	  teamref.update({"active_season": season});
-
+	  document.getElementById("message").style.display = "block";
 	});
 	
   } else {
