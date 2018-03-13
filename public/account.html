@@ -74,27 +74,27 @@
 <p></p>
   <div class="topwhite">
     <h2> Your information </h2>
-    <form>
+    <form id="userinfo">
   <div class="form-group">
     <label for="exampleFormControlInput1">Email address</label>
     <input type="email" class="form-control" id="email" placeholder="name@example.com">
 
     <br><label for="exampleFormControlInput1">Team Name</label>
-    <input type="email" class="form-control" id="teamname" placeholder="Team name">
+    <input type="input" class="form-control" id="teamname" placeholder="Team name">
     <br>
   <br><label for="exampleFormControlInput1">New Password</label>
-    <input type="email" class="form-control" id="newpassword" placeholder="new password">
+    <input type="input" class="form-control" id="newpassword" placeholder="new password">
 
     <br><label for="exampleFormControlInput1">Confirm New Password</label>
-    <input type="email" class="form-control" id="new password" placeholder="new password">
+    <input type="input" class="form-control" id="newpassword1" placeholder="new password">
   </div>
   </form>
 
-  <input type="button" name="submit" value="Save" onClick="saveinfo()" class="btn btn-save">
+  <input type="button" name="submit" value="Save" onClick="saveinfo()" class="btn btn-default">
 </div> </div><!-- end of topwhite class-->
 
 <div id="insideplayer" class="box textleft">
-  <h2> Edit Players  </h2>
+  <h2> Players  </h2>
   <form id="playerform">
   <div class="form-row">
     <div class="col-md-3 mb-3">
@@ -113,7 +113,7 @@
   </div>
 
   <p><br>
-      <input type="button" name="submit" value="Add" onClick="addnewplayer()" class="btn btn-save">
+      <input type="button" name="submit" value="Add" onClick="addnewplayer()" class="btn btn-default">
       </form>
 
       <table id="playerstable" class="table table-striped"> 
@@ -153,6 +153,30 @@
   firebase.initializeApp(config);
   var db = firebase.database();
   updatelist();
+  var user = firebase.auth().currentUser;
+  var name, email;
+
+if (user != null) {
+  user.providerData.forEach(function (profile) {
+    console.log("Sign-in provider: " + profile.providerId);
+    console.log("  Provider-specific UID: " + profile.uid);
+    console.log("  Name: " + profile.displayName);
+    console.log("  Email: " + profile.email);
+    console.log("  Photo URL: " + profile.photoURL);
+  });
+}
+
+function saveinfo(){
+  var email = document.getElementById("email").value;
+  var teamname = document.getElementById("teamname").value;
+  var password = document.getElementById("newpassword").value;
+  var password1 = document.getElementById("newpassword1").value;
+  var form = document.getElementById("userinfo").value;
+  var user = firebase.auth().currentUser;
+  emailtoval = acctEmail.value;
+  email = JSON.stringify(emailtoval);
+
+}
 
 function addnewplayer() {
   var x = document.getElementById("firstname").value;
