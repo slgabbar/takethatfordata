@@ -201,7 +201,7 @@ function loadShots2(snapshot, uid) {
 	ref.once("value").then(function(snapshot_game) {
 		snapshot_game.forEach(function(game) {
 			setTimeout (function() {
-				loadPlayerStats(snapshot, game);	
+				loadPlayerStats2(snapshot, uid, game);	
 			}, 0);
 			var team_query = db.ref("/users/" + uid + "/teams/" + snapshot.key + 
 			"/season_" + snap.active_season + "/games/" + game.key + "/players/");
