@@ -35,6 +35,20 @@ function loadAverages(snapshot) {
 	});
 }
 
+function loadAverages2(snapshot, uid) {
+	var user = firebase.auth().currentUser;
+	var snap = snapshot.val();
+	var ref = db.ref("/users/" + uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season +"/games/");
+	ref.once("value").then(function(snapshot_game) {
+		var num_games = 0;
+		snapshot_game.forEach(function(game) {
+			num_games++;
+		});
+		printTable(num_games);
+	});
+}
+
 
 function printTable(avg) {
 	//print stats table averages over avg number of games
@@ -114,6 +128,20 @@ function playerSize(snapshot) {
 	});
 }
 
+function playerSize2(snapshot, uid) {
+	var user = firebase.auth().currentUser;
+	var snap = snapshot.val();
+	var ref = db.ref("/users/" + uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season +"/players/");
+	ref.once("value").then(function(snapshot_player) {
+		var team_length = 0;
+		snapshot_player.forEach(function(player) {
+			team_length++;;
+		});
+		initializeJson(team_length);
+	});
+}
+
 function loadShots(snapshot) {
 	//sums shot data for all players and all games
 	console.log("we amde it");
@@ -160,6 +188,54 @@ function loadShots(snapshot) {
 		});
 	});
 }
+
+function loadShots2(snapshot, uid) {
+	//sums shot data for all players and all games
+	console.log("we amde it");
+	count = 0;
+	playerSize2(snapshot, uid);	
+	var user = firebase.auth().currentUser;
+	var snap = snapshot.val();
+	var ref = db.ref("/users/" + uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season +"/games/");
+	ref.once("value").then(function(snapshot_game) {
+		snapshot_game.forEach(function(game) {
+			setTimeout (function() {
+				loadPlayerStats(snapshot, game);	
+			}, 0);
+			var team_query = db.ref("/users/" + uid + "/teams/" + snapshot.key + 
+			"/season_" + snap.active_season + "/games/" + game.key + "/players/");
+			team_query.once("value").then(function(snapshot_player) {
+				var player_count = 0;
+				snapshot_player.forEach(function(player) {
+					rowcount++;
+					var player_query = db.ref("/users/" + uid + "/teams/" + 
+						snapshot.key + "/season_" + snap.active_season + "/games/" + 
+						game.key + "/players/" + player.key + "/shots/")
+					player_query.once("value").then(function(snapshot_shot) {
+						var stat = snapshot_shot.val();
+						snapshot_shot.forEach(function(shot) {
+							var shot_data = shot.val();
+							data[count] = {
+        						"shot_attempted_flag": shot_data.shot_attempted_flag,
+        						"shot_attempted": shot_data.shot_attempted,
+        						"shot_made_flag": shot_data.shot_made_flag,
+        						"x":shot_data.x,
+        						"y":shot_data.y,
+								"count": shot_data.count
+							}
+							loadAdvShot(player_count, shot_data.shot_made_flag, shot_data.shot_attempted);
+							count++;
+						});
+						set_chart(data);
+						player_count++;
+					});
+				});
+			});
+		});
+	});
+}
+
 
 function loadAdvShot(shot_count, made, dist) {
 	//console.log(shot_count);
@@ -231,12 +307,55 @@ function playerInfo(snapshot) {
 	});
 }
 
+function playerInfo2(snapshot, uid) {
+	//loads player name and number
+	var user = firebase.auth().currentUser;
+	var snap = snapshot.val();
+	var ref = db.ref("/users/" + uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season + "/players/");
+	ref.once("value").then(function(snapshot_player) {
+		var player_count = 0;
+		snapshot_player.forEach(function(player) {
+			var info = player.val();
+			stats[player_count].firstname += info.firstname;
+			stats[player_count].lastname += info.lastname;
+			stats[player_count].number += info.number;
+			player_count++;
+		});
+	});
+}
+
 
 function loadPlayerStats(snapshot, game) {
 	//cumilates all stats for players for each game
 	var user = firebase.auth().currentUser;
 	var snap = snapshot.val();
 	var ref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + 
+		snap.active_season +"/games/" + game.key + "/players/");
+	ref.once("value").then(function(snapshot_players) {
+		var player_count = 0;
+		snapshot_players.forEach(function(player) {
+			var data = player.val();
+			stats[player_count].assists += data.assists;
+			stats[player_count].blocks += data.blocks;
+			stats[player_count].fouls += data.fouls;
+			stats[player_count].ftmake += data.ftmake;
+			stats[player_count].points += data.ftmake;
+			stats[player_count].ftmiss += data.ftmiss;
+			stats[player_count].drebounds += data.drebounds;
+			stats[player_count].orebounds += data.orebounds;
+			stats[player_count].steals += data.steals;
+			stats[player_count].turnovers += data.turnovers;
+			player_count++;
+		});
+	});
+}
+
+function loadPlayerStats2(snapshot, uid, game) {
+	//cumilates all stats for players for each game
+	var user = firebase.auth().currentUser;
+	var snap = snapshot.val();
+	var ref = db.ref("/users/" + uid + "/teams/" + snapshot.key + "/season_" + 
 		snap.active_season +"/games/" + game.key + "/players/");
 	ref.once("value").then(function(snapshot_players) {
 		var player_count = 0;
@@ -392,4 +511,12 @@ function makeElement(statv, tr) {
 	var tn = document.createTextNode(statv);
 	te.appendChild(tn);
 	tr.appendChild(te);
+}
+
+function setHeader(name, school, loc, season) {
+	//set html headers
+	document.getElementById("team_name").innerHTML = name;
+	document.getElementById("school").innerHTML = school;
+	document.getElementById("location").innerHTML = loc;
+	document.getElementById("active_sea").innerHTML = "Active Season: "+ season;
 }

@@ -28,40 +28,39 @@ ref.on("child_removed", deleteIndexRecord);
   var teamref = db.ref("/users/" + userkey + "/teams");
     teamref.on("child_added", function(teamss) {
       var teamkey = teamss.key;
-    var teamdata = teamss.val();
-	var fullreference = "/users/" + userkey + "/teams/" + teamkey;
-    var teamobj = { 
-        
-        "name" : teamdata.name,
-        "location" : teamdata.location,
-        "school" : teamdata.school,
-		"reference" : fullreference
-        };
+      var teamdata = teamss.val();
+	    var fullreference = "/users/" + userkey + "/teams/" + teamkey;
+      var teamobj = { 
+          "name" : teamdata.name,
+          "location" : teamdata.location,
+          "school" : teamdata.school,
+		      "reference" : fullreference
+      };
     
-  teamobj.objectID = teamkey;
-  teams.teams.push(teamobj);
-    var seasonref = db.ref("/users/" + userkey + "/teams/" + teamkey);
-    seasonref.on("child_added", function(seasonss) {
-      if (seasonss.key.includes("season_")) {
-        var seasonkey = seasonss.key;
-      var playerref = db.ref("/users/" + userkey + "/teams/" + teamkey + "/" + seasonkey + "/players/");
-      playerref.on("child_added", function(playerss) {
-        playerkey = playerss.key;
-        playerdata = playerss.val();
-		fullreference = "/users/" + userkey + "/teams/" + teamkey + "/" + seasonkey + "/players/" + playerkey;
-        var playerobj = {
-        "name" : playerdata.firstname + " " + playerdata.lastname,
-        "number" : playerdata.number,
-    "school" : teamdata.school,
-    "location" : teamdata.location,
-	"reference" : fullreference
-        };
-    playerobj.objectID = playerkey;
-    players.players.push(playerobj);
+      teamobj.objectID = teamkey;
+      teams.teams.push(teamobj);
+      var seasonref = db.ref("/users/" + userkey + "/teams/" + teamkey);
+      seasonref.on("child_added", function(seasonss) {
+        if (seasonss.key.includes("season_")) {
+          var seasonkey = seasonss.key;
+          var playerref = db.ref("/users/" + userkey + "/teams/" + teamkey + "/" + seasonkey + "/players/");
+          playerref.on("child_added", function(playerss) {
+            playerkey = playerss.key;
+            playerdata = playerss.val();
+		        fullreference = "/users/" + userkey + "/teams/" + teamkey + "/" + seasonkey + "/players/" + playerkey;
+            var playerobj = {
+              "name" : playerdata.firstname + " " + playerdata.lastname,
+              "number" : playerdata.number,
+              "school" : teamdata.school,
+              "location" : teamdata.location,
+	             "reference" : fullreference
+            };
+            playerobj.objectID = playerkey;
+            players.players.push(playerobj);
+          });
+        }
       });
-      }
     });
-      });
 
 //You MUST use objectID in order to push it to Algolio. the objectID takes the key and  push it there.
 // ObjectID should be: objectID = teamkey, objectID = playerskey
