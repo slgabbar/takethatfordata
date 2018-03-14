@@ -196,7 +196,7 @@ function clearFields(){
 
 function updatelist() {
 var playerlist = document.getElementById("players");
-while (playerlist.childNodes.length > 2) {
+while (playerlist.childNodes.length > 0) {
 	playerlist.removeChild(playerlist.lastChild);
 }
 firebase.auth().onAuthStateChanged(function(user) {
