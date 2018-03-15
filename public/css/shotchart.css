@@ -144,8 +144,11 @@ path {
     margin-left: auto;
     border:solid 1px #3E3E3E;
     padding: 10px;
-    color: black;
+    color: white;
+    background-color: #75c8f5;
+    border-radius: 5px;
     padding: 15px 32px;
+    border: none;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -220,6 +223,7 @@ path {
 }
 .sidebar-nav>.sidebar-dark {
     color:#999999;
+    border-bottom: 1px solid #3e3e3e;
 }
 
 .jumbotron {
