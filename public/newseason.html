@@ -108,8 +108,9 @@
                     
                   <div class="col-lg-12">
                   <br>
-                     <input type="button" name="submit" value="Save" onClick="SubmitNewSeason()" class="btn btn-default">
+                     <input type="button" name="submit" value="Save" onClick="SubmitNewSeason()" class="btn btn-save">
                     
+					 <input type="button" name="next" value="Next" onClick="nextbtn()" class="btn btn-default"></a>
                     </button>
                   </div>
                   
@@ -192,7 +193,9 @@ function SubmitNewSeason() {
 
 
 
-
+function nextbtn() {
+  window.location = '../addplayers'; //After succesful signup, user will be redirected to create_team
+}
 
 
 

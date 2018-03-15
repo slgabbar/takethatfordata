@@ -131,19 +131,12 @@ app.get('/input', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/add.html'));
 });
 
-app.get('/view', function(req, res) {
-    res.sendFile(path.join(__dirname + '/public/view.html'));
-});
 app.get('/newseason', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/newseason.html'));
 });
 
 app.get('/newgame', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/newgame.html'));
-});
-
-app.get('/games', function(req, res) {
-    res.sendFile(path.join(__dirname + '/public/games.html'));
 });
 
 app.get('/editgame', function(req, res) {
