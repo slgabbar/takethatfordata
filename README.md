@@ -8,7 +8,11 @@ Before running the application make sure to "npm install" first. Then run node s
 Date: 3/16/18
 
 Sam Gabbard (Product Owner): slgabbar@ucsc.edu
+
 Evan Louie (Scrum Master: Sprint 1): ejlouie@ucsc.edu
+
 Michael Yang (Scrum Master: Sprint 4): myang31@ucsc.edu
+
 Kristine Nguyen (Scrum Master: Sprint 2): krkinguy@ucsc.edu
+
 Gugsa Gemeda (Scrum Master: Sprint 3): ggemeda@ucsc.edu
