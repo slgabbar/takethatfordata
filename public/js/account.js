@@ -34,19 +34,30 @@ function saveteaminfo(){
   if (user) {
     var db = firebase.database();
     var ref = db.ref("/users/" + user.uid + "/teams/");
-    var obj = { "name":teamname, "location":location, "school":school};
-    if (ref===null) {
-      ref.set(obj);
-    } else {
-      ref.push(obj);
-      document.getElementById("message").style.display = "block";
-    }
+
+    ref.on("child_added", function(snapshot) {
+      var ss = snapshot.val();
+      var reff = db.ref("/users/" + user.uid + "/teams/" + snapshot.key);
+      var obj = { "name":teamname, "location":location, "school":school};
+      if (reff===null) {
+        reff.update(obj);
+      } else {
+        reff.update(obj);
+        document.getElementById("message").style.display = "block";
+      }
+    });
   } else {
     // No user is signed in.
     console.log("Error not logged in");
-  }
+    }
   
 }
+
+
+
+
+
+
 
 
 function saveinfo(){
@@ -95,6 +106,9 @@ function saveinfo(){
     // No user is signed in.
     
   }
+
+
+  // updating password goes here.. maybe for now i can just redirect to reset password. idk
   });
 
 

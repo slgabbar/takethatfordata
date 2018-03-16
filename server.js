@@ -1,6 +1,5 @@
 const admin = require('firebase-admin');
 const path = require('path');
-const cert = require('./db-credentials.json');
 var algoliasearch = require('algoliasearch');
 var client = algoliasearch('CPXKNGPIA3','5c48ad9a063387024679616778114894');
 var index = client.initIndex('team_players')
@@ -11,29 +10,6 @@ index.setSettings({
   'location',
   'unordered(school)']
 })
-
-admin.initializeApp({
-  credential: admin.credential.cert(cert),
-  databaseURL: `https://${cert.project_id}.firebaseio.com`,
-});
-
-const db = admin.database();
-var ref = db.ref("/test");
-
-/*
-//set data in firebase 
-ref.set({
-  test1: {
-    test2: "data"
-	}
-});*/
-//read data from firebase 
-ref.once("value", function(snapshot) {
-  console.log(snapshot.val());
-  }, function (error) {
-    console.log("Error: " + error.code);
-});
-
 
 var express = require('express');
 var app = express();

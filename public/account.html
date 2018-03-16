@@ -40,8 +40,8 @@
   </div>
     <div class="collapse navbar-collapse" id="top">
       <ul class="nav navbar-nav navbar-right">
-         <li><a href="../"> Search </a></li>
         <li><a href="../about">About</a></li>
+        <li><a href="../dashboard"> Dashboard </a></li>
         <li><a href="#"> Account </a></li>
          <li><a href="#" onclick="return signout();"> Logout </a></li>
       </ul>
@@ -69,10 +69,10 @@
 
 
 <div class="jumbotron text-center">
-  <div id="inside" class="textleft">
+  <div id="myinfo" class="box textleft">
     <p></p>
 <p></p>
-  <div class="topwhite">
+
     <h2> Your information </h2>
     <div id="message" class="alert alert-success"> Saved! </div>
     <div id="errormessage1" class="alert alert-danger"> <strong>Error:</strong> Please enter a password that is more than 6 characters   </div>
@@ -93,20 +93,14 @@
 
     <br><label for="exampleFormControlInput1">Confirm New Password</label>
     <input type="password" class="form-control" id="newpassword1" placeholder="new password">
-   <br>
-     <br>
-        <br>
-     <br>
-
-  
-    <br> <br> <br> <br>
+   <br><br><br><br><br> <br> <br> <br>
      <br><label for="exampleFormControlInput1">Enter Current Password</label>
     <input type="password" class="form-control" id="currentpassword" placeholder="current password">
   </div>
   </form>
 
   <input type="button" name="submit" value="Save" onClick="saveinfo()" class="btn btn-default">
-</div> </div><!-- end of topwhite class-->
+ </div><!-- end of topwhite class-->
 
 <div id="temainfo" class="box textleft">
   <div id="message1" class="alert alert-success" style="display:none"> Saved! </div>
