@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+  <title>Take that for Data</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <!-- IE < 10 support -->
+  <!--[if lte IE 9]>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+  <![endif]-->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="/css/main.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+ 
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="../"> Take that for Data </a>
+  </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="../about">About</a></li>
+        <li><a id="alreadylog" href="/dashboard">Dashboard</a></li>
+        <li><a id="newuser" href="../signin"> Sign In </a></li>
+        <li><a id="newuser1" href="../create_account">Sign Up </a></li>
+        <li><a id="alreadylog2" href="../account">Account</a></li>
+        <li><a id="alreadylog3" href="#" onclick="return signout();">Logout</a> </li>
+       
+      </ul>
+    </div>
+</nav>
+
+<div class="jumbotron text-center">
+  <div class="space">
+<h1>Take That For Data</h1>
+<p>
+<div class="input-group">
+  <!-- INTERFACE -->
+  <header>
+
+    <center><div id="search-input"></div></center>
+  </header>
+
+  <main>
+    <div id="right-column">
+      
+      <div id="stats"></div>
+      <div id="hits"></div>
+      <div id="pagination"></div>
+    </div>
+  </main>
+
+
+  <!-- /INTERFACE -->
+
+  <!-- TEMPLATES -->
+  <script type="text/html" id="hit-template">
+    <div class="hit">
+     
+      </div>
+      <div id="home-page" class="hit-content">
+      <a href="/viewsearch{{reference}}">
+        <h3 class="hit-school">{{school}}</h3>
+        <h2 class="hit-name">{{{_highlightResult.name.value}}}</h2>
+        <p class="hit-description">{{{location}}}</p>
+        </a>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/html" id="no-results-template">
+    <div id="no-results-message">
+      <p>We didn't find any results for the search <em>"{{query}}"</em>.</p>
+      <a href="." class='clear-all'>Clear search</a>
+    </div>
+  </script>
+  </div></div>
+  <!-- /TEMPLATES -->
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.js"></script>
+  <script src="/js/search.js"></script>
+
+<script>
+ // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
+    authDomain: "takethatfordata-8f719.firebaseapp.com",
+    databaseURL: "https://takethatfordata-8f719.firebaseio.com",
+    projectId: "takethatfordata-8f719",
+    storageBucket: "takethatfordata-8f719.appspot.com",
+    messagingSenderId: "211430446462"
+  };
+  firebase.initializeApp(config);
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+   //user is sign in
+    // ...
+    document.getElementById("newuser").style.display = "none";
+    document.getElementById("newuser1").style.display = "none";
+  } else {
+   console.log("signed out");
+    // User is signed out.
+    document.getElementById("alreadylog").style.display = "none";
+    document.getElementById("alreadylog2").style.display = "none";
+    document.getElementById("alreadylog3").style.display = "none";
+  }
+});
+ 
+ function signout(){
+    firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+   window.location = '../'; 
+}).catch(function(error) {
+  // An error happened.
+  console.log("Error: " + error.code);
+});
+return true;
+
+  }
+</script>
+  <!-- /SCRIPTS -->
+
+
+  <!-- /GA -->
+</body>
+</html>

@@ -1,0 +1,82 @@
+
+ <!-- add.html -->
+<!DOCTYPE html>
+<html>
+
+<head> 
+  <title> Take that for Data! </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="/css/main.css">
+   <link rel="stylesheet" href="/css/shotchart.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <title>Input Stats</title>
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+     <script src="/js/logout.js" ></script>
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="/"> Take that for Data </a>
+  </div>
+    <div class="collapse navbar-collapse" id="top">
+       <ul class="nav navbar-nav navbar-right">
+        <li><a href="../about">About</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="../account">Account</a></li>
+        <li><a href="#" onclick="return signout();">Logout</a> </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Sidebar -->
+
+
+ <div id="sidebar-wrapper">
+    <div class="side-top">
+       <a href="../"> Search</a>
+    </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-dark"><a href="/newseason">+ New Season  </a> </li>
+                <li class="sidebar-dark"> <a href="/newgame">+ New Game </a> </li>
+                <li class="sidebar-dark"> <a href="/editgame"> Edit Game</a> </li>
+                <li class="sidebar-dark"> <a href="/viewstats"> View stats</a></li>
+                  
+                
+                  <ul>
+  </div> <!-- #end sidebar-wrapper -->
+<div class="jumbotron text-center">
+  <h1>Edit Game</h1>
+    <p id="activegame"> </p>
+    <form action="../input">
+    <input type="submit" class="btn btn-default" value="Go to Game" />
+</form>
+    <center><ul id="gamelist" class="gameliststyle">
+    </ul></center>
+
+
+	
+</div>
+ <!-- Javascript -->
+<script src="/js/editgame.js" ></script>
+
+</body>
+</html>

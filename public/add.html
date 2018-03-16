@@ -1,0 +1,134 @@
+
+ <!-- add.html -->
+<!DOCTYPE html>
+<html>
+
+<head> 
+  <title> Take that for Data! </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="/css/main.css">
+   <link rel="stylesheet" href="/css/shotchart.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!--Input Stats --> 
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="/js/d3-shotchart.js" ></script>
+    <script src="/js/shotchart.js" ></script>
+	<script src="/js/buttons.js" ></script>
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="/"> Take that for Data </a>
+  </div>
+    <div class="collapse navbar-collapse" id="top">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="../about">About</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/account">Account</a></li>
+        <li><a href="#" onclick="return signout();">Logout</a> </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+ <!-- Sidebar -->
+
+
+ <div id="sidebar-wrapper">
+    <div class="side-top" id="teamname">
+        Team Name
+    </div>
+            <ul class="sidebar-nav" id="playerbuttons">
+                <li class="sidebar-dark" id="active_season">
+                    <a href="#"> Season </a>
+                </li>
+                <li class="sidebar-dark" id="active_game">
+                    1/20/2018 
+                </li>
+				        <li id="playerkey" hidden> </li>
+            </ul>
+  </div> <!-- #end sidebar-wrapper -->
+<div class="jumbotron text-center">
+  <h5 id="home_score"></h5>  <h5 id="visitor_score"></h5>
+    <div id="inside">
+<div id="button_layout">
+  <ul>
+        <li><input id="btn" type="button" value="Delete" onclick="deleteShot();"></li>
+        <li><input id="btn" type="button" value="Hexbin" onclick="toHexbin();"></li>
+
+  </ul>
+</div>
+        <div id="button_layout2">
+         <li><input id="btn" type="button" value="Home Score +1" onclick="makeFT();"></li>
+        <li><input id="btn" type="button" value="Home Score -1" onclick="decrement(1);"></li>
+        <li><input id="btn" type="button" value="Visitor Score +1" onclick="oppScore();"></li>
+        <li><input id="btn" type="button" value="Visitor Score -1" onclick="decrement(0);"></li>
+        <p id="home_score"></p>
+        <p id="visitor_score"></p>
+		Current Active Player: <li id="playername"></li>
+		<li class="statbtn" id="statbuttons"></li>
+		Last Action: <li id="lastaction"></li>
+    </div>
+
+    <div id="shot-chart" class="shot-chart"></div>
+    <p id="coords1"></p>
+
+   </div>
+</div>
+
+ <!-- Javascript -->
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
+    authDomain: "takethatfordata-8f719.firebaseapp.com",
+    databaseURL: "https://takethatfordata-8f719.firebaseio.com",
+    projectId: "takethatfordata-8f719",
+    storageBucket: "takethatfordata-8f719.appspot.com",
+    messagingSenderId: "211430446462"
+  };
+
+  function signout(){
+    firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+   window.location = '../'; 
+}).catch(function(error) {
+  // An error happened.
+  console.log("Error: " + error.code);
+});
+return true;
+
+  }
+
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+  } else {
+    // No user is signed in.
+    window.location = '../';
+  }
+});
+</script>
+
+
+</body>
+</html>

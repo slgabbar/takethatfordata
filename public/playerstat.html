@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<h1>Input Game Statistics</h1>
+
+<form id="playerbuttons">
+Select Active Player: <br>
+
+</form>
+<br>
+  Active Player: <span id="player"> </span><br>
+  Active Player Key: <span id="playerkey"> </span><br>
+<br>
+<br>
+  Statistics <br>
+<form id="statbuttons">  
+  
+</form>
+
+<br>
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
+    authDomain: "takethatfordata-8f719.firebaseapp.com",
+    databaseURL: "https://takethatfordata-8f719.firebaseio.com",
+    projectId: "takethatfordata-8f719",
+    storageBucket: "takethatfordata-8f719.appspot.com",
+    messagingSenderId: "211430446462"
+  };
+  firebase.initializeApp(config);
+  var db = firebase.database();
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    //This code creates the player selection buttons
+    var ref = db.ref("/users/" + user.uid + "/teams");
+	ref.on("child_added", function (snapshot) {
+	  var ss = snapshot.val();
+	  var reff = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" +
+	    ss.active_season + "/players/");
+	  reff.on("child_added", function (snapshot_player) {
+	    snap = snapshot_player.val();
+	    var element = document.createElement("input");
+	    element.type = "button";
+	    element.value = snap.firstname + " " + snap.lastname;
+		element.name = snapshot_player.key;
+		element.onclick = function() {
+		  document.getElementById("player").innerHTML = element.value;
+		  document.getElementById("playerkey").innerHTML = element.name;
+		};
+		var form = document.getElementById("playerbuttons");
+		form.appendChild(element);
+	  });
+	});
+	
+	//Creates stat labels with plus minus buttons
+	var ref = db.ref("/statistics");
+	ref.on("child_added", function (snapshot) {
+	  var element = document.createElement("div");
+	  element.innerHTML = snapshot.key;
+      element.name = snapshot.key;
+	  element.id = snapshot.key;
+	  
+	  var plus = document.createElement("input");
+	  plus.type = "button";
+	  plus.value = "+";
+	  plus.id = snapshot.key;
+	  plus.onclick = function() {
+	    plusminus(this.id, true);
+	  };
+	  
+	  var minus = document.createElement("input");
+	  minus.type = "button";
+	  minus.value = "-";
+	  minus.onclick = function() {
+	    plusminus(this.id, false);
+	  };
+	  
+	  element.appendChild(plus);
+	  element.appendChild(minus);
+	  var form = document.getElementById("statbuttons");
+	  form.appendChild(element);
+	});
+	
+  } else {
+    console.log("Error not logged in");
+  }
+});
+
+function plusminus(stat,operation) {
+	    var user = firebase.auth().currentUser;
+		if (user) {
+		  var ref = db.ref("/users/" + user.uid + "/teams");
+	      ref.on("child_added", function (snapshot) {
+
+	        var ss = snapshot.val();
+		    var teamkey = snapshot.key;
+		    var gamekey = ss.active_game;
+			var playerkey = document.getElementById("playerkey").innerHTML;
+		    var season = ss.active_season;
+			
+			var readstatref = db.ref("/users/" + user.uid + "/teams/" + teamkey + "/season_" +
+	          season + "/games/" + gamekey + "/players/" + playerkey + "/" + stat);
+			var val = 0;
+			readstatref.on("value", function(snap) {
+			  
+			  val = snap.val();
+			}, function(error) {});
+			if (operation) {
+			  val++;
+			} else {
+			  val--;
+			}
+	        var ref = db.ref("/users/" + user.uid + "/teams/" + teamkey + "/season_" +
+	          season + "/games/" + gamekey + "/players/" + playerkey);
+	        var obj = { [stat] : val };
+	        ref.update(obj);
+	      });
+		} else {
+		  console.log("Error not logged in");
+		}
+}
+
+
+
+</script>
+</body>
+</html>

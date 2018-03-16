@@ -1,0 +1,145 @@
+
+
+<!DOCTYPE html>
+<html>
+<head> 
+  <title> Take that for Data! </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="/css/main.css">
+   <link rel="stylesheet" href="/css/shotchart.css">
+   <link rel="stylesheet" type="text/css" href="/css/login.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="../"> Take that for Data </a>
+  </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+     <ul class="nav navbar-nav navbar-right">
+        <li><a href="../about">About</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="../account">Account</a></li>
+        <li><a href="#" onclick="return signout();">Logout</a> </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+ <!-- Sidebar -->
+
+
+ <div id="sidebar-wrapper">
+    <div class="side-top">
+        <a href="../"> Search</a>
+    </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-dark"><a href="/newseason">+ New Season  </a> </li>
+                <li class="sidebar-dark"> <a href="/newgame">+ New Game </a> </li>
+                <li class="sidebar-dark"> <a href="/editgame"> Edit Game</a> </li>
+                <li class="sidebar-dark"> <a href="#"> View stats</a></li>
+                  
+                
+                  <ul>
+  </div> <!-- #end sidebar-wrapper -->
+
+  <div class="space container ">
+
+    <div class="login">
+   <div class="container">
+       <div class="col-lg-6 col-lg-offset-3">
+
+
+<div class="inner-form">
+
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+<center><h1>New Game</h1> </center>
+<div id="message" class="alert alert-success"> Saved! </div>
+ <div id="errormessage" class="alert alert-danger"><strong> Error: </strong> Input Date. </div>
+ <div id="errormessage1" class="alert alert-danger"><strong> Error: </strong> Input Location. </div>
+ <div id="errormessage2" class="alert alert-danger"><strong> Error: </strong> Input Opponent Name. </div>
+            
+                   <form role="form">
+                   <div class="row">
+                          
+                    <div class="col-lg-12">
+                        <label>Date</label>
+                        <div class="form-group">
+                        <input type="date" name="date" id="date" class="form-control" placeholder="">
+                      </div>
+                    </div>
+                    
+                    <div class="col-lg-12">
+                        <label>Location</label>
+                        <div class="form-group">
+                      <input type="text" name="location" id="location" class="form-control" placeholder="">
+                      </div>
+                    </div>
+
+                     <div class="col-lg-12">
+                        <label>Opponent </label>
+                        <div class="form-group">
+                      <input type="text" name="opponent" id="opponent" class="form-control" placeholder="">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <label>Are you Home or Visitor? </label>
+                        <div class="form-group">
+                       <select name="homevisitor" id="homevisitor" class="form-control">
+                            <option value="1"> Home </option>
+                            <option value="2">Visitor </option>
+                          </select>
+                      </div>
+                    </div>
+
+                    
+                  <div class="col-lg-12">
+                  <br>
+                      <input type="button" name="submit" value="Save" onClick="SubmitNewGame()" class="btn btn-save"></a>
+
+                      <input type="button" name="next" value="Next" onClick="nextbtn()" class="btn btn-default"></a>
+                    
+                    </button>
+                  </div>
+                  
+                
+                  </div>
+                    
+                   </div>
+                   </form>
+                  
+                </div> <!-- inner-form -->
+
+
+
+
+<!-- <script src="test.js"></script> -->
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfOoNFnfTmxyl-lScVug25FvUtQyCCVCM&sensor=false&libraries=places&type=school" type="text/javascript"></script>
+<script type="text/javascript">
+    function initialize() {
+        var options = {
+           types: ['(cities)'],
+           componentRestrictions: {country: "us"}
+        };
+        var input = document.getElementById('location');
+        var autocomplete = new google.maps.places.Autocomplete(input,options);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<script src="/js/newgame.js"></script>
+</body>
+</html>

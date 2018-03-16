@@ -1,0 +1,210 @@
+
+
+<!DOCTYPE html>
+<html>
+<head> 
+  <title> Take that for Data! </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="/css/main.css">
+   <link rel="stylesheet" type="text/css" href="/css/login.css">
+   <link rel="stylesheet" href="/css/shotchart.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="../"> Take that for Data </a>
+  </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+     <ul class="nav navbar-nav navbar-right">
+        <li><a href="../about">About</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="../account">Account</a></li>
+        <li><a href="#" onclick="return signout();">Logout</a> </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Sidebar -->
+
+
+ <div id="sidebar-wrapper">
+    <div class="side-top">
+        <a href="../"> Search</a>
+    </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-dark"><a href="/newseason">+ New Season  </a> </li>
+                <li class="sidebar-dark"> <a href="/newgame">+ New Game </a> </li>
+                <li class="sidebar-dark"> <a href="/editgame"> Edit Game</a> </li>
+                <li class="sidebar-dark"> <a href="#"> View stats</a></li>
+                  
+                
+                  <ul>
+  </div> <!-- #end sidebar-wrapper -->
+  <div class="space container ">
+
+    <div class="login">
+   <div class="container">
+       <div class="col-lg-6 col-lg-offset-3">
+
+
+<div class="inner-form">
+
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+<center><h1>New Season</h1> </center>
+            
+                   <form role="form">
+                   <div class="row">
+                          
+			<div id="message" class="alert alert-success"> Saved! </div>
+                    <div class="col-lg-12">
+                        <label> What Season? </label>
+                        <div class="form-group">
+                       <select name="season" id="season" class="form-control">
+                            <option value="2018"> 2018 </option>
+                            <option value="2018-2019">2018 - 2019 </option>
+                            <option value="2019"> 2019 </option>
+                            <option value="2019-2020">2019 - 2020 </option>
+                             <option value="2020">2020 </option>
+                             <option value="2020-2021">2020-2021 </option>
+                             <option value="2021">2021 </option>
+                          </select>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <label> Import Players from last season?</label>
+                        <div class="form-group">
+                       <select name="imp" id="imp" class="form-control">
+                            <option value="yes"> Yes</option>
+                            <option value="no">No </option>
+                          </select>
+                      </div>
+                    </div>
+ <!--
+                      <div class="col-lg-12">
+                        <label> Add / Delete Players Here</label>
+                        <div class="form-group">
+                             <ul>
+                            <li> Player 1 </li>
+                            <li> Player 2 </li>
+                            <li> Player 3 </li>
+                           </ul>
+                       <input name="player" id="player" class="form-control">
+                         </input>
+                          <input type="button" name="add" value="add new player" onClick="addplayers()" class="btn btn-default">
+                      </div>
+                    </div>
+-->
+                    
+                  <div class="col-lg-12">
+                  <br>
+                     <input type="button" name="submit" value="Save" onClick="SubmitNewSeason()" class="btn btn-save">
+                    
+					 <input type="button" name="next" value="Next" onClick="nextbtn()" class="btn btn-default"></a>
+                    </button>
+                  </div>
+                  
+                
+                  </div>
+                    
+                   </div>
+                   </form>
+                  
+                </div> <!-- inner-form -->
+
+
+
+
+<!-- <script src="test.js"></script> -->
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
+    authDomain: "takethatfordata-8f719.firebaseapp.com",
+    databaseURL: "https://takethatfordata-8f719.firebaseio.com",
+    projectId: "takethatfordata-8f719",
+    storageBucket: "takethatfordata-8f719.appspot.com",
+    messagingSenderId: "211430446462"
+  };
+  firebase.initializeApp(config);
+  var db = firebase.database();
+
+  function signout(){
+    firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+   window.location = '../'; 
+}).catch(function(error) {
+  // An error happened.
+  console.log("Error: " + error.code);
+});
+return true;
+
+  }
+  
+function SubmitNewSeason() {
+  var season = document.getElementById("season").value;
+  var imp = document.getElementById("imp").value;
+  var user = firebase.auth().currentUser;
+  if (user) {
+	var ref = db.ref("/users/" + user.uid + "/teams");
+	ref.on("child_added", function (snapshot) {
+	  var ss = snapshot.val();
+	  var key = snapshot.key;
+	  if (imp == "yes") {
+	    var oldplayerref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + ss.active_season + "/players");
+		oldplayerref.on("child_added", function(playersnap) {
+		  var newplayerref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key + "/season_" + season + "/players/" + playersnap.key);
+		  var playerdata = playersnap.val();
+		  var obj = {"firstname" : playerdata.firstname, "lastname" : playerdata.lastname, "number" : playerdata.number };
+		  newplayerref.set(obj);
+		});
+	  }
+	  var teamref = db.ref("/users/" + user.uid + "/teams/" + key);
+	  teamref.update({"active_season": season});
+	  document.getElementById("message").style.display = "block";
+	});
+	
+  } else {
+	console.log("Error not logged in");
+  }
+	
+  
+}
+
+// after you click new game, it redirects to the input / add page
+//firebase.auth().onAuthStateChanged(user => {
+ // if(user) {
+//    window.location = '../new_players'; //After successful login, user will be redirected to home.html
+//  }
+//});
+
+
+
+
+
+function nextbtn() {
+  window.location = '../create_players'; //After succesful signup, user will be redirected to create_team
+}
+
+
+
+
+</script>
+</body>
+</html>

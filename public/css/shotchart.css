@@ -1,0 +1,238 @@
+
+#court {
+    width: 437.5px;
+    height: 412.867px;
+    position: absolute;
+    border: solid 1px #000;
+    display:block;
+    float:left;
+    margin-left: 10em;
+}
+body { 
+
+    font-size: 100%; 
+  background-color: #fdfdfd !important;
+
+}
+
+p {
+  font-size: 12pt !important;
+  line-height: 12pt;
+}
+
+.navbar {
+    margin-left: 250px !important;
+}
+.jumbotron {
+    margin-left: 250px !important;
+}
+.shot-chart{
+   display:inline-block;
+   width:500px;
+    /*border: solid 1px black;*/
+    margin: 0 auto; 
+    margin-left: -200px !important;   
+}
+#inside {
+  padding: 10px;
+}
+
+#button_layout{
+  position:relative;
+  display:inline-block;
+  float: left;
+}
+
+#button_layout li{
+  list-style: none;
+  padding: 5px 5px;
+
+}
+
+#btn {}
+
+h5{
+  font-size: 20pt;
+  display: inline-block;
+  padding: 5px 5px;
+  padding-top: 10px;
+
+}
+
+#button_layout2{
+  position:relative;
+  display:inline-block;
+ float:right;
+ margin-left: -250px;
+}
+
+#button_layout2 li{
+  list-style: none;
+  padding: 5px 5px;
+  
+}
+
+svg {
+    stroke-width: .2;
+}
+
+svg text {
+    font-size: .2em;
+}
+
+svg text.legend-text {
+    font-size: .075em;
+}
+
+svg rect {
+    stroke: black; 
+    width: 1;
+    fill: none;
+}
+
+svg line {
+    stroke: black; 
+    fill: none;
+    width: 1;
+}
+
+svg circle {
+    stroke: black; 
+    fill: none;
+}
+
+circle.shot.make {
+    fill: green;
+    stroke: white;
+    stroke-width: .05;
+}
+
+circle.shot.miss {
+    fill: red;
+    stroke: white;
+    stroke-width: .05;
+}
+
+path.shot {
+    stroke: white; 
+    fill: none;
+    stroke-width: .05;
+}
+
+path {
+    stroke: white;
+    stroke-width: .05;
+}
+
+#sidebar-wrapper {
+  z-index: 20000;
+  position: fixed;
+  left: 250px;
+  max-width: 250px;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #3E3E3E;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#btn {
+    margin-right: auto;
+    margin-left: auto;
+    border:solid 1px #3E3E3E;
+    padding: 10px;
+    color: white;
+    background-color: #75c8f5;
+    border-radius: 5px;
+    padding: 15px 32px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+/* Sidebar Styles */
+
+.side-top {
+    height:60px;
+    background-color: #83C7F2;
+    width: 250px;
+    margin:0;
+    line-height: 60px;
+    padding: 0;
+    text-align: center;
+    font-size: 15px;
+}
+
+.sidebar-nav {
+
+  top: 0;
+  width: 250px;
+  margin:0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999999;
+  font-size: 13px;
+}
+
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-nav>.sidebar-brand {
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
+}
+
+.sidebar-nav>.sidebar-brand a {
+  color: #999999;
+}
+
+.sidebar-nav>.sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+
+.sidebar-nav>.sidebar-dark {
+    height:50px;
+    font-size: 15px;
+    line-height: 50px;
+    background-color: #302F2F;
+}
+.sidebar-nav>.sidebar-dark {
+    color:#999999;
+    border-bottom: 1px solid #3e3e3e;
+}
+
+.jumbotron {
+ background-color:#fdfdfd !important;
+}
+
+.topwhite{
+  background-color: #fff;
+  border: solid 1px #dfdfdf;
+  padding: 5em;
+  min-height: 400px;
+}

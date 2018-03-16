@@ -1,0 +1,176 @@
+ <!-- view.html -->
+<!DOCTYPE html>
+<html>
+
+<head> 
+  <title> Take that for Data! </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="/css/main.css">
+   <link rel="stylesheet" href="/css/shotchart.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!--Input Stats --> 
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="/js/d3-shotchart.js" ></script>
+	  <script src="/js/view_stats.js" ></script>
+    <script src="/js/copy.js"></script>
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="../"> Take that for Data </a>
+  </div>
+    <div class="collapse navbar-collapse" id="top">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="../about">About</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="../account">Account</a></li>
+        <li><a href="#" onclick="return signout();">Logout</a> </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+ <!-- Sidebar -->
+
+
+ <div id="sidebar-wrapper">
+    <div class="side-top" id="teamname">
+        Team Name
+    </div>
+    <ul class="sidebar-nav" id="playerbuttons">
+      <li class="sidebar-dark" id="active_season">
+          <a href="#"> Season </a>
+      </li>
+      <ul class="sidebar-nav" id="gamebuttons">
+          <li class="sidebar-dark" id="game">
+            <a href="#"> Game </a>
+          </li>
+      </ul>
+      <li class="sidebar-dark" id="player">
+         Player 
+      </li>
+			<li id="playerkey" hidden> </li>
+      <li id="gamekey" hidden> </li>
+    </ul>
+  </div> <!-- #end sidebar-wrapper -->
+
+
+
+<div class="jumbotron text-center">
+    <div id="inside" class="insideo">
+<p></p>
+<p></p>
+
+<div id="topwhite" class="topwhite">
+  <div id="leftside">
+    <div id="active">
+        <div class="desc2">Game:</div> <div  class="desc" id="gamename"></div>
+        <div class="desc2">Player:</div> <div class="desc" id="playername"></div>
+    </div>
+  </div>
+
+<div id="scat_hex">
+  <li>
+    <button onclick=toScatter() class="btnshot">Scatter</button>
+  </li>
+  <li>
+    <button onclick=toHexbin() class="btnshot">Hexbin</button>
+  </li>
+</div>
+
+
+<div id="shot-chart" class="shot-chart"></div>
+</div> <!-- end of top white -->
+
+
+<table  class="table-striped" id = "stats_table">
+  <tr>
+    <th>Player</th>
+    <th>PTS</th>
+    <th>FG</th>
+    <th>3PT</th>
+    <th>FT</th>
+    <th>OREB</th>
+    <th>DREB</th>
+    <th>TOTR</th>
+    <th>AST</th>
+    <th>FLS</th>
+    <th>STL</th>
+    <th>TOV</th>
+    <th>BLK</th>
+  </tr>
+</table>
+
+<table  class="table-striped" id = "advstats_table">
+  <div id = "advtitle">
+    Advanced Stats:
+  </div>
+  <tr id = "advhead">
+    <th>TS%</th>
+    <th>eFG%</th>
+    <th>2's%</th>
+    <th>3's%</th>
+    <th>FTA Rate</th>
+    <th>AST/TOV</th>
+    <th>AST Ratio</th>
+    <th>TOV Ratio</th>
+    <th>OffRTG</th>
+  </tr>
+</table>
+
+ <!-- Javascript -->
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
+    authDomain: "takethatfordata-8f719.firebaseapp.com",
+    databaseURL: "https://takethatfordata-8f719.firebaseio.com",
+    projectId: "takethatfordata-8f719",
+    storageBucket: "takethatfordata-8f719.appspot.com",
+    messagingSenderId: "211430446462"
+  };
+
+  function signout(){
+    firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+   window.location = '../'; 
+}).catch(function(error) {
+  // An error happened.
+  console.log("Error: " + error.code);
+});
+return true;
+
+  }
+
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+  } else {
+    // No user is signed in.
+    window.location = '../';
+  }
+});
+</script>
+
+
+</body>
+</html>

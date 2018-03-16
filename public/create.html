@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head> 
+  <title> Take that for Data! </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="/css/main.css">
+   <link rel="stylesheet" type="text/css" href="/css/login.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="#"> Take that for Data </a>
+  </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="../about">About</a></li>
+        <li><a href="../signin"> Sign In </a></li>
+        <li><a href="../create_account">Sign Up </a></li>
+       
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <div class="space container ">
+
+    <div class="login">
+   <div class="container">
+       <div class="col-lg-6 col-lg-offset-3">
+
+
+<div class="inner-form">
+
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+<center><h1>Create Team</h1> </center>
+        <div id="message" class="alert alert-success"> Saved! </div>
+        <div id="errormessage" class="alert alert-danger"> <strong>Error:</strong> Please enter team name. </div>
+        <div id="errormessage1" class="alert alert-danger"> <strong>Error:</strong> Please enter location. </div>
+            
+                   <form role="form">
+                   <div class="row">
+                          
+                    <div class="col-lg-12">
+                        <label>Team Name</label>
+                        <div class="form-group">
+                        <input type="text" name="fname" id="fname" class="form-control" placeholder="Enter Team Name">
+                      </div>
+                    </div>
+                    
+                    <div class="col-lg-12">
+                        <label>Location</label>
+                        <div class="form-group">
+                      <input type="text" name="location" id="location" class="form-control" placeholder="Enter a location" autocomplete="on">
+                      </div>
+                    </div>
+                     <div class="col-lg-12">
+                        <label>School - Optional</label>
+                        <div class="form-group">
+                      <input type="text" name="school" id="school" class="form-control" placeholder="Enter School" autocomplete2="on">
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <label>Season</label>
+                        <div class="form-group">
+                          <select name="season" id="season" class="form-control">
+                            <option value="2018"> 2018 </option>
+                            <option value="2018-2019">2018-2019 </option>
+                          </select>
+                      </div>
+                    </div>
+
+                    
+                  <div class="col-lg-12">
+                      <input type="button" name="submit" value="Save" onClick="test()" class="btn btn-save"></a>
+
+                      <input type="button" name="next" value="Next" onClick="nextbtn()" class="btn btn-default"></a>
+                    
+                    </button>
+                  </div>
+                  
+                
+                  </div>
+                    
+                   </div>
+                   </form>
+          
+                </div> <!-- inner-form -->
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfOoNFnfTmxyl-lScVug25FvUtQyCCVCM&sensor=false&libraries=places&type=school" type="text/javascript"></script>
+<script type="text/javascript">
+    function initialize() {
+        var options = {
+           types: ['(cities)'],
+           componentRestrictions: {country: "us"}
+        };
+        var input = document.getElementById('location');
+        var autocomplete = new google.maps.places.Autocomplete(input,options);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    
+</script>
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
+    authDomain: "takethatfordata-8f719.firebaseapp.com",
+    databaseURL: "https://takethatfordata-8f719.firebaseio.com",
+    projectId: "takethatfordata-8f719",
+    storageBucket: "takethatfordata-8f719.appspot.com",
+    messagingSenderId: "211430446462"
+  };
+  firebase.initializeApp(config);
+
+
+function test() {
+	var team = document.getElementById("fname").value;
+	var location = document.getElementById("location").value;
+	var school = document.getElementById("school").value;
+	var season = document.getElementById("season").value;
+	var user = firebase.auth().currentUser;
+
+  if (team.length < 1) {
+
+    document.getElementById("errormessage").style.display = "block";
+    document.getElementById("errormessage1").style.display = "none";
+    return;
+  }
+
+  if (location.length < 1) {
+     document.getElementById("errormessage1").style.display = "block";
+     document.getElementById("errormessage").style.display = "none";
+  }
+
+	if (user) {
+	  var db = firebase.database();
+	  var ref = db.ref("/users/" + user.uid + "/teams/");
+	  var obj = { "name":team, "location":location, "school":school, "active_season": season};
+	  if (ref===null) {
+	    ref.set(obj);
+	  } else {
+	    ref.push(obj);
+      document.getElementById("message").style.display = "block";
+	  }
+	} else {
+	  // No user is signed in.
+	  console.log("Error not logged in");
+	}
+    //window.location.href = "create_players";
+    firebase.auth().onAuthStateChanged(user => {
+  if(user) {
+    //window.location = '../create_players'; //After succesful signup, user will be redirected to create_team
+  }
+});
+}
+</script>
+
+<script type="text/javascript">
+function nextbtn() {
+  window.location = '../create_players'; //After succesful signup, user will be redirected to create_team
+}
+</script>
+
+</body>
+</html>

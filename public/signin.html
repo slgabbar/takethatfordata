@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head> 
+  <title> Take that for Data! </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="/css/main.css">
+   <link rel="stylesheet" type="text/css" href="/css/login.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="/"> Take that for Data </a>
+  </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="../about">About</a></li>
+        <li><a href="../signin"> Sign In </a></li>
+        <li><a href="../create_account">Sign Up </a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="space container ">
+
+    <div class="login">
+   <div class="container">
+       <div class="col-lg-6 col-lg-offset-3">
+           
+            <div class="inner-form">
+
+            <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+                 <center><h1>Sign In</h1> </center>
+           
+                <div id="errormessage" class="alert alert-danger"><strong> Error: </strong> Incorrect e-mail / password. Please try again. </div>
+                   <form role="form">
+                   <div class="row">
+                          
+                    <div class="col-lg-12">
+                        <label>E-mail</label>
+                        <div class="form-group">
+                        <input type="text" name="fname" id="fname" class="form-control" placeholder="">
+                      </div>
+                    </div>
+                    
+                    <div class="col-lg-12">
+                        <label>Password</label>
+                        <div class="form-group">
+                      <input type="password" name="password" id="password" class="form-control" placeholder="">
+                      </div>
+                    </div>
+                    
+                  <div class="col-lg-12">
+                      <input type="button" name="submit" value="LOGIN" onClick="test()" class="btn btn-default">
+                    
+                    </button>
+                  </div>
+                  
+                  <div class="col-lg-12">
+                      <div class="forgot">
+                          <p><a href="../reset">Forgot Password or Email?</a></p>
+                          <p><a href="../create_account"> New? Sign Up Here</a></p>
+                      </div>
+                  </div>
+                    
+                   </div>
+                   </form>
+          
+                </div> <!-- inner-form -->
+
+  
+
+</div>
+
+<!-- <script src="test.js"></script> -->
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
+    authDomain: "takethatfordata-8f719.firebaseapp.com",
+    databaseURL: "https://takethatfordata-8f719.firebaseio.com",
+    projectId: "takethatfordata-8f719",
+    storageBucket: "takethatfordata-8f719.appspot.com",
+    messagingSenderId: "211430446462"
+  };
+  firebase.initializeApp(config);
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    var email = user.email;
+    var uid = user.uid;
+	  var ref = firebase.database().ref("/test");
+  ref.once("value", function(snapshot) {
+  console.log(snapshot.val());
+  }, function (error) {
+    console.log("Error: " + error.code);
+
+	});
+    // ...
+  } else {
+   console.log("signed out");
+    // User is signed out.
+    // ...
+  }
+});
+function test() {
+var x = document.getElementById("fname").value;
+var y = document.getElementById("password").value;
+firebase.auth().signInWithEmailAndPassword(x, y).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+   document.getElementById("errormessage").style.display = "block";
+  // ...
+
+});
+
+firebase.auth().onAuthStateChanged(user => {
+  if(user) {
+    window.location = '../dashboard'; //After successful login, user will be redirected to home.html
+  }
+});
+}
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    window.location = '../dashboard'; 
+  } else {
+    // No user is signed in.
+    
+  }
+});
+</script>
+
+</body>
+</html>

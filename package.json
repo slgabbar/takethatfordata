@@ -1,0 +1,26 @@
+{
+  "name": "takethatfordata",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/algoliasearch": "^3.24.9",
+    "algoliasearch": "^3.25.1",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.2",
+    "firebase": "^4.9.0",
+    "firebase-admin": "^5.8.1",
+    "instantsearch.js": "^2.6.0",
+    "nodemon": "^1.14.11"
+  },
+  "devDependencies": {
+    "webpack": "^3.10.0",
+    "d3-hexbin": "^0.2.2",
+    "d3-tip": "^0.7.1"
+  }
+}

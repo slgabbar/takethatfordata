@@ -1,0 +1,411 @@
+
+
+.bg {
+  	background: #82C8F2;
+  	width: 80%;
+  	height: 400px;
+  	margin-left: 10%;
+  
+}
+
+.letter{
+  	display: inline-block;
+  	font-weight: 900;
+  	font-size: 8em;
+  	margin: 0.4em;
+  	position: relative;
+  	color: #00B4F1;
+  	transform-style: preserve-3d;
+  	perspective: 400;
+  	z-index: 1;
+}
+.letter:before, .letter:after{
+  	position:absolute;
+  	content: attr(data-letter);
+  	transform-origin: top left;
+  	top:0;
+  	left:0;
+}
+.letter, .letter:before, .letter:after{
+  	transition: all 0.3s ease-in-out;
+}
+.letter:before{
+  	color: #fff;
+  	text-shadow: 
+    -1px 0px 1px rgba(255,255,255,.8),
+    1px 0px 1px rgba(0,0,0,.8);
+ 	 z-index: 3;
+  	transform:
+    rotateX(0deg)
+    rotateY(-15deg)
+    rotateZ(0deg);
+}
+.letter:after{
+  	color: rgba(0,0,0,.11);
+  	z-index:2;
+  	transform:
+    scale(1.08,1)
+    rotateX(0deg)
+    rotateY(0deg)
+    rotateZ(0deg)
+    skew(0deg,1deg);
+}
+.letter:hover:before{
+  	color: #fafafa;
+  	transform:
+    rotateX(0deg)
+    rotateY(-40deg)
+    rotateZ(0deg);
+}
+.letter:hover:after{
+  transform:
+    scale(1.08,1)
+    rotateX(0deg)
+    rotateY(40deg)
+    rotateZ(0deg)
+    skew(0deg,22deg);
+}
+
+
+.aboutSpace {
+  	padding-top: 150px;
+  	height: 350px;
+  	color: white;
+  	text-shadow: #444 0 1px 1px;
+  	background:transparent;
+}
+
+.aboutSpace i {
+	margin-left: -50px;
+	font-size: 200%;
+}
+
+
+/* sizes */
+#main-wrap > div { min-height: 450px; }
+
+/* layout */
+#main-wrap {
+    /* overflow to handle inner floating block */
+    overflow: hidden;
+  	width: 80%;
+  	margin-left: 10%;
+}
+
+#sidebar > div { min-height: 450px; }
+
+#sidebar {
+	overflow: hidden;
+    float: left;
+    width: 20%;
+}
+
+
+.vertical-menu {
+    position: relative;
+    width: 200px;
+    margin-top: 50px;
+}
+
+.vertical-menu a {
+    background-color: #eee;
+    color: black;
+    display: block;
+    margin: 10px, 10px, 10px, 10px;
+    padding: 12px;
+    text-decoration: none;
+}
+
+
+#content-wrap {
+	float: left;
+	margin-top: 50px;
+    width: 70%;
+}
+
+.contentAbout {
+  	width: 95%;
+  	height: auto;
+  	margin-left: 40px;
+  	margin-right: 20px;
+}
+
+.contentAbout h2{
+	color: #82C8F2;
+	float: left;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.contentAbout p{
+	float: left;
+	line-height: 30px;
+	font-size: 120%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	border-bottom: 4px #82C8F2;
+}
+
+
+.contentMission {
+  	width: 95%;
+  	height: auto;
+  	margin-top: 20px;
+  	margin-left: 40px;
+  	margin-right: 20px;
+}  
+
+.contentMission h2{
+	color: #82C8F2;
+	float: left;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.contentMission p{
+	float: left;
+	line-height: 30px;
+	font-size: 120%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}   
+
+
+.contentStats {
+    width: 95%;
+  	height: auto;
+  	margin-top: 20px;
+  	margin-left: 40px;
+  	margin-right: 20px;
+}
+
+.contentStats h2{
+	color: #82C8F2;
+	float: left;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.contentStats h4{
+	color:  #000;
+}
+
+/* Three columns side by side */
+.contentStats .column {
+    float: left;
+    width: 80%;
+    margin-top: 2%;
+    margin-bottom: 16px;
+    margin-left: 40px;
+    padding: 0 8px;
+}
+
+@media (max-width: 650px) {
+ .contentStats .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+/* Add some shadows to create a card effect */
+.contentStats .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* Some left and right padding inside the container */
+.contentStats .container {
+	line-height: 20px;
+    padding: 0 16px;
+    width: 80%;
+}
+
+/* Clear floats */
+.contentStats .container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.contentStats .title {
+	margin-left: 20px;
+	font-weight: normal;
+    color: #8f9296;
+}
+
+
+
+.footer-distributed{
+	background-color: #292c2f;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
+	width: 100%;
+	font: bold 16px sans-serif;
+	text-align: top;
+
+	padding: 50px 60px 40px;
+	margin-top: 80px;
+	overflow: hidden;
+}
+
+/* Footer Top */
+
+.footer-distributed .footer-top{
+	width: 80%;
+	float: center;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-bottom: 5%;
+}
+
+/* The company logo */
+
+.footer-distributed .footer-top h3{
+	color:  #82C8F2;
+	margin: 0 0 10px;
+}
+
+
+/* Footer links */
+
+.footer-distributed .footer-links{
+	color:  #ffffff;
+	margin: 0 0 10px;
+	padding: 0;
+}
+
+
+.footer-distributed .footer-company-name{
+	color:  #8f9296;
+	font-size: 14px;
+	font-weight: normal;
+	margin: 0;
+}
+
+
+
+.footer-distributed .contentTeam {
+    border-color: #82C8F2;
+  	width: 80%;
+  	height: auto;
+  	margin-left: 20%;
+  	margin-right: 20%;
+}
+
+.footer-distributed .contentTeam h3{
+	color:  #FFFFFF;
+	margin: 0 0 10px;
+}
+
+
+
+/* Three columns side by side */
+.footer-distributed .contentTeam .column {
+    float: left;
+    width: 40%;
+    margin-top: 2%;
+    margin-bottom: 16px;
+    margin-left: 10px;
+    padding: 0 8px;
+}
+
+@media (max-width: 650px) {
+  .footer-distributed .contentTeam .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+
+
+
+/* Add some shadows to create a card effect */
+.footer-distributed .contentTeam .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* Some left and right padding inside the container */
+.footer-distributed .contentTeam .container {
+    padding: 0 16px;
+}
+
+/* Clear floats */
+.footer-distributed .contentTeam .container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.footer-distributed .contentTeam .title {
+	font-weight: normal;
+    color: #8f9296;
+}
+
+.footer-distributed .contentTeam .email {
+	font-size: 14px;
+	font-style: italic;
+	font-weight: normal;
+	color: #8f9296;
+}
+
+.footer-distributed .contentTeam .button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #555 ;
+    text-align: center;
+    font-weight: normal;
+    cursor: pointer;
+    width: relative;
+}
+
+.footer-distributed .contentTeam .button:hover {
+    background-color: #82C8F2;
+}
+
+
+
+
+@media (max-width: 1000px) {
+
+	.footer-distributed {
+		font: bold 14px sans-serif;
+	}
+
+	.footer-distributed .footer-company-name{
+		font-size: 12px;
+	}
+
+
+}
+
+@media (max-width: 800px) {
+
+	.footer-distributed{
+		padding: 30px;
+	}
+
+	.footer-distributed .footer-top,
+
+
+	.footer-distributed .footer-top{
+		margin-bottom: 40px;
+	}
+
+}
+
+
+
+
+

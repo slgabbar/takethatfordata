@@ -1,0 +1,185 @@
+
+ <!-- account.html -->
+<!DOCTYPE html>
+<html>
+
+<head> 
+  <title> Take that for Data! </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="/css/main.css">
+   <link rel="stylesheet" href="/css/shotchart.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <title>Input Stats</title>
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="/js/d3-shotchart.js" ></script>
+   
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="../"> Take that for Data </a>
+  </div>
+    <div class="collapse navbar-collapse" id="top">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="../about">About</a></li>
+        <li><a href="../dashboard"> Dashboard </a></li>
+        <li><a href="#"> Account </a></li>
+         <li><a href="#" onclick="return signout();"> Logout </a></li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+ <!-- Sidebar -->
+
+
+ <div id="sidebar-wrapper">
+    <div class="side-top">
+        <a href="../">Search</a>
+    </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-dark"><a href="/newseason">+ New Season  </a> </li>
+                <li class="sidebar-dark"> <a href="/newgame">+ New Game </a> </li>
+                <li class="sidebar-dark"> <a href="/editgame"> Edit Game</a> </li>
+                <li class="sidebar-dark"> <a href="/viewstats"> View Stats</a></li>
+                  
+                
+                  <ul>
+  </div> <!-- #end sidebar-wrapper -->
+
+
+<div class="jumbotron text-center">
+  <div id="myinfo" class="box textleft">
+    <p></p>
+<p></p>
+
+    <h2> Your information </h2>
+    <div id="message" class="alert alert-success"> Saved! </div>
+    <div id="errormessage1" class="alert alert-danger"> <strong>Error:</strong> Please enter a password that is more than 6 characters   </div>
+    <div id="errormessage" class="alert alert-danger"> <strong>Error:</strong> New Password does not match. Please try again </div>
+     <div id="errormessageold" class="alert alert-danger" style="display:none;"> <strong>Error:</strong> Enter Current Password!</div>
+     <div id="errormessagenot" class="alert alert-danger" style="display:none;"> <strong>Error:</strong> Wrong Current Password! Please Try again.</div>
+    <form id="userinfo">
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Email address</label>
+    <input readonly="readonly" class="form-control" id="email" placeholder="name@example.com">
+
+     <br><label for="exampleFormControlInput1">New Email address</label>
+    <input class="form-control" id="newemail" placeholder="name@example.com">
+
+<br>
+     <br>
+
+  <br><label for="exampleFormControlInput1">New Password</label>
+    <input type="password" class="form-control" id="newpassword" placeholder="new password">
+
+    <br><label for="exampleFormControlInput1">Confirm New Password</label>
+    <input type="password" class="form-control" id="newpassword1" placeholder="new password">
+   <br><br><br><br><br> <br> <br> <br>
+     <br><label for="exampleFormControlInput1">Enter Current Password</label>
+    <input type="password" class="form-control" id="currentpassword" placeholder="current password">
+  </div>
+  </form>
+
+  <input type="button" name="submit" value="Save" onClick="saveinfo()" class="btn btn-default">
+ </div><!-- end of topwhite class-->
+
+<div id="temainfo" class="box textleft">
+  <div id="message1" class="alert alert-success" style="display:none"> Saved! </div>
+   <h2> Team Info </h2>
+   <br><label for="exampleFormControlInput1">Team Name</label>
+    <input type="text" class="form-control" id="teamname">
+
+    <br><label for="exampleFormControlInput1">School</label>
+    <input type="text" class="form-control" id="school">
+
+    <br><label for="exampleFormControlInput1">Location</label>
+    <input type="text" class="form-control" id="location">
+    <br>
+     <br>
+
+<input type="button" name="submitteam" value="Save" onClick="saveteaminfo()" class="btn btn-default">
+</div>
+
+
+<div id="insideplayer" class="box textleft">
+  <h2> Players  </h2>
+  <form id="playerform">
+  <div class="form-row">
+    <div class="col-md-3 mb-3">
+      <label for="validationCustom01">First name</label>
+      <input type="text" class="form-control" id="firstname" placeholder="First name">
+    
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationCustom02">Last name</label>
+      <input type="text" class="form-control" id="lastname" placeholder="Last name">
+   
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationCustomUsername">Number</label>
+     <input type="text" class="form-control" id="number" placeholder="Number">
+  </div>
+
+  <p><br>
+      <input type="button" name="submit" value="Add" onClick="addnewplayer()" class="btn btn-default">
+      </form>
+
+      <table id="playerstable" class="table table-striped"> 
+            
+              <tr id="first">
+                <th>First Name</th>
+              <th>Last Name</th> 
+              <th>Number</th>
+              <th></th>
+              </tr>
+          
+               <tbody id="players"></tbody>
+           </table>
+           
+                <ul>
+                <li id="playerkey" hidden> </li>
+              </ul>
+
+
+</div>
+</div>
+
+
+ <!-- Javascript -->
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfOoNFnfTmxyl-lScVug25FvUtQyCCVCM&sensor=false&libraries=places&type=school" type="text/javascript"></script>
+<script type="text/javascript">
+    function initialize() {
+        var options = {
+           types: ['(cities)'],
+           componentRestrictions: {country: "us"}
+        };
+        var input = document.getElementById('location');
+        var autocomplete = new google.maps.places.Autocomplete(input,options);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<script src="/js/account.js"></script>
+
+</body>
+</html>

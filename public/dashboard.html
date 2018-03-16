@@ -1,0 +1,164 @@
+
+ <!-- dashboard.html -->
+<!DOCTYPE html>
+<html>
+
+<head> 
+  <title> Take that for Data! </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="/css/main.css">
+   <link rel="stylesheet" href="/css/shotchart.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <title>Input Stats</title>
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src = "/js/dashboard.js"></script>
+    <script src="/js/d3-shotchart.js" ></script>
+    <script src="/js/logout.js" ></script>
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="/"> Take that for Data </a>
+  </div>
+    <div class="collapse navbar-collapse" id="top">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="../about">About</a></li>
+        <li><a href="../dashboard">Dashboard</a></li>
+        <li><a href="../account"> Account </a></li>
+         <li><a href="#" onclick="return signout();"> Logout </a></li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+ <!-- Sidebar -->
+
+
+ <div id="sidebar-wrapper">
+    <div class="side-top">
+        <a href="../">Search</a>
+    </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-dark"><a href="/newseason">+ New Season  </a> </li>
+                <li class="sidebar-dark"> <a href="/newgame">+ New Game </a> </li>
+                <li class="sidebar-dark"> <a href="/editgame"> Edit Game</a> </li>
+                <li class="sidebar-dark"> <a href="/viewstats"> View Stats</a></li>
+                  
+                
+                  <ul>
+  </div> <!-- #end sidebar-wrapper -->
+
+
+<div class="jumbotron text-center">
+  <div id="inside" class="insideo">
+    <p></p>
+<p></p>
+  <div id="topwhite" class="topwhite">
+  <div id="leftside">
+  <h2 id="team_name"></h2>
+  <div  class="desc2" id="active_season"></div>
+  <div class="desc" id="school"></div>
+  <div class="desc" id="location"></div>
+  </div>
+<div id="shot-chart" class="shot-chart"></div>
+</div> </div><!-- end of topwhite class-->
+<table class="table-striped" id = "dashboard_table">
+  <tr>
+    <th>Player</th>
+    <th>PTS/G</th>
+    <th>FG/G</th>
+    <th>3PT/G</th>
+    <th>FT/G</th>
+    <th>OREB/G</th>
+    <th>DREB/G</th>
+    <th>REB/G</th>
+    <th>AST/G</th>
+    <th>FLS/G</th>
+    <th>STL/G</th>
+    <th>TOV/G</th>
+    <th>BLK/G</th>
+  </tr>
+</table>
+
+
+    <h2>Advanced Stats:</h2>
+
+
+
+<table id = "dash_advstats_table">
+  <tr id = "dash_advhead">
+    <th>Player</th>
+    <th>TS%</th>
+    <th>eFG%</th>
+    <th>2's%</th>
+    <th>3's%</th>
+    <th>FTA Rate</th>
+    <th>AST/TOV</th>
+    <th>AST Ratio</th>
+    <th>TOV Ratio</th>
+    <th>OffRTG</th>
+    <th>Game Score</th>
+  </tr>
+</table>
+
+
+</div>
+
+
+
+
+ <!-- Javascript -->
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
+    authDomain: "takethatfordata-8f719.firebaseapp.com",
+    databaseURL: "https://takethatfordata-8f719.firebaseio.com",
+    projectId: "takethatfordata-8f719",
+    storageBucket: "takethatfordata-8f719.appspot.com",
+    messagingSenderId: "211430446462"
+  };
+
+  function signout(){
+    firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+   window.location = '../'; 
+}).catch(function(error) {
+  // An error happened.
+  console.log("Error: " + error.code);
+});
+return true;
+
+  }
+ 
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+  } else {
+    // No user is signed in.
+    window.location = '../'; 
+  }
+});
+</script>
+
+</body>
+</html>
