@@ -33,20 +33,31 @@ function saveteaminfo(){
 
   if (user) {
     var db = firebase.database();
-    var ref = db.ref("/users/" + user.uid + "/teams/" + snapshot.key);
-    var obj = { "name":teamname, "location":location, "school":school};
-    if (ref===null) {
-      ref.update(obj);
-    } else {
-      ref.push(obj);
-      document.getElementById("message").style.display = "block";
-    }
+    var ref = db.ref("/users/" + user.uid + "/teams/");
+
+    ref.on("child_added", function(snapshot) {
+      var ss = snapshot.val();
+      var reff = db.ref("/users/" + user.uid + "/teams/" + snapshot.key);
+      var obj = { "name":teamname, "location":location, "school":school};
+      if (reff===null) {
+        reff.update(obj);
+      } else {
+        reff.update(obj);
+        document.getElementById("message").style.display = "block";
+      }
+    });
   } else {
     // No user is signed in.
     console.log("Error not logged in");
-  }
+    }
   
 }
+
+
+
+
+
+
 
 
 function saveinfo(){
