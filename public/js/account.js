@@ -96,12 +96,7 @@ function saveinfo(){
     // User is signed in.
     var newemail2 = document.getElementById("newemail").value;
     console.log("email:" + newemail2);
-    firebase.auth().currentUser.updateEmail(newemail2).then(function() {
-  // Update successful.
-      console.log("updated");
-    }).catch(function(error) {
-      // An error happened.
-    });
+    user.updateEmail(newemail2);
   } else {
     // No user is signed in.
     
