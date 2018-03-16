@@ -15,6 +15,37 @@
 
 function saveteaminfo(){
    document.getElementById("message1").style.display = "block";
+   var teamname = document.getElementById("teamname").value;
+   var school = document.getElementById("school").value;
+   var location = document.getElementById("location").value;
+   var user = firebase.auth().currentUser;
+   if (teamname.length < 1) {
+
+    document.getElementById("errormessage").style.display = "block";
+    document.getElementById("errormessage1").style.display = "none";
+    return;
+  }
+
+  if (location.length < 1) {
+     document.getElementById("errormessage1").style.display = "block";
+     document.getElementById("errormessage").style.display = "none";
+  }
+
+  if (user) {
+    var db = firebase.database();
+    var ref = db.ref("/users/" + user.uid + "/teams/");
+    var obj = { "name":teamname, "location":location, "school":school};
+    if (ref===null) {
+      ref.set(obj);
+    } else {
+      ref.push(obj);
+      document.getElementById("message").style.display = "block";
+    }
+  } else {
+    // No user is signed in.
+    console.log("Error not logged in");
+  }
+  
 }
 
 
@@ -29,11 +60,11 @@ function saveinfo(){
   var currentpassword = document.getElementById("currentpassword").value;
   var user = firebase.auth().currentUser;
 
+  console.log("New Email: " + newemail);
   // errors messages - check before save
   if (newemail == "") {
     return;
   }
-
   if (newpassword == ""){
     return;
   }
@@ -43,31 +74,31 @@ function saveinfo(){
     return;
    }
   if (!newpassword.match(newpassword1)) {
-   
       document.getElementById("errormessage").style.display = "block";
       document.getElementById("message").style.display = "none";
     return;
    }
 
-   // push to update new email address
-   firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      NewEmail = newemail;
-      // User is logged in. you can access firebase.auth().currentUser.
-      // You can now perform operations on the user.
-      user.updateEmail(NewEmail).then(function() {
-        // Update successful.
-        console.log(NewEmail);
-      }).catch(function(error) {
-        // An error happened.
-        console.log(NewEmail);
-      });
-    } else {
-      // No user logged in.
-    }
+// update email.. it's not working
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    var newemail2 = document.getElementById("newemail").value;
+    console.log("email:" + newemail2);
+    firebase.auth().currentUser.updateEmail(newemail2).then(function() {
+  // Update successful.
+      console.log("updated");
+    }).catch(function(error) {
+      // An error happened.
+    });
+  } else {
+    // No user is signed in.
+    
+  }
   });
 
-}
+
+} //end of save info
 
 
 function addnewplayer() {
