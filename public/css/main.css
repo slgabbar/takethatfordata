@@ -279,17 +279,19 @@ margin-bottom:-1px;
 .textleft{
     text-align: left;
     font-size: 13px;
+
 }
 
 .box{
   background-color: #fff;
   border: solid 1px #dfdfdf;
   padding: 5em;
-  margin: 1em;
+  margin: 4em;
+  margin-top: 2em;
   min-height: 100px;
 }
 
 .statbtn{
      border: solid 1px #dfdfdf;
-    
+
 }
