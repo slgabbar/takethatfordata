@@ -36,6 +36,7 @@
  var blocks = 0;
 
  var team = 0;
+ var initial = 0;
 
  var rowcount = 0;
 
@@ -516,10 +517,14 @@ function set_chart(shot_data) {
 
 function toHexbin() {
 	var sdata = [];
-	if (team == 1){
-		sdata = team_data;
-	}else {
-		sdata = player_data;
+	if (initial == 0) {
+		sdata = data;
+	} else {
+		if (team == 1){
+			sdata = team_data;
+		}else {
+			sdata = player_data;
+		}
 	}
     var shot_chart = d3.select(".shot-chart").attr('width', width - margin.left + margin.right);
     var court = d3.court().width(700);
@@ -530,10 +535,14 @@ function toHexbin() {
 
 function toScatter() {
 	var sdata = [];
-	if (team == 1){
-		sdata = team_data;
-	}else {
-		sdata = player_data;
+	if (initial == 0) {
+		sdata = data;
+	} else {
+		if (team == 1){
+			sdata = team_data;
+		}else {
+			sdata = player_data;
+		}
 	}
     var shot_chart = d3.select(".shot-chart").attr('width', width - margin.left + margin.right);
     var court = d3.court().width(700);
@@ -658,6 +667,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 		  				advTable();
 		  			}, 0);
 		  			team = 0;
+		  			initial = 1;
 		  		}
 		 	};
 		 	var playerlist = document.getElementById("playerbuttons");
