@@ -52,64 +52,69 @@ function loadAverages2(snapshot, uid) {
 
 function printTable(avg) {
 	//print stats table averages over avg number of games
-	for (var i = 0; i < stats.length; i++) {
-		var tr2 = document.createElement("tr");
-		tr2.id = "statsrow";
-		var p_info = "#" + stats[i].number + " " + stats[i].firstname + " " +  
-			stats[i].lastname;
-		makeElement(p_info, tr2);
-		makeElement((stats[i].points/avg).toFixed(1), tr2);
-		var fgg = (stats[i].fgm/avg).toFixed(1) + "/" + (stats[i].fga/avg).toFixed(1);
-		makeElement(fgg, tr2);
-		var tfgg = (stats[i].fgm3/avg).toFixed(1) + "/" + (stats[i].fga3/avg).toFixed(1);
-		makeElement(tfgg, tr2);
-		var ftg = (stats[i].ftmake/avg).toFixed(1) + "/" + 
-			((stats[i].ftmiss + stats[i].ftmake)/avg).toFixed(1);
-		makeElement(ftg, tr2);
-		makeElement((stats[i].orebounds/avg).toFixed(1), tr2);
-		makeElement((stats[i].drebounds/avg).toFixed(1), tr2);
-		makeElement(((stats[i].orebounds + stats[i].drebounds)/avg).toFixed(1), tr2);
-		makeElement((stats[i].assists/avg).toFixed(1), tr2);
-		makeElement((stats[i].fouls/avg).toFixed(1), tr2);
-		makeElement((stats[i].steals/avg).toFixed(1), tr2);
-		makeElement((stats[i].turnovers/avg).toFixed(1), tr2);
-		console.log(stats[i].blocks/avg);
-		makeElement((stats[i].blocks/avg).toFixed(1), tr2);
-		var table = document.getElementById("stats_table");
-		table.appendChild(tr2);
-	}
-	var headid = document.getElementById("advhead");
+	if (avg == 0) {
+		alert("No stats to display. Navigate to the dashboard page and" + 
+				" select '+ New Game' to begin scouting a new game");
+	}else {
+		for (var i = 0; i < stats.length; i++) {
+			var tr2 = document.createElement("tr");
+			tr2.id = "statsrow";
+			var p_info = "#" + stats[i].number + " " + stats[i].firstname + " " +  
+				stats[i].lastname;
+			makeElement(p_info, tr2);
+			makeElement((stats[i].points/avg).toFixed(1), tr2);
+			var fgg = (stats[i].fgm/avg).toFixed(1) + "/" + (stats[i].fga/avg).toFixed(1);
+			makeElement(fgg, tr2);
+			var tfgg = (stats[i].fgm3/avg).toFixed(1) + "/" + (stats[i].fga3/avg).toFixed(1);
+			makeElement(tfgg, tr2);
+			var ftg = (stats[i].ftmake/avg).toFixed(1) + "/" + 
+				((stats[i].ftmiss + stats[i].ftmake)/avg).toFixed(1);
+			makeElement(ftg, tr2);
+			makeElement((stats[i].orebounds/avg).toFixed(1), tr2);
+			makeElement((stats[i].drebounds/avg).toFixed(1), tr2);
+			makeElement(((stats[i].orebounds + stats[i].drebounds)/avg).toFixed(1), tr2);
+			makeElement((stats[i].assists/avg).toFixed(1), tr2);
+			makeElement((stats[i].fouls/avg).toFixed(1), tr2);
+			makeElement((stats[i].steals/avg).toFixed(1), tr2);
+			makeElement((stats[i].turnovers/avg).toFixed(1), tr2);
+			console.log(stats[i].blocks/avg);
+			makeElement((stats[i].blocks/avg).toFixed(1), tr2);
+			var table = document.getElementById("stats_table");
+			table.appendChild(tr2);
+		}
+		var headid = document.getElementById("advhead");
 
-	var pl = document.createElement("th");
-	var plg = document.createTextNode("Player");
-	pl.appendChild(plg);
-	pl.id = "adv_player";
-	headid.prepend(pl);
+		var pl = document.createElement("th");
+		var plg = document.createTextNode("Player");
+		pl.appendChild(plg);
+		pl.id = "adv_player";
+		headid.prepend(pl);
 
-	var th2 = document.createElement("th");
-	var ht = document.createTextNode("Game Score");
-	th2.appendChild(ht);
-	th2.id = "gscore";
-	headid.appendChild(th2);
+		var th2 = document.createElement("th");
+		var ht = document.createTextNode("Game Score");
+		th2.appendChild(ht);
+		th2.id = "gscore";
+		headid.appendChild(th2);
 
-	for (var i = 0; i < adv_stats.length; i++) {
-		var tr2 = document.createElement("tr");
-		tr2.id = "adv_statsrow";
-		var p_info = "#" + stats[i].number + " " + stats[i].firstname + " " +
-			stats[i].lastname;
-		makeElement(p_info, tr2);
-		makeElement((((adv_stats[i].true_shooting)*100)).toFixed(2), tr2);
-		makeElement((((adv_stats[i].eff_fg)*100)).toFixed(2), tr2);
-		makeElement((((adv_stats[i].two_freq)*100)).toFixed(2), tr2);
-		makeElement((((adv_stats[i].three_freq)*100)).toFixed(2), tr2);
-		makeElement((((adv_stats[i].ft_rate))).toFixed(2), tr2);
-		makeElement((((adv_stats[i].at_ratio))).toFixed(2), tr2);
-		makeElement((((adv_stats[i].a_ratio))).toFixed(2), tr2);
-		makeElement((((adv_stats[i].to_ratio))).toFixed(2), tr2);
-		makeElement((((adv_stats[i].off_rating))).toFixed(2), tr2);
-		makeElement((((adv_stats[i].game_score))/avg).toFixed(2), tr2);
-		var table = document.getElementById("advstats_table");
-		table.appendChild(tr2);
+		for (var i = 0; i < adv_stats.length; i++) {
+			var tr2 = document.createElement("tr");
+			tr2.id = "adv_statsrow";
+			var p_info = "#" + stats[i].number + " " + stats[i].firstname + " " +
+				stats[i].lastname;
+			makeElement(p_info, tr2);
+			makeElement((((adv_stats[i].true_shooting)*100)).toFixed(2), tr2);
+			makeElement((((adv_stats[i].eff_fg)*100)).toFixed(2), tr2);
+			makeElement((((adv_stats[i].two_freq)*100)).toFixed(2), tr2);
+			makeElement((((adv_stats[i].three_freq)*100)).toFixed(2), tr2);
+			makeElement((((adv_stats[i].ft_rate))).toFixed(2), tr2);
+			makeElement((((adv_stats[i].at_ratio))).toFixed(2), tr2);
+			makeElement((((adv_stats[i].a_ratio))).toFixed(2), tr2);
+			makeElement((((adv_stats[i].to_ratio))).toFixed(2), tr2);
+			makeElement((((adv_stats[i].off_rating))).toFixed(2), tr2);
+			makeElement((((adv_stats[i].game_score))/avg).toFixed(2), tr2);
+			var table = document.getElementById("advstats_table");
+			table.appendChild(tr2);
+		}
 	}
 
 }
