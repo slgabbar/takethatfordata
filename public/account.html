@@ -74,6 +74,9 @@
 <p></p>
   <div class="topwhite">
     <h2> Your information </h2>
+    <div id="message" class="alert alert-success"> Saved! </div>
+    <div id="errormessage1" class="alert alert-danger"> <strong>Error:</strong> Please enter a password that is more than 6 characters   </div>
+    <div id="errormessage" class="alert alert-danger"> <strong>Error:</strong> New Password does not match. Please try again </div>
     <form id="userinfo">
   <div class="form-group">
     <label for="exampleFormControlInput1">Email address</label>
@@ -84,17 +87,18 @@
 
 <br>
      <br>
-<h2 id="team_name"></h2>
-    <br><label for="exampleFormControlInput1">Team Name</label>
-    <input type="text" class="form-control" id="team_name">
-    <br>
-     <br>
+
   <br><label for="exampleFormControlInput1">New Password</label>
     <input type="password" class="form-control" id="newpassword" placeholder="new password">
 
     <br><label for="exampleFormControlInput1">Confirm New Password</label>
     <input type="password" class="form-control" id="newpassword1" placeholder="new password">
+   <br>
+     <br>
+        <br>
+     <br>
 
+  
     <br> <br> <br> <br>
      <br><label for="exampleFormControlInput1">Enter Current Password</label>
     <input type="password" class="form-control" id="currentpassword" placeholder="current password">
@@ -103,6 +107,24 @@
 
   <input type="button" name="submit" value="Save" onClick="saveinfo()" class="btn btn-default">
 </div> </div><!-- end of topwhite class-->
+
+<div id="temainfo" class="box textleft">
+  <div id="message1" class="alert alert-success" style="display:none"> Saved! </div>
+   <h2> Team Info </h2>
+   <br><label for="exampleFormControlInput1">Team Name</label>
+    <input type="text" class="form-control" id="teamname">
+
+    <br><label for="exampleFormControlInput1">School</label>
+    <input type="text" class="form-control" id="school">
+
+    <br><label for="exampleFormControlInput1">Location</label>
+    <input type="text" class="form-control" id="location">
+    <br>
+     <br>
+
+<input type="button" name="submitteam" value="Save" onClick="saveteaminfo()" class="btn btn-default">
+</div>
+
 
 <div id="insideplayer" class="box textleft">
   <h2> Players  </h2>
@@ -149,6 +171,18 @@
 
 
  <!-- Javascript -->
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfOoNFnfTmxyl-lScVug25FvUtQyCCVCM&sensor=false&libraries=places&type=school" type="text/javascript"></script>
+<script type="text/javascript">
+    function initialize() {
+        var options = {
+           types: ['(cities)'],
+           componentRestrictions: {country: "us"}
+        };
+        var input = document.getElementById('location');
+        var autocomplete = new google.maps.places.Autocomplete(input,options);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 <script src="/js/account.js"></script>
 
 </body>

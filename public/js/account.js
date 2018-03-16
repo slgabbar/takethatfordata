@@ -13,15 +13,59 @@
   var user = firebase.auth().currentUser;
   var name, email;
 
+function saveteaminfo(){
+   document.getElementById("message1").style.display = "block";
+}
+
+
 function saveinfo(){
+  //document.getElementById("message").style.display = "block";
   var email = document.getElementById("email").value;
+  var newemail = document.getElementById("newemail").value;
   var teamname = document.getElementById("teamname").value;
-  var password = document.getElementById("newpassword").value;
-  var password1 = document.getElementById("newpassword1").value;
+  var newpassword = document.getElementById("newpassword").value;
+  var newpassword1 = document.getElementById("newpassword1").value;
   var form = document.getElementById("userinfo").value;
+  var currentpassword = document.getElementById("currentpassword").value;
   var user = firebase.auth().currentUser;
-  emailtoval = acctEmail.value;
-  email = JSON.stringify(emailtoval);
+
+  // errors messages - check before save
+  if (newemail == "") {
+    return;
+  }
+
+  if (newpassword == ""){
+    return;
+  }
+  if (newpassword.length < 5 && !newpassword=="") {
+    document.getElementById("errormessage").style.display = "block";
+    document.getElementById("message").style.display = "none";
+    return;
+   }
+  if (!newpassword.match(newpassword1)) {
+   
+      document.getElementById("errormessage").style.display = "block";
+      document.getElementById("message").style.display = "none";
+    return;
+   }
+
+   // push to update new email address
+   firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      NewEmail = newemail;
+      // User is logged in. you can access firebase.auth().currentUser.
+      // You can now perform operations on the user.
+      user.updateEmail(NewEmail).then(function() {
+        // Update successful.
+        console.log(NewEmail);
+      }).catch(function(error) {
+        // An error happened.
+        console.log(NewEmail);
+      });
+    } else {
+      // No user logged in.
+    }
+  });
 
 }
 
@@ -62,6 +106,8 @@ function addnewplayer() {
     console.log("Error not logged in");
     }
   }
+
+
 function del(playerkey) {
   var user = firebase.auth().currentUser;
   if (user) {
@@ -132,34 +178,30 @@ firebase.auth().onAuthStateChanged(function(user) {
 } 
 
 
+
 function setHeader(name, school, loc) {
-  //set html headers
-  document.getElementById("team_name").value = name;
-  document.getElementById("school").innerHTML = school;
-  document.getElementById("location").innerHTML = loc;
+  document.getElementById("teamname").value = name;
+  document.getElementById("school").value = school;
+  document.getElementById("location").value = loc;
 }
 
+function setInfo(email){
+  document.getElementById("email").value = email;
+}
 firebase.auth().onAuthStateChanged(function(user) {
   var user = firebase.auth().currentUser;
+  var email;
+  email = user.email;
+  setInfo(email);
+
   var ref = db.ref("/users/" + user.uid + "/teams");
   ref.on("child_added", function (snapshot) {
     var ss = snapshot.val();
     var name = ss.name;
     var school = ss.school;
     var location = ss.location;
-    var season = ss.active_season;
-    setHeader(name);
-    loadShots(snapshot);
-    setTimeout (function() {
-      playerInfo(snapshot); 
-    }, 0);
-    setTimeout (function() {
-      //this is where to call advanced stats functions
-      advancedStats();  
-    }, 1000);
-    setTimeout (function() {
-      loadAverages(snapshot);
-    }, 1000);
+    setHeader(name,school, location);
+   
   });
 });
 

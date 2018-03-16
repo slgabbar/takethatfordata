@@ -48,6 +48,10 @@
             
                    <form role="form">
                    <div class="row">
+
+            <div id="errormessage" class="alert alert-danger"> <strong>Error:</strong> Please input email </div>
+        <div id="errormessage1" class="alert alert-danger"> <strong>Error:</strong> Please enter a password that is more than 6 characters </div>
+        <div id="errormessage2" class="alert alert-danger"> <strong>Error:</strong> Password does not match. Please re-type password again.</div>
                           
                     <div class="col-lg-12">
                         <label>E-mail</label>
@@ -113,16 +117,24 @@ var y = document.getElementById('password').value;
 var y1 = document.getElementById('password1').value;
 
 if ( x.length < 4) {
-  alert('Error: input e-mail');
+
+  document.getElementById("errormessage").style.display = "block";
+  document.getElementById("errormessage1").style.display = "none";
+  document.getElementById("errormessage2").style.display = "none";
   return;
 }
 if (y.length < 5) {
-  alert('Error: Please enter a password that is more than 6 characters');
+  document.getElementById("errormessage1").style.display = "block";
+  document.getElementById("errormessage").style.display = "none";
+  document.getElementById("errormessage2").style.display = "none";
+
   return;
 }
 
 if (!y.match(y1)) {
-  alert('Password does not match. Please re-type password again.');
+  document.getElementById("errormessage2").style.display = "block";
+  document.getElementById("errormessage").style.display = "none";
+  document.getElementById("errormessage1").style.display = "none";
   return;
 }
 
