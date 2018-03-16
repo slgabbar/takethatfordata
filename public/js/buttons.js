@@ -60,11 +60,20 @@ firebase.auth().onAuthStateChanged(function(user) {
 	  element.innerHTML = snapshot.key;
       element.name = snapshot.key;
 	  element.id = snapshot.key;
+	  element.style.fontSize = "15px";
+	  element.style.height = "auto";
 	  
 	  var plus = document.createElement("input");
 	  plus.type = "button";
 	  plus.value = "+";
 	  plus.id = snapshot.key;
+	  plus.style.fontSize = "12px";
+	  plus.style.backgroundColor = "#437af8";
+	  plus.style.color = "#fff";
+	  plus.style.overflow = "hidden";
+	  plus.style.right="0";
+	  plus.style.cssFloat="right";
+	  plus.style.padding = "10px 15px";
 	  plus.onclick = function() {
 	    plusminus(this.id, true);
 	  };
@@ -72,13 +81,22 @@ firebase.auth().onAuthStateChanged(function(user) {
 	  var minus = document.createElement("input");
 	  minus.type = "button";
 	  minus.value = "-";
+	  minus.style.fontSize = "12px"
+	  minus.style.backgroundColor = "#437af8";
+	  minus.style.color="#fff";
+	  minus.style.cssFloat="right";
+	  minus.style.overflow = "hidden";
+	  minus.style.padding = "10px 15px";
 	  minus.id = snapshot.key;
 	  minus.onclick = function() {
 	    plusminus(this.id, false);
 	  };
-	  
+	  var linebreak = document.createElement("p");
+	  linebreak.innerHTML = "<br>";
+
 	  element.appendChild(plus);
 	  element.appendChild(minus);
+	  element.appendChild(linebreak);
 	  var form = document.getElementById("statbuttons");
 	  form.appendChild(element);
 	});
