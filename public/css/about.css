@@ -92,7 +92,10 @@
   	margin-left: 10%;
 }
 
+#sidebar > div { min-height: 450px; }
+
 #sidebar {
+	overflow: hidden;
     float: left;
     width: 20%;
 }
@@ -103,8 +106,6 @@
     width: 200px;
     margin-top: 50px;
 }
-
-
 
 .vertical-menu a {
     background-color: #eee;
@@ -119,13 +120,12 @@
 #content-wrap {
 	float: left;
 	margin-top: 50px;
-	margin-left: 5%;
     width: 70%;
 }
 
 .contentAbout {
   	width: 95%;
-  	height: 300px;
+  	height: auto;
   	margin-left: 40px;
   	margin-right: 20px;
 }
@@ -137,7 +137,6 @@
 	margin-bottom: 10px;
 	margin-left: 10px;
 	margin-right: 10px;
-
 }
 
 .contentAbout p{
@@ -151,21 +150,10 @@
 	border-bottom: 4px #82C8F2;
 }
 
-.contentAbout li{
-	float: left;
-	line-height: 30px;
-	font-size: 120%;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	margin-left: 10px;
-	margin-right: 10px;
-	border-bottom: 4px #82C8F2;
-}
-
 
 .contentMission {
   	width: 95%;
-  	height: 300px;
+  	height: auto;
   	margin-top: 20px;
   	margin-left: 40px;
   	margin-right: 20px;
@@ -188,77 +176,73 @@
 	margin-bottom: 10px;
 	margin-left: 10px;
 	margin-right: 10px;
-}    
+}   
 
 
-.contentTeam {
-    border-color: #82C8F2;
-  	width: 95%;
-  	height: 300px;
+.contentStats {
+    width: 95%;
+  	height: auto;
+  	margin-top: 20px;
   	margin-left: 40px;
   	margin-right: 20px;
-  	margin-top: 20px;
 }
 
-.contentTeam h2{
+.contentStats h2{
 	color: #82C8F2;
-
+	float: left;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
+.contentStats h4{
+	color:  #000;
+}
 
 /* Three columns side by side */
-.column {
+.contentStats .column {
     float: left;
-    width: 40%;
+    width: 80%;
     margin-top: 2%;
     margin-bottom: 16px;
-    margin-left: 10px;
+    margin-left: 40px;
     padding: 0 8px;
 }
 
 @media (max-width: 650px) {
-  .column {
+ .contentStats .column {
     width: 100%;
     display: block;
   }
 }
 
 /* Add some shadows to create a card effect */
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+.contentStats .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
 }
 
 /* Some left and right padding inside the container */
-.container {
+.contentStats .container {
+	line-height: 20px;
     padding: 0 16px;
+    width: 80%;
 }
 
 /* Clear floats */
-.container::after, .row::after {
+.contentStats .container::after, .row::after {
     content: "";
     clear: both;
     display: table;
 }
 
-.title {
-    color: grey;
+.contentStats .title {
+	margin-left: 20px;
+	font-weight: normal;
+    color: #8f9296;
 }
 
-.button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: relative;
-}
 
-.button:hover {
-    background-color: #555;
-}
 
 .footer-distributed{
 	background-color: #292c2f;
@@ -266,30 +250,30 @@
 	box-sizing: border-box;
 	width: 100%;
 	font: bold 16px sans-serif;
-	text-align: left;
+	text-align: top;
 
 	padding: 50px 60px 40px;
 	margin-top: 80px;
 	overflow: hidden;
 }
 
-/* Footer left */
+/* Footer Top */
 
-.footer-distributed .footer-left{
-	float: left;
+.footer-distributed .footer-top{
+	width: 80%;
+	float: center;
 	margin-left: 10%;
+	margin-right: 10%;
+	margin-bottom: 5%;
 }
 
 /* The company logo */
 
-.footer-distributed h3{
-	color:  #ffffff;
+.footer-distributed .footer-top h3{
+	color:  #82C8F2;
 	margin: 0 0 10px;
 }
 
-.footer-distributed h3 span{
-	color:  #82C8F2;
-}
 
 /* Footer links */
 
@@ -307,80 +291,91 @@
 	margin: 0;
 }
 
-/* Footer Right */
 
-.footer-distributed .footer-right{
-	float: right;
-	margin-right: 10%;
+
+.footer-distributed .contentTeam {
+    border-color: #82C8F2;
+  	width: 80%;
+  	height: auto;
+  	margin-left: 20%;
+  	margin-right: 20%;
 }
 
-.footer-distributed .footer-right p{
-	display: inline-block;
-	vertical-align: top;
-	margin: 15px 42px 0 0;
-	color: #ffffff;
+.footer-distributed .contentTeam h3{
+	color:  #FFFFFF;
+	margin: 0 0 10px;
 }
 
-/* The contact form */
 
-.footer-distributed form{
-	display: inline-block;
+
+/* Three columns side by side */
+.footer-distributed .contentTeam .column {
+    float: left;
+    width: 40%;
+    margin-top: 2%;
+    margin-bottom: 16px;
+    margin-left: 10px;
+    padding: 0 8px;
 }
 
-.footer-distributed form input,
-.footer-distributed form textarea{
-	display: block;
-	border-radius: 3px;
-	box-sizing: border-box;
-	background-color:  #1f2022;
-	box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);
-	border: none;
-	resize: none;
+@media (max-width: 650px) {
+  .footer-distributed .contentTeam .column {
+    width: 100%;
+    display: block;
+  }
+}
 
-	font: inherit;
-	font-size: 14px;
+
+
+
+/* Add some shadows to create a card effect */
+.footer-distributed .contentTeam .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* Some left and right padding inside the container */
+.footer-distributed .contentTeam .container {
+    padding: 0 16px;
+}
+
+/* Clear floats */
+.footer-distributed .contentTeam .container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.footer-distributed .contentTeam .title {
 	font-weight: normal;
-	color:  #d1d2d2;
-
-	width: 400px;
-	padding: 18px;
+    color: #8f9296;
 }
 
-.footer-distributed ::-webkit-input-placeholder {
-	color:  #5c666b;
+.footer-distributed .contentTeam .email {
+	font-size: 14px;
+	font-style: italic;
+	font-weight: normal;
+	color: #8f9296;
 }
 
-.footer-distributed ::-moz-placeholder {
-	color:  #5c666b;
-	opacity: 1;
+.footer-distributed .contentTeam .button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #555 ;
+    text-align: center;
+    font-weight: normal;
+    cursor: pointer;
+    width: relative;
 }
 
-.footer-distributed :-ms-input-placeholder{
-	color:  #5c666b;
+.footer-distributed .contentTeam .button:hover {
+    background-color: #82C8F2;
 }
 
 
-.footer-distributed form input{
-	height: 55px;
-	margin-bottom: 15px;
-}
 
-.footer-distributed form textarea{
-	height: 100px;
-	margin-bottom: 20px;
-}
-
-.footer-distributed form button{
-	border-radius: 3px;
-	background-color:  #33383b;
-	color: #ffffff;
-	border: 0;
-	padding: 15px 50px;
-	font-weight: bold;
-	float: right;
-}
-
-/* If you don't want the footer to be responsive, remove these media queries */
 
 @media (max-width: 1000px) {
 
@@ -392,14 +387,6 @@
 		font-size: 12px;
 	}
 
-	.footer-distributed form input,
-	.footer-distributed form textarea{
-		width: 250px;
-	}
-
-	.footer-distributed form button{
-		padding: 10px 35px;
-	}
 
 }
 
@@ -409,28 +396,13 @@
 		padding: 30px;
 	}
 
-	.footer-distributed .footer-left,
-	.footer-distributed .footer-right{
-		float: none;
-		max-width: 300px;
-		margin: 0 auto;
-	}
+	.footer-distributed .footer-top,
 
-	.footer-distributed .footer-left{
+
+	.footer-distributed .footer-top{
 		margin-bottom: 40px;
 	}
 
-	.footer-distributed form{
-		margin-top: 30px;
-	}
-
-	.footer-distributed form{
-		display: block;
-	}
-
-	.footer-distributed form button{
-		float: none;
-	}
 }
 
 

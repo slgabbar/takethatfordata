@@ -62,35 +62,150 @@
               <div class="vertical-menu">
                 <a href="#contentAbout" id="aboutSelected" onclick="aboutClicked(this.id)">About</a>
                 <a href="#contentMission" id="missionSelected" onclick="missionClicked(this.id)">Mission</a>
-                <a href="#contentTeam" id="teamSelected" onclick="teamClicked(this.id)">Team</a>
-                <a href="#contentContact" id="contactSelected" onclick="contactClicked(this.id)">Contact Us</a>
+                <a href="#contentStats" id="statsSelected" onclick="statsClicked(this.id)">Advanced Stats</a>
+                <a href="#contentTeam" id="teamSelected" onclick="teamClicked(this.id)">Contact Us</a>
+                
               </div>
           </div>
 
-          <div id="content-wrap">
+    <div id="content-wrap">
 
             <div class="contentAbout" id="contentAbout">
                 <h2>About</h2>
                 <p>
                     Interactive web application that allows users to scout basketball games and view advanced statistics. Users are able to input stats from games, or use our interactive application to log stats real time during a game. All player and team statistics are stored in a database so any user can look them up our website.
                  </p>
-              </div> 
+            </div> 
 
 
 
-              <div class="contentMission" id="contentMission">
+            <div class="contentMission" id="contentMission">
                 <h2>Mission</h2>
-                  <p>
-                      Our Mission is to provide athletes, coaches and teams with the platform to gain the right partnership. Using our product athletes are able to show their stats and increase their visiblity to recruiters. Coaches are also able to conduct effective practices, understand their weakness and strengths, motivate their athletes, and instruct athletes in game strategies and techniques where they need it most. 
-                   </p>
+                <p>
+                    Our Mission is to provide athletes, coaches and teams with the platform to gain the right partnership. Using our product athletes are able to show their stats and increase their visiblity to recruiters. Coaches are also able to conduct effective practices, understand their weakness and strengths, motivate their athletes, and instruct athletes in game strategies and techniques where they need it most. 
+                </p>
                   
-              </div> 
+            </div> 
+
+
+              <div class="contentStats" id="contentStats">
+                <h2>Advanced Stats</h2>
+
+                <div class="row">
+                    <div class="column">
+                      <div class="card">
+                        <div class="container">
+                          <h4> True shooting percentage </h4>
+                          <p class="title">A shooting percentage that factors in the value of three-point field goals and free throws in addition to conventional two-point field goals.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="column">
+                      <div class="card">
+                        <div class="container">
+                          <h4> Effective field goal percentage </h4>
+                          <p class="title">Measures field goal percentage adjusting for made 3-point field goals being 1.5 times more valuable than made 2-point field goals.</p>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="column">
+                      <div class="card">
+                        <div class="container">
+                          <h4> 2 Point Field Goal Frequency </h4>
+                          <p class="title">The percentage of opponent field goal attempts that fit the specified criteria.</p>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="column">
+                      <div class="card">
+                        <div class="container">
+                          <h4> 3 Point Field Goal Frequency </h4>
+                          <p class="title">The percentage of opponent field goal attempts of the specified criteria that are 3 point attempts.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="column">
+                      <div class="card">
+                        <div class="container">
+                          <h4> Free Throw Attempt Rate </h4>
+                          <p class="title">The number of free throw attempts a team shoots in comparison to the number of field goal attempts that.</p>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="column">
+                      <div class="card">
+                        <div class="container">
+                          <h4> Assist Ratio </h4>
+                          <p class="title">Assist Ratio is the number of assists a player averages per 100 possessions used.</p>
+                        </div>
+                      </div>
+                    </div>
+
+
+                     <div class="column">
+                      <div class="card">
+                        <div class="container">
+                          <h4> Turnover Ratio </h4>
+                          <p class="title">The number of turnovers a player or team averages per 100 possessions used.</p>
+                        </div>
+                      </div>
+                    </div>                 
+
+                    <div class="column">
+                      <div class="card">
+                        <div class="container">
+                          <h4> Offensive Rating </h4>
+                          <p class="title">Measures a team's points scored per 100 possessions. On a player level this statistic is team points scored per 100 possessions while he is on court.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="column">
+                      <div class="card">
+                        <div class="container">
+                          <h4> Turnover Ratio </h4>
+                          <p class="title">A basketball statistic used to out a player's number of assists in context with the number of turnovers they have caused. It is intended to be representative of a player's ball control.</p>
+                        </div>
+                      </div>
+                    </div>                 
+
+
+                    <div class="column">
+                      <div class="card">
+                        <div class="container">
+                          <h4> Game Score </h4>
+                          <p class="title">Points in basketball that are used to keep track of the score in a game.</p>
+                        </div>
+                      </div>
+                    </div>
 
 
 
-              <div class="contentTeam" id="contentTeam">
-                <h2>Team</h2>
+                  </div>
+          </div> 
+      </div>
+  </div>  
+    
 
+  <footer class="footer-distributed">
+
+      <div class="footer-top">
+          <h3>Team Contact</h3>
+          <p class="footer-links">
+          </p>
+          <p class="footer-company-name">Take That For Data &copy; 2018</p>
+      </div>
+
+
+      <div class="contentTeam" id="contentTeam">
 
                 <div class="row">
                     <div class="column">
@@ -98,8 +213,7 @@
                         <div class="container">
                           <h3>Micheal Yang</h3>
                           <p class="title">Developer</p>
-                          <p>Some text that describes me.</p>
-                          <p>myang31@ucsc.edu</p>
+                          <p class="email">myang31@ucsc.edu</p>
                           <p><a href="mailto:myang31@ucsc.edu"><button class="button"> Contact</button></a></p>
                         </div>
                       </div>
@@ -110,8 +224,7 @@
                         <div class="container">
                           <h3>Sam Gabbards</h3>
                           <p class="title">Developer</p>
-                          <p>Some text that describes me.</p>
-                          <p>slgabbar@ucsc.edu</p>
+                          <p class="email">slgabbar@ucsc.edu</p>
                           <p><a href="mailto:slgabbar@ucsc.edu"><button class="button">Contact</button></a></p>
                         </div>
                       </div>
@@ -123,8 +236,7 @@
                         <div class="container">
                           <h3>Kristine Nguyen</h3>
                           <p class="title">Developer</p>
-                          <p>Some text that describes me.</p>
-                          <p>krkinguy@ucsc.edu</p>
+                          <p class="email">krkinguy@ucsc.edu</p>
                           <p><a href="mailto:krkinguy@ucsc.edu"><button class="button">Contact</button></a></p>
                         </div>
                       </div>
@@ -136,8 +248,7 @@
                         <div class="container">
                           <h3>Evan Louie</h3>
                           <p class="title">Developer</p>
-                          <p>Some text that describes me.</p>
-                          <p>ejlouie@ucsc.edu</p>
+                          <p class="email">ejlouie@ucsc.edu</p>
                           <p><a href="mailto:ejlouie@ucsc.edu"><button class="button">Contact</button></a></p>
                         </div>
                       </div>
@@ -148,77 +259,48 @@
                         <div class="container">
                           <h3>Gugsa Gemeda</h3>
                           <p class="title">Developer</p>
-                          <p>Some text that describes me.</p>
-                          <p>ggemeda@ucsc.edu</p>
+                          <p class="email">ggemeda@ucsc.edu</p>
                           <p><a href="mailto:ggemeda@ucsc.edu"><button class="button">Contact</button></a></p>
                         </div>
                       </div>
                     </div>
                   </div>
-              </div> 
-
-
-          </div>
-  </div>  
-    
-
-  <footer class="footer-distributed">
-
-
-
-      <div class="footer-left">
-        <h3>Take That<span> For Data</span></h3>
-        <p class="footer-links">
-        </p>
-        <p class="footer-company-name">Take That For Data &copy; 2018</p>
-      </div>
-
-
-
-      <div id="contentContact" class="footer-right">
-        <p>Contact Us</p>
-        <form action="#" method="post">
-          <input type="text" name="email" placeholder="Email" />
-          <textarea name="message" placeholder="Message"></textarea>
-          <button>Send</button>
-        </form>
-      </div>
-
-
-
+              </div>
   </footer> 
+
+
+
+
+
 
   <script type="text/javascript">
     function aboutClicked(x){
       document.getElementById("aboutSelected").style.backgroundColor="#82C8F2";
       document.getElementById("missionSelected").style.backgroundColor="#eee";
       document.getElementById("teamSelected").style.backgroundColor="#eee";
-      document.getElementById("contactSelected").style.backgroundColor="#eee";
+      document.getElementById("statsSelected").style.backgroundColor="#eee";
     }
 
     function missionClicked(x){
       document.getElementById("aboutSelected").style.backgroundColor="#eee";
       document.getElementById("missionSelected").style.backgroundColor="#82C8F2";
       document.getElementById("teamSelected").style.backgroundColor="#eee";
-      document.getElementById("contactSelected").style.backgroundColor="#eee";
+      document.getElementById("statsSelected").style.backgroundColor="#eee";
+    }
+
+    function statsClicked(x){
+      document.getElementById("aboutSelected").style.backgroundColor="#eee";
+      document.getElementById("missionSelected").style.backgroundColor="#eee";
+      document.getElementById("teamSelected").style.backgroundColor="#eee";
+      document.getElementById("statsSelected").style.backgroundColor="#82C8F2";
     }
 
     function teamClicked(x){
       document.getElementById("aboutSelected").style.backgroundColor="#eee";
       document.getElementById("missionSelected").style.backgroundColor="#eee";
       document.getElementById("teamSelected").style.backgroundColor="#82C8F2";
-      document.getElementById("contactSelected").style.backgroundColor="#eee";
-
-
+      document.getElementById("statsSelected").style.backgroundColor="#eee";
     }
-
-    function contactClicked(x){
-      document.getElementById("aboutSelected").style.backgroundColor="#eee";
-      document.getElementById("missionSelected").style.backgroundColor="#eee";
-      document.getElementById("teamSelected").style.backgroundColor="#eee";
-      document.getElementById("contactSelected").style.backgroundColor="#82C8F2";
-    }
-
 
 
   </script> 
