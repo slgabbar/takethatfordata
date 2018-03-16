@@ -18,7 +18,7 @@
 
 
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top">
+   <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top">
@@ -26,17 +26,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-    <a class="navbar-brand" href="/"> Take that for Data </a>
+    <a class="navbar-brand" href="#"> Take that for Data </a>
   </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="../about">About</a></li>
-        <li><a href="../signin"> Sign In </a></li>
-        <li><a href="../create_account">Sign Up </a></li>
+        <li><a id="alreadylog" href="/dashboard">Dashboard</a></li>
+        <li><a id="newuser" href="../signin"> Sign In </a></li>
+        <li><a id="newuser1" href="../create_account">Sign Up </a></li>
+        <li><a id="alreadylog2" href="../account">Account</a></li>
+        <li><a id="alreadylog3" href="#" onclick="return signout();">Logout</a> </li>
+       
       </ul>
     </div>
-  </div>
 </nav>
+
 
 
   <div class="bg"> 
@@ -309,6 +313,42 @@
       document.getElementById("teamSelected").style.backgroundColor="#82C8F2";
       document.getElementById("statsSelected").style.backgroundColor="#eee";
     }
+    // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDmi6qgpfnoCZ8a2FM2APfX74dXfiJ9PFY",
+    authDomain: "takethatfordata-8f719.firebaseapp.com",
+    databaseURL: "https://takethatfordata-8f719.firebaseio.com",
+    projectId: "takethatfordata-8f719",
+    storageBucket: "takethatfordata-8f719.appspot.com",
+    messagingSenderId: "211430446462"
+  };
+  firebase.initializeApp(config);
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+   //user is sign in
+    // ...
+    document.getElementById("newuser").style.display = "none";
+    document.getElementById("newuser1").style.display = "none";
+  } else {
+   console.log("signed out");
+    // User is signed out.
+    document.getElementById("alreadylog").style.display = "none";
+    document.getElementById("alreadylog2").style.display = "none";
+    document.getElementById("alreadylog3").style.display = "none";
+  }
+});
+ 
+ function signout(){
+        firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+       window.location = '../'; 
+        }).catch(function(error) {
+          // An error happened.
+          console.log("Error: " + error.code);
+        });
+     return true;
+
+  }
 
 
   </script> 
