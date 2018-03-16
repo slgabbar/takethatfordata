@@ -72,38 +72,81 @@ function saveinfo(){
   var user = firebase.auth().currentUser;
 
   console.log("New Email: " + newemail);
+  
   // errors messages - check before save
   if (newemail == "") {
-    return;
   }
   if (newpassword == ""){
-    return;
+  }
+  if (currentpassword == ""){
+    document.getElementById("errormessageold").style.display = "block";
+    document.getElementById("errormessagenot").style.display = "none";
   }
   if (newpassword.length < 5 && !newpassword=="") {
     document.getElementById("errormessage").style.display = "block";
     document.getElementById("message").style.display = "none";
-    return;
+    
    }
   if (!newpassword.match(newpassword1)) {
       document.getElementById("errormessage").style.display = "block";
       document.getElementById("message").style.display = "none";
-    return;
    }
 
-// update email.. it's not working
-  firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    // User is signed in.
-    var newemail2 = document.getElementById("newemail").value;
-    console.log("email:" + newemail2);
-    user.updateEmail(newemail2);
-  } else {
-    // No user is signed in.
-    
-  }
+  var credential = firebase.auth.EmailAuthProvider.credential(
+    email,currentpassword);
+    console.log("Email: " + email);
+  user.reauthenticateWithCredential(credential).then(function() {
+    // check if the password is correct
+          // User re-authenticated.
+          // update email.. it's not working
+          firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              // User is signed in.
+              var newemail2 = document.getElementById("newemail").value;
+              console.log("email:" + newemail2);
+              user.updateEmail(newemail2);
+              document.getElementById("message").style.display = "block";
+            } else {
+              // No user is signed in.
+            }
+          });
+        // updating password goes here.. maybe for now i can just redirect to reset password. idk
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              // User is signed in.
+              var newpassword12 = document.getElementById("newpassword").value;
+              var newpassword13 = document.getElementById("newpassword").value;
+              console.log("new password:" + newpassword12);
+
+              if (newpassword12.length < 5 && !newpassword12=="") {
+                document.getElementById("errormessage").style.display = "block";
+                document.getElementById("message").style.display = "none";
+                
+               }
+              if (!newpassword12.match(newpassword13)) {
+                  document.getElementById("errormessage").style.display = "block";
+                  document.getElementById("message").style.display = "none";
+               }
+
+              user.updatePassword(newpassword12);
+              document.getElementById("message").style.display = "block";
+              document.getElementById("errormessagenot").style.display = "none";
+            } else {
+              // No user is signed in.
+            }
+          });
 
 
-  // updating password goes here.. maybe for now i can just redirect to reset password. idk
+ }).catch(function(error) {
+  // An error happened.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  if (errorCode === 'auth/wrong-password') {
+        document.getElementById("errormessagenot").style.display = "block";
+      } else {
+        alert(errorMessage);
+      }
+  alert(errorMessage);
   });
 
 
